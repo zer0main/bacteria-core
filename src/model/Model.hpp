@@ -8,7 +8,7 @@
 #ifndef MODEL_HPP_
 #define MODEL_HPP_
 
-#include <vactor>
+#include <vector>
 
 namespace Abstract {
 
