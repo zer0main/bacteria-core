@@ -8,13 +8,15 @@
 #ifndef MODEL_HPP_
 #define MODEL_HPP_
 
+#include <vactor>
+
 namespace Abstract {
 
 class Model {
 public:
     enum CellState {
-        BACTERIUM,
         EMPTY,
+        BACTERIUM,
     };
 
     CellState cellState(int x, int y) const;
@@ -27,6 +29,23 @@ protected:
     virtual CellState cellState_impl(int x, int y) const = 0;
 
     virtual int getTeam_impl(int x, int y) const = 0;
+};
+
+}
+
+namespace Implementation {
+
+class Model : public Abstract::Model {
+public:
+    Model(int size, int bacteria_number, int teams_number);
+
+protected:
+    Abstract::Model::CellState cellState_impl(int x, int y) const;
+
+    int getTeam_impl(int x, int y) const;
+
+private:
+    std::vector<int> board_;
 };
 
 }
