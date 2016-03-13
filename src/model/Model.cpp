@@ -18,7 +18,7 @@ Model::Model(
 ) {
 }
 
-CellState Model::cellState(int x, int y) const {
+Model::CellState Model::cellState(int x, int y) const {
     return cellState_impl(x, y);
 }
 
