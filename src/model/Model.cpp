@@ -30,6 +30,8 @@ int Model::size() const {
     return size_impl();
 }
 
+}
+
 namespace Implementation {
 
 Model::Model(int size, int bacteria_number, int teams_number) :
