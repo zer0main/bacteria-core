@@ -53,6 +53,8 @@ protected:
 private:
     std::vector<int> board_;
 
+    int size_;
+
     void tryToPlace(int team);
 };
 

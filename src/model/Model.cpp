@@ -34,8 +34,13 @@ int Model::size() const {
 
 namespace Implementation {
 
-Model::Model(int size, int bacteria_number, int teams_number) :
-    Abstract::Model(size, bacteria_number, teams_number) {
+Model::Model(
+    int size,
+    int bacteria_number,
+    int teams_number
+)
+    : Abstract::Model(size, bacteria_number, teams_number)
+    , size_(size) {
     board_.resize(size * size, Abstract::Model::EMPTY);
     for (int team = 0; team < teams_number; team++) {
         for (int bacteria = 0; bacteria < bacteria_number; bacteria++) {
@@ -64,7 +69,7 @@ int Model::getTeam_impl(int x, int y) const {
 }
 
 int Model::size_impl() const {
-    return board_.size();
+    return size_;
 }
 
 void Model::tryToPlace(int team) {
