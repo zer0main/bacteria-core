@@ -43,9 +43,9 @@ Model::Model(int size, int bacteria_number, int teams_number) :
 Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
     int size = board_.size();
     if (board_[y * size + x] != 0) {
-        return Abstract::Model::CellState::BACTERIUM;
+        return Abstract::Model::BACTERIUM;
     } else {
-        return Abstract::Model::CellState::EMPTY;
+        return Abstract::Model::EMPTY;
     }
 }
 
