@@ -23,12 +23,16 @@ public:
 
     int getTeam(int x, int y) const;
 
+    int size() const;
+
 protected:
     Model(int size, int bacteria_number, int teams_number);
 
     virtual CellState cellState_impl(int x, int y) const = 0;
 
     virtual int getTeam_impl(int x, int y) const = 0;
+
+    virtual int size_impl() const = 0;
 };
 
 }
@@ -43,6 +47,8 @@ protected:
     Abstract::Model::CellState cellState_impl(int x, int y) const;
 
     int getTeam_impl(int x, int y) const;
+
+    int size_impl() const;
 
 private:
     std::vector<int> board_;

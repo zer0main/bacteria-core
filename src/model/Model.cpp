@@ -26,6 +26,8 @@ int Model::getTeam(int x, int y) const {
     return getTeam_impl(x, y);
 }
 
+int Model::size() const {
+    return size_impl();
 }
 
 namespace Implementation {
@@ -57,6 +59,10 @@ int Model::getTeam_impl(int x, int y) const {
     } else {
         throw Exception("Error: Attempt to get team of empty cell.");
     }
+}
+
+int Model::size_impl() const {
+    return board_.size();
 }
 
 void Model::tryToPlace(int team) {
