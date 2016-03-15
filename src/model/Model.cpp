@@ -42,7 +42,7 @@ Model::Model(
     : Abstract::Model(size, bacteria_number, teams_number)
     , size_(size) {
     board_.resize(size * size, Abstract::Model::EMPTY);
-    for (int team = 0; team < teams_number; team++) {
+    for (int team = 1; team <= teams_number; team++) {
         for (int bacteria = 0; bacteria < bacteria_number; bacteria++) {
             tryToPlace(team);
         }
