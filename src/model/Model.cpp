@@ -50,8 +50,7 @@ Model::Model(
 }
 
 Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
-    int size = board_.size();
-    if (board_[y * size + x] != 0) {
+    if (board_[y * size_ + x] != 0) {
         return Abstract::Model::BACTERIUM;
     } else {
         return Abstract::Model::EMPTY;
@@ -59,8 +58,7 @@ Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
 }
 
 int Model::getTeam_impl(int x, int y) const {
-    int size = board_.size();
-    int res = board_[y * size + x];
+    int res = board_[y * size_ + x];
     if (res != 0) {
         return res;
     } else {
@@ -73,12 +71,11 @@ int Model::size_impl() const {
 }
 
 void Model::tryToPlace(int team) {
-    int size = board_.size();
     while (true) {
-        int x = random(size);
-        int y = random(size);
+        int x = random(size_);
+        int y = random(size_);
         if (cellState(x, y) != Abstract::Model::BACTERIUM) {
-            board_[y * size + x] = team;
+            board_[y * size_ + x] = team;
             break;
         }
     }
