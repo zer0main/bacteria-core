@@ -23,16 +23,20 @@ public:
 
     int getTeam(int x, int y) const;
 
-    int size() const;
+    int getWidth() const;
+
+    int getHeight() const;
 
 protected:
-    Model(int size, int bacteria_number, int teams_number);
+    Model(int width, int height);
 
     virtual CellState cellState_impl(int x, int y) const = 0;
 
     virtual int getTeam_impl(int x, int y) const = 0;
 
-    virtual int size_impl() const = 0;
+    virtual int getWidth_impl() const = 0;
+
+    virtual int getHeight_impl() const = 0;
 };
 
 }
@@ -41,21 +45,22 @@ namespace Implementation {
 
 class Model : public Abstract::Model {
 public:
-    Model(int size, int bacteria_number, int teams_number);
+    Model(int width, int height);
 
 protected:
     Abstract::Model::CellState cellState_impl(int x, int y) const;
 
     int getTeam_impl(int x, int y) const;
 
-    int size_impl() const;
+    int getWidth_impl() const;
+
+    int getHeight_impl() const;
 
 private:
     std::vector<int> board_;
 
-    int size_;
-
-    void tryToPlace(int team);
+    int width_;
+    int height_;
 };
 
 }

@@ -12,9 +12,8 @@
 namespace Abstract {
 
 Model::Model(
-    int /*size*/,
-    int /*bacteria_number*/,
-    int /*teams_number*/
+    int /*width*/,
+    int /*height*/
 ) {
 }
 
@@ -26,8 +25,12 @@ int Model::getTeam(int x, int y) const {
     return getTeam_impl(x, y);
 }
 
-int Model::size() const {
-    return size_impl();
+int Model::getWidth() const {
+    return getWidth_impl();
+}
+
+int Model::getHeight() const {
+    return getHeight_impl();
 }
 
 }
@@ -35,22 +38,17 @@ int Model::size() const {
 namespace Implementation {
 
 Model::Model(
-    int size,
-    int bacteria_number,
-    int teams_number
+    int width,
+    int height
 )
-    : Abstract::Model(size, bacteria_number, teams_number)
-    , size_(size) {
-    board_.resize(size * size, Abstract::Model::EMPTY);
-    for (int team = 1; team <= teams_number; team++) {
-        for (int bacteria = 0; bacteria < bacteria_number; bacteria++) {
-            tryToPlace(team);
-        }
-    }
+    : Abstract::Model(width, height)
+    , width_(width)
+    , height_(height) {
+    board_.resize(width * height, Abstract::Model::EMPTY);
 }
 
 Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
-    if (board_[y * size_ + x] != 0) {
+    if (board_[y * width_ + x] != 0) {
         return Abstract::Model::BACTERIUM;
     } else {
         return Abstract::Model::EMPTY;
@@ -58,7 +56,7 @@ Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
 }
 
 int Model::getTeam_impl(int x, int y) const {
-    int res = board_[y * size_ + x];
+    int res = board_[y * width_ + x];
     if (res != 0) {
         return res;
     } else {
@@ -66,19 +64,12 @@ int Model::getTeam_impl(int x, int y) const {
     }
 }
 
-int Model::size_impl() const {
-    return size_;
+int Model::getWidth_impl() const {
+    return width_;
 }
 
-void Model::tryToPlace(int team) {
-    while (true) {
-        int x = random(size_);
-        int y = random(size_);
-        if (cellState(x, y) != Abstract::Model::BACTERIUM) {
-            board_[y * size_ + x] = team;
-            break;
-        }
-    }
+int Model::getHeight_impl() const {
+    return height_;
 }
 
 }
