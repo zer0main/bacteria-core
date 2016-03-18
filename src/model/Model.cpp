@@ -59,6 +59,18 @@ static int getIndex(int x, int y, int width, int height) {
     return index;
 }
 
+Unit::Unit(
+    int mass,
+    int direction,
+    int team,
+    int instruction
+)
+    : mass(mass)
+    , direction(direction)
+    , team(team)
+    , instruction(instruction) {
+}
+
 Model::Model(
     int width,
     int height
