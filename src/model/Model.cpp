@@ -86,9 +86,9 @@ Abstract::CellState Model::cellState_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
     Unit* unit_ptr = board_[index];
     if (unit_ptr != 0) {
-        return Abstract::Model::BACTERIUM;
+        return Abstract::BACTERIUM;
     } else {
-        return Abstract::Model::EMPTY;
+        return Abstract::EMPTY;
     }
 }
 
