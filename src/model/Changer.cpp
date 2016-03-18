@@ -17,3 +17,18 @@ Changer::Changer(
 }
 
 }
+
+namespace Implementation {
+
+Changer::Changer(
+    Model& model,
+    int team,
+    int move_number
+)
+    : Abstract::Changer(model, team, move_number)
+    , model_(model)
+    , team_(team)
+    , move_number_(move_number) {
+}
+
+}
