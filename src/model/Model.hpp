@@ -85,6 +85,8 @@ protected:
     int getHeight_impl() const;
 
 private:
+    void initializeBoard(int bacteria, int teams);
+
     std::vector<Unit*> board_;
 
     std::vector< std::vector<Unit> > units_;

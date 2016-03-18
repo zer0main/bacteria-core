@@ -6,6 +6,7 @@
  */
 
 #include "Model.hpp"
+#include "constants.hpp"
 #include "random.hpp"
 #include "Exception.hpp"
 
@@ -128,6 +129,20 @@ int Model::getWidth_impl() const {
 
 int Model::getHeight_impl() const {
     return height_;
+}
+
+void Model::initializeBoard(int bacteria, int teams) {
+    for (int team = 0; team < teams; team++) {
+        for (int bacterium = 0; bacterium < bacteria; bacterium++) {
+            int direction = random(4);
+            Unit unit(DEFAULT_MASS, direction, team, 0);
+            units_[team].push_back(unit);
+            int x = random(width_);
+            int y = random(height_);
+            board_[y * width_ + x] = &(units_[team][bacterium]);
+        }
+    }
+
 }
 
 }
