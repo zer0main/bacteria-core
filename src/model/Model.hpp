@@ -14,13 +14,6 @@ namespace Abstract {
 
 class Model {
 public:
-    enum CellState {
-        EMPTY,
-        BACTERIUM,
-    };
-
-    CellState cellState(int x, int y) const;
-
     int getTeam(int x, int y) const;
 
     int getWidth() const;
@@ -29,8 +22,6 @@ public:
 
 protected:
     Model(int width, int height);
-
-    virtual CellState cellState_impl(int x, int y) const = 0;
 
     virtual int getTeam_impl(int x, int y) const = 0;
 
@@ -43,13 +34,18 @@ protected:
 
 namespace Implementation {
 
+struct Cell {
+    int mass;
+    int direction;
+    int team;
+    int instruction;
+};
+
 class Model : public Abstract::Model {
 public:
     Model(int width, int height);
 
 protected:
-    Abstract::Model::CellState cellState_impl(int x, int y) const;
-
     int getTeam_impl(int x, int y) const;
 
     int getWidth_impl() const;
@@ -57,7 +53,7 @@ protected:
     int getHeight_impl() const;
 
 private:
-    std::vector<int> board_;
+    std::vector<Cell> board_;
 
     int width_;
     int height_;

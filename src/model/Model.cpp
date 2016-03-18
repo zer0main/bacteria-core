@@ -17,10 +17,6 @@ Model::Model(
 ) {
 }
 
-Model::CellState Model::cellState(int x, int y) const {
-    return cellState_impl(x, y);
-}
-
 int Model::getTeam(int x, int y) const {
     return getTeam_impl(x, y);
 }
@@ -44,24 +40,12 @@ Model::Model(
     : Abstract::Model(width, height)
     , width_(width)
     , height_(height) {
-    board_.resize(width * height, Abstract::Model::EMPTY);
-}
-
-Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
-    if (board_[y * width_ + x] != 0) {
-        return Abstract::Model::BACTERIUM;
-    } else {
-        return Abstract::Model::EMPTY;
-    }
+    board_.resize(width * height);
 }
 
 int Model::getTeam_impl(int x, int y) const {
-    int res = board_[y * width_ + x];
-    if (res != 0) {
-        return res;
-    } else {
-        throw Exception("Error: Attempt to get team of empty cell.");
-    }
+    int res = board_[y * width_ + x].team;
+    return res;
 }
 
 int Model::getWidth_impl() const {
