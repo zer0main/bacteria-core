@@ -17,10 +17,15 @@ enum CellState {
     BACTERIUM,
 };
 
+enum Direction {
+    LEFT,
+    FORWARD,
+    RIGHT,
+    BACKWARD,
+};
+
 class Model {
 public:
-    };
-
     CellState cellState(int x, int y) const;
 
     int getDirection(int x, int y) const;
