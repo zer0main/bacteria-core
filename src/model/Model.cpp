@@ -33,6 +33,20 @@ int Model::getHeight() const {
 
 namespace Implementation {
 
+/* get global coordinate from horizontal and
+   vertical coordinates
+*/
+static int getIndex(int x, int y, int width, int height) {
+    bool less = ((x < 0) || (y < 0));
+    bool greater = ((x >= width) || (y >= height));
+    if (less || greater) {
+        throw Exception("Model: index of cell in arguments "
+                        "of some methods is out of range.");
+    }
+    int index = y * width + x;
+    return index;
+}
+
 Model::Model(
     int width,
     int height
