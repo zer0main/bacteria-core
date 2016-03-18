@@ -17,7 +17,7 @@ Model::Model(
 ) {
 }
 
-Model::CellState Model::cellState(int x, int y) const {
+CellState Model::cellState(int x, int y) const {
     return cellState_impl(x, y);
 }
 
@@ -69,7 +69,7 @@ Model::Model(
     board_.resize(width * height, 0);
 }
 
-Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
+Abstract::CellState Model::cellState_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
     Unit* unit_ptr = board_[index];
     if (unit_ptr != 0) {
