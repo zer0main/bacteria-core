@@ -17,6 +17,10 @@ Model::Model(
 ) {
 }
 
+int Model::getDirection(int x, int y) const {
+    return getDirection_impl(x, y);
+}
+
 int Model::getMass(int x, int y) const {
     return getMass_impl(x, y);
 }
@@ -59,6 +63,16 @@ Model::Model(
     , width_(width)
     , height_(height) {
     board_.resize(width * height, 0);
+}
+
+int Model::getDirection_impl(int x, int y) const {
+    int index = getIndex(x, y, width_, height_);
+    Unit* unit_ptr = board_[index];
+    if (unit_ptr != 0) {
+        return unit_ptr->direction;
+    } else {
+        throw Exception("Error: Attempt to get direction of empty cell.");
+    }
 }
 
 int Model::getMass_impl(int x, int y) const {

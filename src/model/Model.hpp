@@ -14,6 +14,8 @@ namespace Abstract {
 
 class Model {
 public:
+    int getDirection(int x, int y) const;
+
     int getMass(int x, int y) const;
 
     int getTeam(int x, int y) const;
@@ -24,6 +26,8 @@ public:
 
 protected:
     Model(int width, int height);
+
+    virtual int getDirection_impl(int x, int y) const = 0;
 
     virtual int getMass_impl(int x, int y) const = 0;
 
@@ -50,6 +54,8 @@ public:
     Model(int width, int height);
 
 protected:
+    int getDirection_impl(int x, int y) const;
+
     int getMass_impl(int x, int y) const;
 
     int getTeam_impl(int x, int y) const;
