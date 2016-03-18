@@ -17,6 +17,10 @@ Model::Model(
 ) {
 }
 
+int Model::getMass(int x, int y) const {
+    return getMass_impl(x, y);
+}
+
 int Model::getTeam(int x, int y) const {
     return getTeam_impl(x, y);
 }
@@ -55,6 +59,15 @@ Model::Model(
     , width_(width)
     , height_(height) {
     board_.resize(width * height, 0);
+}
+
+int Model::getMass_impl(int x, int y) const {
+    Unit* unit_ptr = board_[y * width_ + x];
+    if (unit_ptr != 0) {
+        return unit_ptr->mass;
+    } else {
+        throw Exception("Error: Attempt to get mass of empty cell.");
+    }
 }
 
 int Model::getTeam_impl(int x, int y) const {
