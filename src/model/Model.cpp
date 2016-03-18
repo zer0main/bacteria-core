@@ -14,7 +14,9 @@ namespace Abstract {
 
 Model::Model(
     int /*width*/,
-    int /*height*/
+    int /*height*/,
+    int /*bacteria*/,
+    int /*teams*/
 ) {
 }
 
@@ -74,12 +76,16 @@ Unit::Unit(
 
 Model::Model(
     int width,
-    int height
+    int height,
+    int bacteria,
+    int teams
 )
-    : Abstract::Model(width, height)
+    : Abstract::Model(width, height, bacteria, teams)
     , width_(width)
     , height_(height) {
     board_.resize(width * height, 0);
+    units_.resize(teams);
+    initializeBoard(bacteria, teams);
 }
 
 Abstract::CellState Model::cellState_impl(int x, int y) const {

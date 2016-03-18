@@ -39,7 +39,7 @@ public:
     int getHeight() const;
 
 protected:
-    Model(int width, int height);
+    Model(int width, int height, int bacteria, int teams);
 
     virtual CellState cellState_impl(int x, int y) const = 0;
 
@@ -69,7 +69,7 @@ struct Unit {
 
 class Model : public Abstract::Model {
 public:
-    Model(int width, int height);
+    Model(int width, int height, int bacteria, int teams);
 
 protected:
     Abstract::CellState cellState_impl(int x, int y) const;
