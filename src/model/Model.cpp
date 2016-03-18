@@ -17,6 +17,10 @@ Model::Model(
 ) {
 }
 
+Model::CellState Model::cellState(int x, int y) const {
+    return cellState_impl(x, y);
+}
+
 int Model::getDirection(int x, int y) const {
     return getDirection_impl(x, y);
 }
@@ -63,6 +67,16 @@ Model::Model(
     , width_(width)
     , height_(height) {
     board_.resize(width * height, 0);
+}
+
+Abstract::Model::CellState Model::cellState_impl(int x, int y) const {
+    int index = getIndex(x, y, width_, height_);
+    Unit* unit_ptr = board_[index];
+    if (unit_ptr != 0) {
+        return Abstract::Model::BACTERIUM;
+    } else {
+        return Abstract::Model::EMPTY;
+    }
 }
 
 int Model::getDirection_impl(int x, int y) const {

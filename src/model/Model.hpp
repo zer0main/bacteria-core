@@ -14,6 +14,13 @@ namespace Abstract {
 
 class Model {
 public:
+    enum CellState {
+        EMPTY,
+        BACTERIUM,
+    };
+
+    CellState cellState(int x, int y) const;
+
     int getDirection(int x, int y) const;
 
     int getMass(int x, int y) const;
@@ -26,6 +33,8 @@ public:
 
 protected:
     Model(int width, int height);
+
+    virtual CellState cellState_impl(int x, int y) const = 0;
 
     virtual int getDirection_impl(int x, int y) const = 0;
 
@@ -54,6 +63,8 @@ public:
     Model(int width, int height);
 
 protected:
+    Abstract::Model::CellState cellState_impl(int x, int y) const;
+
     int getDirection_impl(int x, int y) const;
 
     int getMass_impl(int x, int y) const;
