@@ -62,7 +62,8 @@ Model::Model(
 }
 
 int Model::getMass_impl(int x, int y) const {
-    Unit* unit_ptr = board_[y * width_ + x];
+    int index = getIndex(x, y, width_, height_);
+    Unit* unit_ptr = board_[index];
     if (unit_ptr != 0) {
         return unit_ptr->mass;
     } else {
@@ -71,7 +72,8 @@ int Model::getMass_impl(int x, int y) const {
 }
 
 int Model::getTeam_impl(int x, int y) const {
-    Unit* unit_ptr = board_[y * width_ + x];
+    int index = getIndex(x, y, width_, height_);
+    Unit* unit_ptr = board_[index];
     if (unit_ptr != 0) {
         return unit_ptr->team;
     } else {
