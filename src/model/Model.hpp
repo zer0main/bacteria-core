@@ -34,7 +34,7 @@ protected:
 
 namespace Implementation {
 
-struct Cell {
+struct Unit {
     int mass;
     int direction;
     int team;
@@ -53,7 +53,9 @@ protected:
     int getHeight_impl() const;
 
 private:
-    std::vector<Cell> board_;
+    std::vector<Unit*> board_;
+
+    std::vector< std::vector<Unit> > units_;
 
     int width_;
     int height_;

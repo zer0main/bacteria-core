@@ -40,12 +40,17 @@ Model::Model(
     : Abstract::Model(width, height)
     , width_(width)
     , height_(height) {
-    board_.resize(width * height);
+    board_.resize(width * height, 0);
 }
 
 int Model::getTeam_impl(int x, int y) const {
-    int res = board_[y * width_ + x].team;
-    return res;
+    Unit* unit_ptr = board_[y * width_ + x];
+    if (unit_ptr != 0) {
+        return unit_ptr->team;
+    } else {
+        // no unit in the current cell
+        throw Exception("Error: Attempt to get team of empty cell.");
+    }
 }
 
 int Model::getWidth_impl() const {
