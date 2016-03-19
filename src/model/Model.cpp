@@ -149,7 +149,6 @@ void Model::initializeBoard(int bacteria, int teams) {
             board_[index] = unit_ptr;
         }
     }
-
 }
 
 }
