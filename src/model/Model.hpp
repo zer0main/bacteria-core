@@ -93,6 +93,8 @@ protected:
 private:
     void initializeBoard(int bacteria, int teams);
 
+    void tryToPlace(int team);
+
     Units board_;
     Teams teams_;
 

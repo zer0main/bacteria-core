@@ -140,15 +140,23 @@ int Model::getHeight_impl() const {
 void Model::initializeBoard(int bacteria, int teams) {
     for (int team = 0; team < teams; team++) {
         for (int bacterium = 0; bacterium < bacteria; bacterium++) {
-            int direction = random(4);
-            UnitPtr unit_ptr(new Unit(DEFAULT_MASS, direction, team, 0));
-            teams_[team].push_back(unit_ptr);
-            int x = random(width_);
-            int y = random(height_);
-            int index = getIndex(x, y, width_, height_);
-            board_[index] = unit_ptr;
+            tryToPlace(team);
         }
     }
+}
+
+void Model::tryToPlace(int team) {
+    int x = random(width_);
+    int y = random(height_);
+    while (cellState(x, y) == Abstract::BACTERIUM) {
+        x = random(width_);
+        y = random(height_);
+    }
+    int direction = random(4);
+    UnitPtr unit_ptr(new Unit(DEFAULT_MASS, direction, team, 0));
+    teams_[team].push_back(unit_ptr);
+    int index = getIndex(x, y, width_, height_);
+    board_[index] = unit_ptr;
 }
 
 }
