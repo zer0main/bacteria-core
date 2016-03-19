@@ -8,6 +8,8 @@
 #ifndef MODEL_HPP_
 #define MODEL_HPP_
 
+#include <QtCore>
+
 #include <vector>
 
 namespace Abstract {
@@ -67,6 +69,10 @@ struct Unit {
     int instruction;
 };
 
+typedef QSharedPointer<Unit> UnitPtr;
+typedef std::vector<UnitPtr> Units;
+typedef std::vector<Units> Teams;
+
 class Model : public Abstract::Model {
 public:
     Model(int width, int height, int bacteria, int teams);
@@ -87,9 +93,8 @@ protected:
 private:
     void initializeBoard(int bacteria, int teams);
 
-    std::vector<Unit*> board_;
-
-    std::vector< std::vector<Unit> > units_;
+    Units board_;
+    Teams teams_;
 
     int width_;
     int height_;

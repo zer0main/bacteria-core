@@ -83,15 +83,15 @@ Model::Model(
     : Abstract::Model(width, height, bacteria, teams)
     , width_(width)
     , height_(height) {
-    board_.resize(width * height, 0);
-    units_.resize(teams);
+    board_.resize(width * height);
+    teams_.resize(teams);
     initializeBoard(bacteria, teams);
 }
 
 Abstract::CellState Model::cellState_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
-    Unit* unit_ptr = board_[index];
-    if (unit_ptr != 0) {
+    UnitPtr unit_ptr = board_[index];
+    if (!unit_ptr.isNull()) {
         return Abstract::BACTERIUM;
     } else {
         return Abstract::EMPTY;
@@ -100,8 +100,8 @@ Abstract::CellState Model::cellState_impl(int x, int y) const {
 
 int Model::getDirection_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
-    Unit* unit_ptr = board_[index];
-    if (unit_ptr != 0) {
+    UnitPtr unit_ptr = board_[index];
+    if (!unit_ptr.isNull()) {
         return unit_ptr->direction;
     } else {
         throw Exception("Error: Attempt to get direction of empty cell.");
@@ -110,8 +110,8 @@ int Model::getDirection_impl(int x, int y) const {
 
 int Model::getMass_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
-    Unit* unit_ptr = board_[index];
-    if (unit_ptr != 0) {
+    UnitPtr unit_ptr = board_[index];
+    if (!unit_ptr.isNull()) {
         return unit_ptr->mass;
     } else {
         throw Exception("Error: Attempt to get mass of empty cell.");
@@ -120,8 +120,8 @@ int Model::getMass_impl(int x, int y) const {
 
 int Model::getTeam_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
-    Unit* unit_ptr = board_[index];
-    if (unit_ptr != 0) {
+    UnitPtr unit_ptr = board_[index];
+    if (!unit_ptr.isNull()) {
         return unit_ptr->team;
     } else {
         // no unit in the current cell
@@ -141,11 +141,12 @@ void Model::initializeBoard(int bacteria, int teams) {
     for (int team = 0; team < teams; team++) {
         for (int bacterium = 0; bacterium < bacteria; bacterium++) {
             int direction = random(4);
-            Unit unit(DEFAULT_MASS, direction, team, 0);
-            units_[team].push_back(unit);
+            UnitPtr unit_ptr(new Unit(DEFAULT_MASS, direction, team, 0));
+            teams_[team].push_back(unit_ptr);
             int x = random(width_);
             int y = random(height_);
-            board_[y * width_ + x] = &(units_[team][bacterium]);
+            int index = getIndex(x, y, width_, height_);
+            board_[index] = unit_ptr;
         }
     }
 
