@@ -10,4 +10,12 @@
 
 const int DEFAULT_MASS = 5;
 
+const int MIN_WIDTH = 5;
+
+const int MAX_WIDTH = 500;
+
+const int MIN_HEIGHT = 5;
+
+const int MAX_HEIGHT = 500;
+
 #endif
