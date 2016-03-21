@@ -6,9 +6,7 @@
  */
 
 #include "Model.hpp"
-#include "constants.hpp"
 #include "random.hpp"
-#include "Exception.hpp"
 
 namespace Abstract {
 

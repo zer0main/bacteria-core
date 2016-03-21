@@ -12,7 +12,25 @@
 
 #include <vector>
 
+#include "constants.hpp"
+#include "Exception.hpp"
+
 namespace Abstract {
+
+template<typename TModel>
+TModel* makeModel(int width, int height, int bacteria, int teams) {
+    bool less = ((width < MIN_WIDTH) || (height < MIN_HEIGHT));
+    bool greater = ((width > MAX_WIDTH) || (height > MAX_WIDTH));
+    if (less || greater) {
+        throw Exception("Model: width or height of board "
+                        "is out of allowable range.");
+    }
+    if ((bacteria * teams) > ((width * height) / 2)) {
+        throw Exception("Error: invalid number of creatures");
+    }
+    TModel* model = new TModel(width, height, bacteria, teams);
+    return model;
+}
 
 enum CellState {
     EMPTY,
