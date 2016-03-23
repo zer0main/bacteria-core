@@ -23,4 +23,7 @@ const int MIN_HEIGHT = 5;
 /** Maximum height of board */
 const int MAX_HEIGHT = 500;
 
+/** Indent between minimum and default width/height */
+const int INDENT = 15;
+
 #endif
