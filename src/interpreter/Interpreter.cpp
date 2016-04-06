@@ -21,3 +21,22 @@ State* Interpreter::createState() const {
 }
 
 }
+
+namespace Implementation {
+
+Interpreter::Interpreter(
+    const Strings& scripts
+)
+    : Abstract::Interpreter(scripts) {
+}
+
+void Interpreter::makeMove_impl(
+    Abstract::Changer& changer,
+    Abstract::State* st
+) const {
+}
+
+Abstract::State* Interpreter::createState_impl() const {
+}
+
+}
