@@ -15,6 +15,7 @@
 #include "Changer.hpp"
 
 typedef std::vector<std::string> Strings;
+typedef std::vector<int> Ints;
 
 namespace Abstract {
 
@@ -36,6 +37,13 @@ protected:
 
 namespace Implementation {
 
+struct Instruction {
+    const char* command;
+    Ints parameters;
+};
+
+typedef std::vector< std::vector <Instruction> > InstructionsVect;
+
 class Interpreter : public Abstract::Interpreter {
 public:
     Interpreter(const Strings& scripts);
@@ -47,6 +55,9 @@ protected:
     ) const;
 
     Abstract::State* createState_impl() const;
+
+private:
+    InstructionsVect bytecode_;
 };
 
 }
