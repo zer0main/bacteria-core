@@ -9,12 +9,14 @@
 #define INTERPRETER_HPP_
 
 #include <vector>
+#include <sstream>
 #include <string>
 
 #include "State.hpp"
 #include "Changer.hpp"
 
 typedef std::vector<std::string> Strings;
+typedef std::vector<Strings> StringsVect;
 typedef std::vector<int> Ints;
 
 namespace Abstract {
@@ -58,6 +60,8 @@ protected:
 
 private:
     InstructionsVect bytecode_;
+
+    StringsVect lexer(const Strings& source) const;
 };
 
 }
