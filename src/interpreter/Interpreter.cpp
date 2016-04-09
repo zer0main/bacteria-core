@@ -39,16 +39,4 @@ void Interpreter::makeMove_impl(
 Abstract::State* Interpreter::createState_impl() const {
 }
 
-StringsVect Interpreter::lexer(const Strings& source) const {
-    StringsVect tokens(source.size(), Strings(0));
-    for (int i = 0; i < source.size(); i++) {
-        std::stringstream s_stream(source[i]);
-        std::string token;
-        while (std::getline(s_stream, token, '\n')) {
-            tokens[i].push_back(token);
-        }
-    }
-    return tokens;
-}
-
 }

@@ -57,11 +57,6 @@ protected:
     ) const;
 
     Abstract::State* createState_impl() const;
-
-private:
-    InstructionsVect bytecode_;
-
-    StringsVect lexer(const Strings& source) const;
 };
 
 }
