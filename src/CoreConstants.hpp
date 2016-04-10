@@ -5,8 +5,8 @@
  * See the LICENSE file for terms of use.
  */
 
-#ifndef CONSTANTS_HPP_
-#define CONSTANTS_HPP_
+#ifndef CORE_CONSTANTS_HPP_
+#define CORE_CONSTANTS_HPP_
 
 /** Default mass of bacteria */
 const int DEFAULT_MASS = 5;

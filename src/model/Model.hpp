@@ -12,7 +12,7 @@
 
 #include <vector>
 
-#include "constants.hpp"
+#include "CoreConstants.hpp"
 #include "Exception.hpp"
 
 namespace Abstract {
