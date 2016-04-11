@@ -12,6 +12,7 @@
 
 #include <vector>
 
+#include "CoreGlobals.hpp"
 #include "CoreConstants.hpp"
 #include "Exception.hpp"
 
@@ -86,10 +87,6 @@ struct Unit {
     int team;
     int instruction;
 };
-
-typedef QSharedPointer<Unit> UnitPtr;
-typedef std::vector<UnitPtr> Units;
-typedef std::vector<Units> Teams;
 
 class Model : public Abstract::Model {
 public:

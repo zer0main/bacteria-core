@@ -12,12 +12,9 @@
 #include <sstream>
 #include <string>
 
+#include "CoreGlobals.hpp"
 #include "State.hpp"
 #include "Changer.hpp"
-
-typedef std::vector<std::string> Strings;
-typedef std::vector<Strings> StringsVect;
-typedef std::vector<int> Ints;
 
 namespace Abstract {
 
@@ -43,8 +40,6 @@ struct Instruction {
     const char* command;
     Ints parameters;
 };
-
-typedef std::vector< std::vector <Instruction> > InstructionsVect;
 
 class Interpreter : public Abstract::Interpreter {
 public:
