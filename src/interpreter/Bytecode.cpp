@@ -146,6 +146,27 @@ static void checkByID(int id, int params, int specs) {
     }
 }
 
+static Instruction makeInstruction(
+    int params,
+    int specs,
+    const Tokens& tokens_group
+) {
+    Token function = tokens_group[0];
+    Token p1(PARAMETER);
+    Token p2(PARAMETER);
+    Token spec(SPECIFICATION);
+    if (params == 2) {
+        p1 = tokens_group[1];
+        p2 = tokens_group[2];
+    } else if (params == 1) {
+        p1 = tokens_group[1];
+    } else if (specs == 1) {
+        spec = tokens_group[1];
+    }
+    Instruction instruction(function, p1, p2, spec);
+    return instruction;
+}
+
 Token::Token(
     Type type,
     int parameter,
