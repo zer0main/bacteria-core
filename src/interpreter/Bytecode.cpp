@@ -222,4 +222,32 @@ Tokens Bytecode::lexer(const std::string& source) const {
     return result;
 }
 
+Instructions Bytecode::parser(const Tokens& tokens) const {
+    Tokens tokens_group;
+    // Abstract syntax tree.
+    Instructions ast;
+    int funcs = 0, params = 0, specs = 0;
+    for (int i = 0; i < tokens.size(); i++) {
+        if (tokens[i].type == DELIMITER) {
+            checkFunctions(tokens_group[0], funcs);
+            checkByID(tokens_group[0].function_id, params, specs);
+            Instruction inst =
+                makeInstruction(params, specs, tokens_group);
+            ast.push_back(inst);
+            funcs = 0, params = 0, specs = 0;
+            tokens_group.clear();
+        } else {
+            if (tokens[i].type == FUNCTION) {
+                funcs++;
+            } else if (tokens[i].type == PARAMETER) {
+                params++;
+            } else {
+                specs++;
+            }
+            tokens_group.push_back(tokens[i]);
+        }
+    }
+    return ast;
+}
+
 }

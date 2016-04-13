@@ -71,6 +71,8 @@ struct PackedInstruction {
 class Bytecode {
 private:
     Tokens lexer(const std::string& source) const;
+
+    Instructions parser(const Tokens& tokens) const;
 };
 
 }
