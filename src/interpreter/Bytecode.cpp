@@ -108,6 +108,15 @@ static Token makeToken(const std::string& token_str) {
     return token;
 }
 
+static void checkFunctions(const Token& first, int funcs) {
+    if ((first.type != FUNCTION) || (funcs != 1)) {
+        throw Exception("Interpreter: function is missed "
+                        "/ it's in the incorrect position "
+                        "/ there are too many functions "
+                        "for one command.");
+    }
+}
+
 Token::Token(
     Type type,
     int parameter,
