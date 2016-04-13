@@ -54,6 +54,16 @@ static void split(
     }
 }
 
+static int isParameter(const std::string& what) {
+    bool is_parameter = true;
+    for (int i = 0; i < what.size(); i++) {
+        if (!isdigit(what[i])) {
+            is_parameter = false;
+        }
+    }
+    return (is_parameter) ? atoi(what.c_str()) : -1;
+}
+
 Token::Token(
     Type type,
     int parameter,

@@ -8,6 +8,7 @@
 #ifndef BYTECODE_HPP_
 #define BYTECODE_HPP_
 
+#include <cstdlib>
 #include <vector>
 #include <sstream>
 #include <string>
