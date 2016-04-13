@@ -126,6 +126,26 @@ static bool searchID(int id, const int* array, int size) {
     return false;
 }
 
+static void checkByID(int id, int params, int specs) {
+    bool ok = false;
+    if ((params == 2) && (specs == 0)) {
+        int size = sizeof(two_parameter_functions) / sizeof(int);
+        ok = searchID(id, two_parameter_functions, size);
+    } else if ((params == 1) && (specs == 0)) {
+        int size = sizeof(one_parameter_functions) / sizeof(int);
+        ok = searchID(id, one_parameter_functions, size);
+    } else if ((params == 0) && (specs == 1)) {
+        int size = sizeof(spec_functions) / sizeof(int);
+        ok = searchID(id, spec_functions, size);
+    } else if ((params == 0) && (specs == 0)) {
+        int size = sizeof(non_argument_functions) / sizeof(int);
+        ok = searchID(id, non_argument_functions, size);
+    }
+    if (!ok) {
+        throw Exception("Interpreter: invalid arguments of function");
+    }
+}
+
 Token::Token(
     Type type,
     int parameter,
