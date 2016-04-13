@@ -86,6 +86,28 @@ static int isFunction(const std::string& what) {
     return -1;
 }
 
+static Token makeToken(const std::string& token_str) {
+    Type type;
+    if (token_str == "\n") {
+        type = DELIMITER;
+    } else if (isParameter(token_str) != -1) {
+        type = PARAMETER;
+    } else if (isSpecification(token_str)) {
+        type = SPECIFICATION;
+    } else if (isFunction(token_str) != -1) {
+        type = FUNCTION;
+    } else {
+        throw Exception("Interpreter: invalid token");
+    }
+    Token token(
+        type,
+        isParameter(token_str),
+        isSpecification(token_str),
+        isFunction(token_str)
+    );
+    return token;
+}
+
 Token::Token(
     Type type,
     int parameter,

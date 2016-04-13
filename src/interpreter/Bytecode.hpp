@@ -14,6 +14,7 @@
 #include <string>
 
 
+#include "Exception.hpp"
 #include "CoreGlobals.hpp"
 
 namespace Implementation {
