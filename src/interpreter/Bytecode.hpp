@@ -13,6 +13,7 @@
 #include <sstream>
 #include <string>
 
+#include <QtCore>
 
 #include "Exception.hpp"
 #include "CoreGlobals.hpp"
@@ -69,8 +70,13 @@ struct PackedInstruction {
 };
 
 class Bytecode {
+public:
+    static BytecodePtr make(const std::string& source);
+
 private:
     PackedInstructions bytecode_;
+
+    Bytecode();
 
     void generateBytecode(const std::string& source);
 

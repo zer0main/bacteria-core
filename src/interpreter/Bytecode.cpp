@@ -206,6 +206,15 @@ PackedInstruction::PackedInstruction(
 {
 }
 
+BytecodePtr Bytecode::make(const std::string& source) {
+    BytecodePtr bytecode(new Bytecode);
+    bytecode->generateBytecode(source);
+    return bytecode;
+}
+
+Bytecode::Bytecode() {
+}
+
 void Bytecode::generateBytecode(const std::string& source) {
     Tokens tokens = lexer(source);
     Instructions ast = parser(tokens);
