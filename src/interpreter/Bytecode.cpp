@@ -75,6 +75,17 @@ static bool isSpecification(const std::string& what) {
     return false;
 }
 
+static int isFunction(const std::string& what) {
+    size_t el_size = sizeof(char*);
+    size_t size = sizeof(functions_registry) / el_size;
+    for (int i = 0; i < size; i++) {
+        if (what.compare(functions_registry[i]) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 Token::Token(
     Type type,
     int parameter,
