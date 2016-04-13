@@ -117,6 +117,15 @@ static void checkFunctions(const Token& first, int funcs) {
     }
 }
 
+static bool searchID(int id, const int* array, int size) {
+    for (int i = 0; i < size; i++) {
+        if (array[i] == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 Token::Token(
     Type type,
     int parameter,
