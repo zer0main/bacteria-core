@@ -64,6 +64,17 @@ static int isParameter(const std::string& what) {
     return (is_parameter) ? atoi(what.c_str()) : -1;
 }
 
+static bool isSpecification(const std::string& what) {
+    size_t el_size = sizeof(char*);
+    size_t size = sizeof(specifications_registry) / el_size;
+    for (int i = 0; i < size; i++) {
+        if (what.compare(specifications_registry[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 Token::Token(
     Type type,
     int parameter,
