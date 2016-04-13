@@ -32,6 +32,20 @@ struct Token {
     bool spec;
 };
 
+struct Instruction {
+    Instruction(
+        Token function,
+        Token p1,
+        Token p2,
+        Token spec
+    );
+
+    Token function;
+    // parameters
+    Token p1, p2;
+    Token spec;
+};
+
 }
 
 #endif

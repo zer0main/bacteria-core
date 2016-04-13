@@ -22,4 +22,17 @@ Token::Token(
 {
 }
 
+Instruction::Instruction(
+    Token function,
+    Token p1,
+    Token p2,
+    Token spec
+)
+    : function(function)
+    , p1(p1)
+    , p2(p2)
+    , spec(spec)
+{
+}
+
 }
