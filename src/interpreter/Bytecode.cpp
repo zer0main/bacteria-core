@@ -206,6 +206,11 @@ PackedInstruction::PackedInstruction(
 {
 }
 
+void Bytecode::generateBytecode(const std::string& source) {
+    Tokens tokens = lexer(source);
+    Instructions ast = parser(tokens);
+    compile(ast);
+}
 
 Tokens Bytecode::lexer(const std::string& source) const {
     Strings lines;

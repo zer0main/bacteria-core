@@ -72,6 +72,8 @@ class Bytecode {
 private:
     PackedInstructions bytecode_;
 
+    void generateBytecode(const std::string& source);
+
     Tokens lexer(const std::string& source) const;
 
     Instructions parser(const Tokens& tokens) const;
