@@ -206,4 +206,20 @@ PackedInstruction::PackedInstruction(
 {
 }
 
+
+Tokens Bytecode::lexer(const std::string& source) const {
+    Strings lines;
+    split(source, '\n', lines);
+    Strings tokens_str;
+    for (int i = 0; i < lines.size(); i++) {
+        split(lines[i], ' ', tokens_str);
+        tokens_str.push_back("\n");
+    }
+    Tokens result;
+    for (int i = 0; i < tokens_str.size(); i++) {
+        result.push_back(makeToken(tokens_str[i]));
+    }
+    return result;
+}
+
 }

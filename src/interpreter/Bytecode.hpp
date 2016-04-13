@@ -68,6 +68,11 @@ struct PackedInstruction {
     bool spec;
 };
 
+class Bytecode {
+private:
+    Tokens lexer(const std::string& source) const;
+};
+
 }
 
 #endif
