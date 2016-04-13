@@ -117,7 +117,7 @@ static void checkFunctions(const Token& first, int funcs) {
     }
 }
 
-static bool searchID(int id, const int* array, int size) {
+static bool searchId(int id, const int* array, int size) {
     for (int i = 0; i < size; i++) {
         if (array[i] == id) {
             return true;
@@ -126,20 +126,20 @@ static bool searchID(int id, const int* array, int size) {
     return false;
 }
 
-static void checkByID(int id, int params, int specs) {
+static void checkById(int id, int params, int specs) {
     bool ok = false;
     if ((params == 2) && (specs == 0)) {
         int size = sizeof(two_parameter_functions) / sizeof(int);
-        ok = searchID(id, two_parameter_functions, size);
+        ok = searchId(id, two_parameter_functions, size);
     } else if ((params == 1) && (specs == 0)) {
         int size = sizeof(one_parameter_functions) / sizeof(int);
-        ok = searchID(id, one_parameter_functions, size);
+        ok = searchId(id, one_parameter_functions, size);
     } else if ((params == 0) && (specs == 1)) {
         int size = sizeof(spec_functions) / sizeof(int);
-        ok = searchID(id, spec_functions, size);
+        ok = searchId(id, spec_functions, size);
     } else if ((params == 0) && (specs == 0)) {
         int size = sizeof(non_argument_functions) / sizeof(int);
-        ok = searchID(id, non_argument_functions, size);
+        ok = searchId(id, non_argument_functions, size);
     }
     if (!ok) {
         throw Exception("Interpreter: invalid arguments of function");
@@ -244,7 +244,7 @@ Instructions Bytecode::parser(const Tokens& tokens) const {
     for (int i = 0; i < tokens.size(); i++) {
         if (tokens[i].type == DELIMITER) {
             checkFunctions(tokens_group[0], funcs);
-            checkByID(tokens_group[0].function_id, params, specs);
+            checkById(tokens_group[0].function_id, params, specs);
             Instruction inst =
                 makeInstruction(params, specs, tokens_group);
             ast.push_back(inst);
