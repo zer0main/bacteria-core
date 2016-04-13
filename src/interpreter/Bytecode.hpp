@@ -70,9 +70,13 @@ struct PackedInstruction {
 
 class Bytecode {
 private:
+    PackedInstructions bytecode_;
+
     Tokens lexer(const std::string& source) const;
 
     Instructions parser(const Tokens& tokens) const;
+
+    void compile(const Instructions& instructions);
 };
 
 }

@@ -250,4 +250,15 @@ Instructions Bytecode::parser(const Tokens& tokens) const {
     return ast;
 }
 
+void Bytecode::compile(const Instructions& instructions) {
+    for (int i = 0; i < instructions.size(); i++) {
+        int func_id = instructions[i].function.function_id;
+        int p1 = instructions[i].p1.parameter;
+        int p2 = instructions[i].p2.parameter;
+        bool spec = instructions[i].spec.spec;
+        PackedInstruction packed_inst(func_id, p1, p2, spec);
+        bytecode_.push_back(packed_inst);
+    }
+}
+
 }
