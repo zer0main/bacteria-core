@@ -35,4 +35,17 @@ Instruction::Instruction(
 {
 }
 
+PackedInstruction::PackedInstruction(
+    int function_id,
+    int p1,
+    int p2,
+    bool spec
+)
+    : function_id(function_id)
+    , p1(p1)
+    , p2(p2)
+    , spec(spec)
+{
+}
+
 }

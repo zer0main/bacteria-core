@@ -46,6 +46,20 @@ struct Instruction {
     Token spec;
 };
 
+struct PackedInstruction {
+    PackedInstruction(
+        int function_id,
+        int p1,
+        int p2,
+        bool spec
+    );
+
+    int function_id;
+    // parameters
+    int p1, p2;
+    bool spec;
+};
+
 }
 
 #endif
