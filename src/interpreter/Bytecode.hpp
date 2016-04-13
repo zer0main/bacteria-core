@@ -13,8 +13,6 @@
 #include <sstream>
 #include <string>
 
-#include <QtCore>
-
 #include "Exception.hpp"
 #include "CoreGlobals.hpp"
 

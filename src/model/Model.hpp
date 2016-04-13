@@ -8,8 +8,6 @@
 #ifndef MODEL_HPP_
 #define MODEL_HPP_
 
-#include <QtCore>
-
 #include <vector>
 
 #include "CoreGlobals.hpp"
