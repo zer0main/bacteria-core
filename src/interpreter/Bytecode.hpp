@@ -8,6 +8,12 @@
 #ifndef BYTECODE_HPP_
 #define BYTECODE_HPP_
 
+#include <vector>
+#include <sstream>
+#include <string>
+
+
+#include "CoreGlobals.hpp"
 
 namespace Implementation {
 

@@ -9,6 +9,21 @@
 
 namespace Implementation {
 
+
+static void split(
+    const std::string& str,
+    char delimiter,
+    Strings items
+) {
+    std::stringstream s_stream(str);
+    std::string item;
+    while (std::getline(s_stream, item, delimiter)) {
+        if (!item.empty()) {
+            items.push_back(item);
+        }
+    }
+}
+
 Token::Token(
     Type type,
     int parameter,
