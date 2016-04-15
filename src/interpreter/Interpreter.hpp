@@ -36,11 +36,6 @@ protected:
 
 namespace Implementation {
 
-struct Instruction {
-    const char* command;
-    Ints parameters;
-};
-
 class Interpreter : public Abstract::Interpreter {
 public:
     Interpreter(const Strings& scripts);
