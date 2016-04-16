@@ -32,6 +32,7 @@ typedef QSharedPointer<const Abstract::Model> ConstModelPtr;
 typedef QSharedPointer<Abstract::Model> ModelPtr;
 
 typedef QSharedPointer<Implementation::Bytecode> BytecodePtr;
+typedef std::vector<BytecodePtr> BytecodePtrs;
 typedef std::vector<Implementation::Token> Tokens;
 typedef std::vector<Implementation::Instruction> Instructions;
 typedef std::vector<Implementation::PackedInstruction> PackedInstructions;

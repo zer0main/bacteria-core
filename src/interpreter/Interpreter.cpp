@@ -9,7 +9,11 @@
 
 namespace Abstract {
 
-Interpreter::Interpreter(const Strings& scripts) {
+Interpreter::Interpreter() {
+}
+
+void Interpreter::makeBytecode(const Strings& scripts) {
+    return makeBytecode_impl(scripts);
 }
 
 void Interpreter::makeMove(Changer& changer, State* st) const {
@@ -24,10 +28,11 @@ State* Interpreter::createState() const {
 
 namespace Implementation {
 
-Interpreter::Interpreter(
-    const Strings& scripts
-)
-    : Abstract::Interpreter(scripts) {
+void Interpreter::makeBytecode_impl(const Strings& scripts) {
+    for (int i = 0; i < scripts.size(); i++) {
+        BytecodePtr bytecode_ptr = Bytecode::make(scripts[i]);
+        bytecode_.push_back(bytecode_ptr);
+    }
 }
 
 void Interpreter::makeMove_impl(
