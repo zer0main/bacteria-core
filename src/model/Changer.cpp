@@ -40,6 +40,12 @@ Changer::Changer(
     , model_(model)
     , team_(team)
     , move_number_(move_number) {
+    int bacteria = model_.getBacteriaNumber(team_);
+    remaining_actions_.resize(bacteria, MAX_ACTIONS);
+    remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);
+    completed_commands_.resize(bacteria, 0);
+}
+
 }
 
 }

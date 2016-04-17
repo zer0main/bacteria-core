@@ -34,6 +34,10 @@ public:
 
 private:
     Model& model_;
+    Ints remaining_actions_;
+    Ints remaining_pseudo_actions_;
+    // command = action OR pseudo action
+    Ints completed_commands_;
 
     int team_;
     int move_number_;
