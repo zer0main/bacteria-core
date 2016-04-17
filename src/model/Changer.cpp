@@ -9,6 +9,17 @@
 
 namespace Abstract {
 
+Params::Params(
+    int p1,
+    int p2,
+    bool spec
+)
+    : p1(p1)
+    , p2(p2)
+    , spec(spec)
+{
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,

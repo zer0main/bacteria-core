@@ -12,6 +12,13 @@
 
 namespace Abstract {
 
+struct Params {
+    Params(int p1, int p2, bool spec);
+
+    int p1, p2;
+    bool spec;
+};
+
 class Changer {
 protected:
     Changer(Model& model, int team, int move_number);
