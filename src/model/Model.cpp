@@ -46,6 +46,10 @@ int Model::getHeight() const {
 
 namespace Implementation {
 
+static bool checkIndex(int index, int size) {
+    return (index >= 0) && (index < size);
+}
+
 /* get global coordinate from horizontal and
    vertical coordinates
 */
@@ -84,6 +88,15 @@ Model::Model(
     board_.resize(width * height);
     teams_.resize(teams);
     initializeBoard(bacteria, teams);
+}
+
+int Model::getBacteriaNumber(int team) const {
+    if (!checkIndex(team, teams_.size())) {
+        throw Exception("Model: team argument of "
+                        "getBacteriaNumber() method is out of "
+                        "allowable range.");
+    }
+    return teams_[team].size();
 }
 
 Abstract::CellState Model::cellState_impl(int x, int y) const {

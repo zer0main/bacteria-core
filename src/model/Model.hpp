@@ -90,6 +90,8 @@ class Model : public Abstract::Model {
 public:
     Model(int width, int height, int bacteria, int teams);
 
+    int getBacteriaNumber(int team) const;
+
 protected:
     Abstract::CellState cellState_impl(int x, int y) const;
 
