@@ -215,6 +215,15 @@ BytecodePtr Bytecode::make(const std::string& source) {
 Bytecode::Bytecode() {
 }
 
+PackedInstruction Bytecode::getInstruction(int index) const {
+    bool less = index < 0;
+    bool greater = index >= bytecode_.size();
+    if (less || greater) {
+        throw Exception("Bytecode: invalid index of instruction.");
+    }
+    return bytecode_[index];
+}
+
 void Bytecode::generateBytecode(const std::string& source) {
     Tokens tokens = lexer(source);
     Instructions ast = parser(tokens);

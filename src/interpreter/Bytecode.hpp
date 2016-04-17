@@ -71,6 +71,8 @@ class Bytecode {
 public:
     static BytecodePtr make(const std::string& source);
 
+    PackedInstruction getInstruction(int index) const;
+
 private:
     PackedInstructions bytecode_;
 
