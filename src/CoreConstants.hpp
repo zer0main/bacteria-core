@@ -8,6 +8,22 @@
 #ifndef CORE_CONSTANTS_HPP_
 #define CORE_CONSTANTS_HPP_
 
+/** Mass increase per one 'eat' command */
+const int EAT_MASS = 1;
+
+const int MAX_COMMANDS_PER_INSTRUCTION = 100;
+
+const int MIN_COMMANDS_PER_INSTRUCTION = 1;
+
+/** Maximum randomly generated number of actions (per instruction) */
+const int RANDOM_MAX_ACTIONS = 5;
+
+/** Maximum number of actions per move */
+const int MAX_ACTIONS = 1;
+
+/** Maximum number of pseudo actions per move */
+const int MAX_PSEUDO_ACTIONS = 30;
+
 /** Default mass of bacteria */
 const int DEFAULT_MASS = 5;
 
