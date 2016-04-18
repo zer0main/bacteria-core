@@ -47,6 +47,21 @@ Changer::Changer(
 
 namespace Implementation {
 
+LogicalChanger::LogicalChanger(
+    Abstract::Model& model,
+    int team,
+    int move_number
+)
+    : model_(model)
+    , team_(team)
+    , move_number_(move_number)
+{
+}
+
+void LogicalChanger::eat(int bacterium_index) {
+    model_.changeMass(team_, bacterium_index, EAT_MASS);
+}
+
 Changer::Changer(
     Abstract::Model& model,
     int team,
@@ -55,7 +70,8 @@ Changer::Changer(
     : Abstract::Changer(model, team, move_number)
     , model_(model)
     , team_(team)
-    , move_number_(move_number) {
+    , move_number_(move_number)
+    , logical_changer_(model_, team_, move_number_) {
     int bacteria = model_.getBacteriaNumber(team_);
     remaining_actions_.resize(bacteria, MAX_ACTIONS);
     remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);

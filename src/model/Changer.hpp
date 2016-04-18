@@ -50,6 +50,24 @@ protected:
 
 namespace Implementation {
 
+class LogicalChanger {
+public:
+    LogicalChanger(
+        Abstract::Model& model,
+        int team,
+        int move_number
+    );
+
+    void eat(int bacterium_index);
+
+private:
+    Abstract::Model& model_;
+    int team_;
+    int move_number_;
+};
+
+typedef void (LogicalChanger::*LogicalMethod) (int bacterium_index);
+
 class Changer : public Abstract::Changer {
 public:
     Changer(Abstract::Model& model, int team, int move_number);
@@ -72,6 +90,8 @@ private:
 
     int team_;
     int move_number_;
+
+    LogicalChanger logical_changer_;
 };
 
 }
