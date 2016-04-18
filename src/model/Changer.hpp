@@ -20,8 +20,13 @@ struct Params {
 };
 
 class Changer {
+public:
+    bool endOfMove(int bacterium_index) const;
+
 protected:
     Changer(Model& model, int team, int move_number);
+
+    virtual bool endOfMove_impl(int bacterium_index) const = 0;
 };
 
 }
@@ -31,6 +36,9 @@ namespace Implementation {
 class Changer : public Abstract::Changer {
 public:
     Changer(Model& model, int team, int move_number);
+
+protected:
+    bool endOfMove_impl(int bacterium_index) const;
 
 private:
     Model& model_;

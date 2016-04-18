@@ -20,6 +20,10 @@ Params::Params(
 {
 }
 
+bool Changer::endOfMove(int bacterium_index) const {
+    return endOfMove_impl(bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -44,6 +48,12 @@ Changer::Changer(
     remaining_actions_.resize(bacteria, MAX_ACTIONS);
     remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);
     completed_commands_.resize(bacteria, 0);
+}
+
+bool Changer::endOfMove_impl(int bacterium_index) const {
+    bool actions = remaining_actions_[bacterium_index] > 0;
+    bool pseudo_actions = remaining_pseudo_actions_[bacterium_index] > 0;
+    return !(actions && pseudo_actions);
 }
 
 }
