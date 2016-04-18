@@ -46,6 +46,10 @@ int Model::getBacteriaNumber(int team) const {
     return getBacteriaNumber_impl(team);
 }
 
+int Model::getInstruction(int team, int bacterium_index) const {
+    return getInstruction_impl(team, bacterium_index);
+}
+
 }
 
 namespace Implementation {
@@ -150,6 +154,22 @@ int Model::getBacteriaNumber_impl(int team) const {
                         "allowable range.");
     }
     return teams_[team].size();
+}
+
+int Model::getInstruction_impl(
+    int team,
+    int bacterium_index
+) const {
+    if (!checkIndex(team, teams_.size())) {
+        throw Exception("Model: team argument of getInstruction() "
+                        "method is out of allowable range.");
+    }
+    if (!checkIndex(bacterium_index, teams_[team].size())) {
+        throw Exception("Model: bacterium_index argument of "
+                        "getInstruction() method is out of "
+                        "allowable range.");
+    }
+    return teams_[team][bacterium_index]->instruction;
 }
 
 void Model::initializeBoard(int bacteria, int teams) {

@@ -59,6 +59,8 @@ public:
 
     int getBacteriaNumber(int team) const;
 
+    int getInstruction(int team, int bacterium_index) const;
+
 protected:
     Model(int width, int height, int bacteria, int teams);
 
@@ -75,6 +77,11 @@ protected:
     virtual int getHeight_impl() const = 0;
 
     virtual int getBacteriaNumber_impl(int team) const = 0;
+
+    virtual int getInstruction_impl(
+        int team,
+        int bacterium_index
+    ) const = 0;
 
 };
 
@@ -109,6 +116,8 @@ protected:
     int getHeight_impl() const;
 
     int getBacteriaNumber_impl(int team) const;
+
+    int getInstruction_impl(int team, int bacterium_index) const;
 
 private:
     void initializeBoard(int bacteria, int teams);
