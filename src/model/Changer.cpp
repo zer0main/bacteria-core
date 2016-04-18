@@ -24,6 +24,10 @@ bool Changer::endOfMove(int bacterium_index) const {
     return endOfMove_impl(bacterium_index);
 }
 
+int Changer::getBacteriaNumber() const {
+    return getBacteriaNumber_impl();
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -54,6 +58,10 @@ bool Changer::endOfMove_impl(int bacterium_index) const {
     bool actions = remaining_actions_[bacterium_index] > 0;
     bool pseudo_actions = remaining_pseudo_actions_[bacterium_index] > 0;
     return !(actions && pseudo_actions);
+}
+
+int Changer::getBacteriaNumber_impl() const {
+    return model_.getBacteriaNumber(team_);
 }
 
 }
