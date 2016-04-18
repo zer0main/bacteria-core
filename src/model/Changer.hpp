@@ -8,7 +8,11 @@
 #ifndef CHANGER_HPP_
 #define CHANGER_HPP_
 
+#include "CoreConstants.hpp"
+#include "CoreGlobals.hpp"
 #include "Model.hpp"
+#include "Exception.hpp"
+#include "random.hpp"
 
 namespace Abstract {
 
