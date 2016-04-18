@@ -29,12 +29,17 @@ public:
 
     int getBacteriaNumber() const;
 
+    int getTeam() const;
+
 protected:
     Changer(Model& model, int team, int move_number);
 
     virtual bool endOfMove_impl(int bacterium_index) const = 0;
 
     virtual int getBacteriaNumber_impl() const = 0;
+
+    virtual int getTeam_impl() const = 0;
+
 };
 
 }
@@ -49,6 +54,9 @@ protected:
     bool endOfMove_impl(int bacterium_index) const;
 
     int getBacteriaNumber_impl() const;
+
+    int getTeam_impl() const;
+
 private:
     Model& model_;
     Ints remaining_actions_;

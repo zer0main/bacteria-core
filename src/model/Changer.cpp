@@ -28,6 +28,10 @@ int Changer::getBacteriaNumber() const {
     return getBacteriaNumber_impl();
 }
 
+int Changer::getTeam() const {
+    return getTeam_impl();
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -62,6 +66,10 @@ bool Changer::endOfMove_impl(int bacterium_index) const {
 
 int Changer::getBacteriaNumber_impl() const {
     return model_.getBacteriaNumber(team_);
+}
+
+int Changer::getTeam_impl() const {
+    return team_;
 }
 
 }
