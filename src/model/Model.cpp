@@ -54,6 +54,18 @@ void Model::changeMass(int team, int bacterium_index, int change) {
     return changeMass_impl(team, bacterium_index, change);
 }
 
+void Model::setInstruction(
+    int team,
+    int bacterium_index,
+    int new_instruction
+) {
+    return setInstruction_impl(
+        team,
+        bacterium_index,
+        new_instruction
+    );
+}
+
 }
 
 namespace Implementation {
@@ -191,6 +203,23 @@ void Model::changeMass_impl(
                         "allowable range.");
     }
     teams_[team][bacterium_index]->mass += change;
+}
+
+void Model::setInstruction_impl(
+    int team,
+    int bacterium_index,
+    int new_instruction
+) {
+    if (!checkIndex(team, teams_.size())) {
+        throw Exception("Model: team argument of setInstruction() "
+                        "method is out of allowable range.");
+    }
+    if (!checkIndex(bacterium_index, teams_[team].size())) {
+        throw Exception("Model: bacterium_index argument of "
+                        "setInstruction() method is out of "
+                        "allowable range.");
+    }
+    teams_[team][bacterium_index]->instruction = new_instruction;
 }
 
 void Model::initializeBoard(int bacteria, int teams) {
