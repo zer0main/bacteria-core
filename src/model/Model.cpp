@@ -185,7 +185,13 @@ int Model::getInstruction_impl(
                         "getInstruction() method is out of "
                         "allowable range.");
     }
-    return teams_[team][bacterium_index]->instruction;
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    if (!unit_ptr.isNull()) {
+        return unit_ptr->instruction;
+    } else {
+        throw Exception("Model: Attempt to get instruction "
+                        "of NULL ptr.");
+    }
 }
 
 void Model::changeMass_impl(
@@ -202,7 +208,13 @@ void Model::changeMass_impl(
                         "changeMass() method is out of "
                         "allowable range.");
     }
-    teams_[team][bacterium_index]->mass += change;
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    if (!unit_ptr.isNull()) {
+        unit_ptr->mass += change;
+    } else {
+        throw Exception("Model: Attempt to change mass "
+                        "of NULL ptr.");
+    }
 }
 
 void Model::setInstruction_impl(
@@ -219,7 +231,13 @@ void Model::setInstruction_impl(
                         "setInstruction() method is out of "
                         "allowable range.");
     }
-    teams_[team][bacterium_index]->instruction = new_instruction;
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    if (!unit_ptr.isNull()) {
+        unit_ptr->instruction = new_instruction;
+    } else {
+        throw Exception("Model: Attempt to set instruction "
+                        "for NULL ptr.");
+    }
 }
 
 void Model::initializeBoard(int bacteria, int teams) {
