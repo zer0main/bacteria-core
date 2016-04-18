@@ -32,6 +32,10 @@ int Changer::getTeam() const {
     return getTeam_impl();
 }
 
+int Changer::getInstruction(int bacterium_index) const {
+    return getInstruction_impl(bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -70,6 +74,10 @@ int Changer::getBacteriaNumber_impl() const {
 
 int Changer::getTeam_impl() const {
     return team_;
+}
+
+int Changer::getInstruction_impl(int bacterium_index) const {
+    return model_.getInstruction(team_, bacterium_index);
 }
 
 }

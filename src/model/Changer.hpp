@@ -31,6 +31,8 @@ public:
 
     int getTeam() const;
 
+    int getInstruction(int bacterium_index) const;
+
 protected:
     Changer(Model& model, int team, int move_number);
 
@@ -39,6 +41,8 @@ protected:
     virtual int getBacteriaNumber_impl() const = 0;
 
     virtual int getTeam_impl() const = 0;
+
+    virtual int getInstruction_impl(int bacterium_index) const = 0;
 
 };
 
@@ -56,6 +60,8 @@ protected:
     int getBacteriaNumber_impl() const;
 
     int getTeam_impl() const;
+
+    int getInstruction_impl(int bacterium_index) const;
 
 private:
     Abstract::Model& model_;
