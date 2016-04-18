@@ -61,6 +61,8 @@ public:
 
     int getInstruction(int team, int bacterium_index) const;
 
+    void changeMass(int team, int bacterium_index, int change);
+
 protected:
     Model(int width, int height, int bacteria, int teams);
 
@@ -82,6 +84,12 @@ protected:
         int team,
         int bacterium_index
     ) const = 0;
+
+    virtual void changeMass_impl(
+        int team,
+        int bacterium_index,
+        int change
+    ) = 0;
 
 };
 
@@ -118,6 +126,8 @@ protected:
     int getBacteriaNumber_impl(int team) const;
 
     int getInstruction_impl(int team, int bacterium_index) const;
+
+    void changeMass_impl(int team, int bacterium_index, int change);
 
 private:
     void initializeBoard(int bacteria, int teams);
