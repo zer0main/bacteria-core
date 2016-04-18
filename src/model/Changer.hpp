@@ -48,7 +48,7 @@ namespace Implementation {
 
 class Changer : public Abstract::Changer {
 public:
-    Changer(Model& model, int team, int move_number);
+    Changer(Abstract::Model& model, int team, int move_number);
 
 protected:
     bool endOfMove_impl(int bacterium_index) const;
@@ -58,7 +58,7 @@ protected:
     int getTeam_impl() const;
 
 private:
-    Model& model_;
+    Abstract::Model& model_;
     Ints remaining_actions_;
     Ints remaining_pseudo_actions_;
     // command = action OR pseudo action

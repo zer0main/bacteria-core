@@ -44,7 +44,7 @@ Changer::Changer(
 namespace Implementation {
 
 Changer::Changer(
-    Model& model,
+    Abstract::Model& model,
     int team,
     int move_number
 )

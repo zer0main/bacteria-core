@@ -57,6 +57,8 @@ public:
 
     int getHeight() const;
 
+    int getBacteriaNumber(int team) const;
+
 protected:
     Model(int width, int height, int bacteria, int teams);
 
@@ -71,6 +73,9 @@ protected:
     virtual int getWidth_impl() const = 0;
 
     virtual int getHeight_impl() const = 0;
+
+    virtual int getBacteriaNumber_impl(int team) const = 0;
+
 };
 
 }
@@ -90,8 +95,6 @@ class Model : public Abstract::Model {
 public:
     Model(int width, int height, int bacteria, int teams);
 
-    int getBacteriaNumber(int team) const;
-
 protected:
     Abstract::CellState cellState_impl(int x, int y) const;
 
@@ -104,6 +107,8 @@ protected:
     int getWidth_impl() const;
 
     int getHeight_impl() const;
+
+    int getBacteriaNumber_impl(int team) const;
 
 private:
     void initializeBoard(int bacteria, int teams);
