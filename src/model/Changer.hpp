@@ -124,6 +124,11 @@ private:
 
     LogicalChanger logical_changer_;
 
+    bool remainingActionsDecrement(
+        Ints& remaining_commands_vect,
+        int bacterium_index
+    );
+
     void updateInstruction(int bacterium_index);
 
     int checkCommandsNumber(int number) const;

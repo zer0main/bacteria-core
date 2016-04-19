@@ -124,6 +124,25 @@ int Changer::getInstruction_impl(int bacterium_index) const {
 }
 
 
+bool Changer::remainingActionsDecrement(
+    Ints& actions_vect,
+    int bacterium_index
+) {
+    bool less = bacterium_index < 0;
+    bool greater = bacterium_index >= actions_vect.size();
+    if (less || greater) {
+        throw Exception("Changer: invalid bacterium index.");
+    }
+    actions_vect[bacterium_index]--;
+    if (actions_vect[bacterium_index] < 0) {
+        throw Exception("Changer: too many commands for one move.");
+    }
+    if (actions_vect[bacterium_index] == 0) {
+        return false;
+    }
+    return true;
+}
+
 void Changer::updateInstruction(int index) {
     completed_commands_[index] = 0;
     int instruction = model_.getInstruction(team_, index);
