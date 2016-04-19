@@ -163,6 +163,23 @@ int Changer::checkCommandsNumber(int number) const {
     }
 }
 
+void Changer::repeater(RepeaterParams* params) {
+    int index = params->bacterium_index;
+    int done = completed_commands_[index];
+    bool finished = false;
+    while ((done < params->commands) && !finished) {
+        finished = !remainingActionsDecrement(
+            params->remaining_commands_vect,
+            index
+        );
+        completed_commands_[index]++;
+        done = completed_commands_[index];
+        LogicalMethod method = params->logic_function;
+        (logical_changer_.*method)(index);
+    }
+    if (done == (params->commands)) {
+        updateInstruction(index);
+    }
 }
 
 }

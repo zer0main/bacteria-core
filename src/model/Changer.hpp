@@ -132,6 +132,8 @@ private:
     void updateInstruction(int bacterium_index);
 
     int checkCommandsNumber(int number) const;
+
+    void repeater(RepeaterParams* params);
 };
 
 }
