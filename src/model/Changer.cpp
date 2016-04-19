@@ -165,19 +165,19 @@ int Changer::checkCommandsNumber(int number) const {
 
 void Changer::repeater(RepeaterParams* params) {
     int index = params->bacterium_index;
-    int done = completed_commands_[index];
+    int total_commands = params->commands;
     bool finished = false;
-    while ((done < params->commands) && !finished) {
+    while ((completed_commands_[index] < total_commands) &&
+           !finished) {
         finished = !remainingActionsDecrement(
             params->remaining_commands_vect,
             index
         );
         completed_commands_[index]++;
-        done = completed_commands_[index];
         LogicalMethod method = params->logic_function;
         (logical_changer_.*method)(index);
     }
-    if (done == (params->commands)) {
+    if (completed_commands_[index] == (total_commands)) {
         updateInstruction(index);
     }
 }
