@@ -34,7 +34,12 @@ public:
     int getInstruction(int bacterium_index) const;
 
 protected:
-    Changer(Model& model, int team, int move_number);
+    Changer(
+        Model& model,
+        int team,
+        int move_number,
+        int instructions
+    );
 
     virtual bool endOfMove_impl(int bacterium_index) const = 0;
 
@@ -70,7 +75,12 @@ typedef void (LogicalChanger::*LogicalMethod) (int bacterium_index);
 
 class Changer : public Abstract::Changer {
 public:
-    Changer(Abstract::Model& model, int team, int move_number);
+    Changer(
+        Abstract::Model& model,
+        int team,
+        int move_number,
+        int instructions
+    );
 
 protected:
     bool endOfMove_impl(int bacterium_index) const;
@@ -90,6 +100,7 @@ private:
 
     int team_;
     int move_number_;
+    int instructions_;
 
     LogicalChanger logical_changer_;
 };

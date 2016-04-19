@@ -39,7 +39,8 @@ int Changer::getInstruction(int bacterium_index) const {
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
-    int /*move_number*/
+    int /*move_number*/,
+    int /*instructions*/
 ) {
 }
 
@@ -65,12 +66,14 @@ void LogicalChanger::eat(int bacterium_index) {
 Changer::Changer(
     Abstract::Model& model,
     int team,
-    int move_number
+    int move_number,
+    int instructions
 )
-    : Abstract::Changer(model, team, move_number)
+    : Abstract::Changer(model, team, move_number, instructions)
     , model_(model)
     , team_(team)
     , move_number_(move_number)
+    , instructions_(instructions)
     , logical_changer_(model_, team_, move_number_) {
     int bacteria = model_.getBacteriaNumber(team_);
     remaining_actions_.resize(bacteria, MAX_ACTIONS);
