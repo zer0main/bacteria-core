@@ -20,6 +20,10 @@ Params::Params(
 {
 }
 
+void Changer::clearAfterMove() {
+    return clearAfterMove_impl();
+}
+
 bool Changer::endOfMove(int bacterium_index) const {
     return endOfMove_impl(bacterium_index);
 }
@@ -92,6 +96,13 @@ Changer::Changer(
     remaining_actions_.resize(bacteria, MAX_ACTIONS);
     remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);
     completed_commands_.resize(bacteria, 0);
+}
+
+void Changer::clearAfterMove_impl() {
+    for (int i = 0; i < getBacteriaNumber_impl(); i++) {
+        remaining_actions_[i] = MAX_ACTIONS;
+        remaining_pseudo_actions_[i] = MAX_PSEUDO_ACTIONS;
+    }
 }
 
 bool Changer::endOfMove_impl(int bacterium_index) const {
