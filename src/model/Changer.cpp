@@ -123,6 +123,17 @@ int Changer::getInstruction_impl(int bacterium_index) const {
     return model_.getInstruction(team_, bacterium_index);
 }
 
+
+void Changer::updateInstruction(int index) {
+    completed_commands_[index] = 0;
+    int instruction = model_.getInstruction(team_, index);
+    if ((instruction + 1) < instructions_) {
+        model_.setInstruction(team_, index, instruction + 1);
+    } else {
+        model_.setInstruction(team_, index, 0);
+    }
+}
+
 }
 
 }

@@ -123,6 +123,8 @@ private:
     int instructions_;
 
     LogicalChanger logical_changer_;
+
+    void updateInstruction(int bacterium_index);
 };
 
 }
