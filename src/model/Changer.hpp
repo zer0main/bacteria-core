@@ -73,6 +73,20 @@ private:
 
 typedef void (LogicalChanger::*LogicalMethod) (int bacterium_index);
 
+struct RepeaterParams {
+    RepeaterParams(
+        int bacterium_index,
+        int commands,
+        Ints& remaining_commands_vect,
+        LogicalMethod logic_function
+    );
+
+    int bacterium_index;
+    int commands;
+    Ints& remaining_commands_vect;
+    LogicalMethod logic_function;
+};
+
 class Changer : public Abstract::Changer {
 public:
     Changer(

@@ -63,6 +63,19 @@ void LogicalChanger::eat(int bacterium_index) {
     model_.changeMass(team_, bacterium_index, EAT_MASS);
 }
 
+RepeaterParams::RepeaterParams(
+    int bacterium_index,
+    int commands,
+    Ints& remaining_commands_vect,
+    LogicalMethod logic_function
+)
+    : bacterium_index(bacterium_index)
+    , commands(commands)
+    , remaining_commands_vect(remaining_commands_vect)
+    , logic_function(logic_function)
+{
+}
+
 Changer::Changer(
     Abstract::Model& model,
     int team,
