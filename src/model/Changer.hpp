@@ -125,6 +125,8 @@ private:
     LogicalChanger logical_changer_;
 
     void updateInstruction(int bacterium_index);
+
+    int checkCommandsNumber(int number) const;
 };
 
 }

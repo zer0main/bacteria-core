@@ -134,6 +134,16 @@ void Changer::updateInstruction(int index) {
     }
 }
 
+int Changer::checkCommandsNumber(int number) const {
+    bool greater = number > MIN_COMMANDS_PER_INSTRUCTION;
+    bool less = number < MAX_COMMANDS_PER_INSTRUCTION;
+    if (greater && less) {
+        return number;
+    } else {
+        throw Exception("Changer: invalid commands number.");
+    }
+}
+
 }
 
 }
