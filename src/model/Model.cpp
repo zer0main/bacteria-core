@@ -22,16 +22,16 @@ CellState Model::cellState(int x, int y) const {
     return cellState_impl(x, y);
 }
 
-int Model::getDirection(int x, int y) const {
-    return getDirection_impl(x, y);
+int Model::getDirectionByCoordinates(int x, int y) const {
+    return getDirectionByCoordinates_impl(x, y);
 }
 
-int Model::getMass(int x, int y) const {
-    return getMass_impl(x, y);
+int Model::getMassByCoordinates(int x, int y) const {
+    return getMassByCoordinates_impl(x, y);
 }
 
-int Model::getTeam(int x, int y) const {
-    return getTeam_impl(x, y);
+int Model::getTeamByCoordinates(int x, int y) const {
+    return getTeamByCoordinates_impl(x, y);
 }
 
 int Model::getWidth() const {
@@ -124,7 +124,7 @@ Abstract::CellState Model::cellState_impl(int x, int y) const {
     }
 }
 
-int Model::getDirection_impl(int x, int y) const {
+int Model::getDirectionByCoordinates_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
     UnitPtr unit_ptr = board_[index];
     if (!unit_ptr.isNull()) {
@@ -134,7 +134,7 @@ int Model::getDirection_impl(int x, int y) const {
     }
 }
 
-int Model::getMass_impl(int x, int y) const {
+int Model::getMassByCoordinates_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
     UnitPtr unit_ptr = board_[index];
     if (!unit_ptr.isNull()) {
@@ -144,7 +144,7 @@ int Model::getMass_impl(int x, int y) const {
     }
 }
 
-int Model::getTeam_impl(int x, int y) const {
+int Model::getTeamByCoordinates_impl(int x, int y) const {
     int index = getIndex(x, y, width_, height_);
     UnitPtr unit_ptr = board_[index];
     if (!unit_ptr.isNull()) {

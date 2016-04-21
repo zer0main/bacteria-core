@@ -47,11 +47,11 @@ class Model {
 public:
     CellState cellState(int x, int y) const;
 
-    int getDirection(int x, int y) const;
+    int getDirectionByCoordinates(int x, int y) const;
 
-    int getMass(int x, int y) const;
+    int getMassByCoordinates(int x, int y) const;
 
-    int getTeam(int x, int y) const;
+    int getTeamByCoordinates(int x, int y) const;
 
     int getWidth() const;
 
@@ -74,11 +74,20 @@ protected:
 
     virtual CellState cellState_impl(int x, int y) const = 0;
 
-    virtual int getDirection_impl(int x, int y) const = 0;
+    virtual int getDirectionByCoordinates_impl(
+        int x,
+        int y
+    ) const = 0;
 
-    virtual int getMass_impl(int x, int y) const = 0;
+    virtual int getMassByCoordinates_impl(
+        int x,
+        int y
+    ) const = 0;
 
-    virtual int getTeam_impl(int x, int y) const = 0;
+    virtual int getTeamByCoordinates_impl(
+        int x,
+        int y
+    ) const = 0;
 
     virtual int getWidth_impl() const = 0;
 
@@ -124,11 +133,11 @@ public:
 protected:
     Abstract::CellState cellState_impl(int x, int y) const;
 
-    int getDirection_impl(int x, int y) const;
+    int getDirectionByCoordinates_impl(int x, int y) const;
 
-    int getMass_impl(int x, int y) const;
+    int getMassByCoordinates_impl(int x, int y) const;
 
-    int getTeam_impl(int x, int y) const;
+    int getTeamByCoordinates_impl(int x, int y) const;
 
     int getWidth_impl() const;
 
