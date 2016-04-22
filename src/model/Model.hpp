@@ -139,10 +139,10 @@ protected:
         int bacterium_index
     ) const = 0;
 
-    virtual int getMass_impl(
+    virtual void kill_impl(
         int team,
         int bacterium_index
-    ) const = 0;
+    ) = 0;
 
     virtual void changeMass_impl(
         int team,
