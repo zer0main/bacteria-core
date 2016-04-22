@@ -43,6 +43,12 @@ enum Direction {
     BACKWARD,
 };
 
+struct Point {
+    Point(int x, int y);
+
+    int x, y;
+};
+
 class Model {
 public:
     CellState cellState(int x, int y) const;
