@@ -26,20 +26,26 @@ Point::Point(
     , y(y) {
 }
 
-CellState Model::cellState(int x, int y) const {
-    return cellState_impl(x, y);
+CellState Model::cellState(const Point& coordinates) const {
+    return cellState_impl(coordinates);
 }
 
-int Model::getDirectionByCoordinates(int x, int y) const {
-    return getDirectionByCoordinates_impl(x, y);
+int Model::getDirectionByCoordinates(
+    const Point& coordinates
+) const {
+    return getDirectionByCoordinates_impl(coordinates);
 }
 
-int Model::getMassByCoordinates(int x, int y) const {
-    return getMassByCoordinates_impl(x, y);
+int Model::getMassByCoordinates(
+    const Point& coordinates
+) const {
+    return getMassByCoordinates_impl(coordinates);
 }
 
-int Model::getTeamByCoordinates(int x, int y) const {
-    return getTeamByCoordinates_impl(x, y);
+int Model::getTeamByCoordinates(
+    const Point& coordinates
+) const {
+    return getTeamByCoordinates_impl(coordinates);
 }
 
 int Model::getWidth() const {
@@ -58,12 +64,11 @@ int Model::getInstruction(int team, int bacterium_index) const {
     return getInstruction_impl(team, bacterium_index);
 }
 
-int Model::getX(int team, int bacterium_index) const {
-    return getX_impl(team, bacterium_index);
-}
-
-int Model::getY(int team, int bacterium_index) const {
-    return getY_impl(team, bacterium_index);
+Point Model::getCoordinates(
+    int team,
+    int bacterium_index
+) const {
+    return getCoordinates_impl(team, bacterium_index);
 }
 
 int Model::getDirection(int team, int bacterium_index) const {
@@ -90,20 +95,16 @@ void Model::setInstruction(
     );
 }
 
-void Model::setX(
+void Model::setCoordinates(
     int team,
     int bacterium_index,
-    int new_x
+    const Point& coordinates
 ) {
-    return setX_impl(team, bacterium_index, new_x);
-}
-
-void Model::setY(
-    int team,
-    int bacterium_index,
-    int new_y
-) {
-    return setY_impl(team, bacterium_index, new_y);
+    return setCoordinates_impl(
+        team,
+        bacterium_index,
+        coordinates
+    );
 }
 
 }
@@ -117,27 +118,30 @@ static bool checkIndex(int index, int size) {
 /* get global coordinate from horizontal and
    vertical coordinates
 */
-static int getIndex(int x, int y, int width, int height) {
-    bool less = ((x < 0) || (y < 0));
-    bool greater = ((x >= width) || (y >= height));
+static int getIndex(
+    const Abstract::Point& coordinates,
+    int width,
+    int height
+) {
+    bool less = ((coordinates.x < 0) || (coordinates.y < 0));
+    bool greater = ((coordinates.x >= width) ||
+                    (coordinates.y >= height));
     if (less || greater) {
         throw Exception("Model: index of cell in arguments "
                         "of some methods is out of range.");
     }
-    int index = y * width + x;
+    int index = coordinates.y * width + coordinates.x;
     return index;
 }
 
 Unit::Unit(
-    int x,
-    int y,
+    const Abstract::Point& coordinates,
     int mass,
     int direction,
     int team,
     int instruction
 )
-    : x(x)
-    , y(y)
+    : coordinates(coordinates)
     , mass(mass)
     , direction(direction)
     , team(team)
@@ -158,8 +162,10 @@ Model::Model(
     initializeBoard(bacteria, teams);
 }
 
-Abstract::CellState Model::cellState_impl(int x, int y) const {
-    int index = getIndex(x, y, width_, height_);
+Abstract::CellState Model::cellState_impl(
+    const Abstract::Point& coordinates
+) const {
+    int index = getIndex(coordinates, width_, height_);
     UnitPtr unit_ptr = board_[index];
     if (!unit_ptr.isNull()) {
         return Abstract::BACTERIUM;
@@ -168,8 +174,10 @@ Abstract::CellState Model::cellState_impl(int x, int y) const {
     }
 }
 
-int Model::getDirectionByCoordinates_impl(int x, int y) const {
-    int index = getIndex(x, y, width_, height_);
+int Model::getDirectionByCoordinates_impl(
+    const Abstract::Point& coordinates
+) const {
+    int index = getIndex(coordinates, width_, height_);
     UnitPtr unit_ptr = board_[index];
     if (!unit_ptr.isNull()) {
         return unit_ptr->direction;
@@ -178,8 +186,10 @@ int Model::getDirectionByCoordinates_impl(int x, int y) const {
     }
 }
 
-int Model::getMassByCoordinates_impl(int x, int y) const {
-    int index = getIndex(x, y, width_, height_);
+int Model::getMassByCoordinates_impl(
+    const Abstract::Point& coordinates
+) const {
+    int index = getIndex(coordinates, width_, height_);
     UnitPtr unit_ptr = board_[index];
     if (!unit_ptr.isNull()) {
         return unit_ptr->mass;
@@ -188,8 +198,10 @@ int Model::getMassByCoordinates_impl(int x, int y) const {
     }
 }
 
-int Model::getTeamByCoordinates_impl(int x, int y) const {
-    int index = getIndex(x, y, width_, height_);
+int Model::getTeamByCoordinates_impl(
+    const Abstract::Point& coordinates
+) const {
+    int index = getIndex(coordinates, width_, height_);
     UnitPtr unit_ptr = board_[index];
     if (!unit_ptr.isNull()) {
         return unit_ptr->team;
@@ -225,16 +237,14 @@ int Model::getInstruction_impl(
     return unit_ptr->instruction;
 }
 
-int Model::getX_impl(int team, int bacterium_index) const {
-    checkParams(team, bacterium_index, "getX()");
+Abstract::Point Model::getCoordinates_impl(
+    int team,
+    int bacterium_index
+) const {
+    checkParams(team, bacterium_index, "getCoordinates()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
-    return unit_ptr->x;
-}
-
-int Model::getY_impl(int team, int bacterium_index) const {
-    checkParams(team, bacterium_index, "getY()");
-    UnitPtr unit_ptr = teams_[team][bacterium_index];
-    return unit_ptr->y;
+    Abstract::Point coordinates = unit_ptr->coordinates;
+    return coordinates;
 }
 
 int Model::getDirection_impl(int team, int bacterium_index) const {
@@ -269,24 +279,14 @@ void Model::setInstruction_impl(
     unit_ptr->instruction = new_instruction;
 }
 
-void Model::setX_impl(
+void Model::setCoordinates_impl(
     int team,
     int bacterium_index,
-    int new_x
+    const Abstract::Point& coordinates
 ) {
-    checkParams(team, bacterium_index, "setX()");
+    checkParams(team, bacterium_index, "setCoordinates()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
-    unit_ptr->x = new_x;
-}
-
-void Model::setY_impl(
-    int team,
-    int bacterium_index,
-    int new_y
-) {
-    checkParams(team, bacterium_index, "setY()");
-    UnitPtr unit_ptr = teams_[team][bacterium_index];
-    unit_ptr->y = new_y;
+    unit_ptr->coordinates = coordinates;
 }
 
 void Model::initializeBoard(int bacteria, int teams) {
@@ -300,21 +300,24 @@ void Model::initializeBoard(int bacteria, int teams) {
 void Model::tryToPlace(int team) {
     int x = random(width_);
     int y = random(height_);
-    while (cellState(x, y) == Abstract::BACTERIUM) {
+    while (cellState(Abstract::Point(x, y)) == Abstract::BACTERIUM) {
         x = random(width_);
         y = random(height_);
     }
     int direction = random(4);
     UnitPtr unit_ptr(new Unit(
-        x,
-        y,
+        Abstract::Point(x, y),
         DEFAULT_MASS,
         direction,
         team,
         0
     ));
     teams_[team].push_back(unit_ptr);
-    int index = getIndex(x, y, width_, height_);
+    int index = getIndex(
+        Abstract::Point(x, y),
+        width_,
+        height_
+    );
     board_[index] = unit_ptr;
 }
 

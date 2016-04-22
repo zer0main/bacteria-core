@@ -51,13 +51,15 @@ struct Point {
 
 class Model {
 public:
-    CellState cellState(int x, int y) const;
+    CellState cellState(const Point& coordinates) const;
 
-    int getDirectionByCoordinates(int x, int y) const;
+    int getDirectionByCoordinates(
+        const Point& coordinates
+    ) const;
 
-    int getMassByCoordinates(int x, int y) const;
+    int getMassByCoordinates(const Point& coordinates) const;
 
-    int getTeamByCoordinates(int x, int y) const;
+    int getTeamByCoordinates(const Point& coordinates) const;
 
     int getWidth() const;
 
@@ -67,9 +69,10 @@ public:
 
     int getInstruction(int team, int bacterium_index) const;
 
-    int getX(int team, int bacterium_index) const;
-
-    int getY(int team, int bacterium_index) const;
+    Point getCoordinates(
+        int team,
+        int bacterium_index
+    ) const;
 
     int getDirection(int team, int bacterium_index) const;
 
@@ -83,36 +86,29 @@ public:
         int new_instruction
     );
 
-    void setX(
+    void setCoordinates(
         int team,
         int bacterium_index,
-        int new_x
-    );
-
-    void setY(
-        int team,
-        int bacterium_index,
-        int new_y
+        const Point& coordinates
     );
 
 protected:
     Model(int width, int height, int bacteria, int teams);
 
-    virtual CellState cellState_impl(int x, int y) const = 0;
+    virtual CellState cellState_impl(
+        const Point& coordinates
+    ) const = 0;
 
     virtual int getDirectionByCoordinates_impl(
-        int x,
-        int y
+        const Point& coordinates
     ) const = 0;
 
     virtual int getMassByCoordinates_impl(
-        int x,
-        int y
+        const Point& coordinates
     ) const = 0;
 
     virtual int getTeamByCoordinates_impl(
-        int x,
-        int y
+        const Point& coordinates
     ) const = 0;
 
     virtual int getWidth_impl() const = 0;
@@ -126,17 +122,17 @@ protected:
         int bacterium_index
     ) const = 0;
 
-    virtual int getX_impl(
-        int team,
-        int bacterium_index
-    ) const = 0;
-
-    virtual int getY_impl(
+    virtual Point getCoordinates_impl(
         int team,
         int bacterium_index
     ) const = 0;
 
     virtual int getDirection_impl(
+        int team,
+        int bacterium_index
+    ) const = 0;
+
+    virtual int getMass_impl(
         int team,
         int bacterium_index
     ) const = 0;
@@ -158,16 +154,10 @@ protected:
         int new_instruction
     ) = 0;
 
-    virtual void setX_impl(
+    virtual void setCoordinates_impl(
         int team,
         int bacterium_index,
-        int new_x
-    ) = 0;
-
-    virtual void setY_impl(
-        int team,
-        int bacterium_index,
-        int new_y
+        const Point& coordinates
     ) = 0;
 };
 
@@ -177,15 +167,14 @@ namespace Implementation {
 
 struct Unit {
     Unit(
-        int x,
-        int y,
+        const Abstract::Point& coordinates,
         int mass,
         int direction,
         int team,
         int instruction
     );
 
-    int x, y;
+    Abstract::Point coordinates;
     int mass;
     int direction;
     int team;
@@ -197,13 +186,21 @@ public:
     Model(int width, int height, int bacteria, int teams);
 
 protected:
-    Abstract::CellState cellState_impl(int x, int y) const;
+    Abstract::CellState cellState_impl(
+        const Abstract::Point& coordinates
+    ) const;
 
-    int getDirectionByCoordinates_impl(int x, int y) const;
+    int getDirectionByCoordinates_impl(
+        const Abstract::Point& coordinates
+    ) const;
 
-    int getMassByCoordinates_impl(int x, int y) const;
+    int getMassByCoordinates_impl(
+        const Abstract::Point& coordinates
+    ) const;
 
-    int getTeamByCoordinates_impl(int x, int y) const;
+    int getTeamByCoordinates_impl(
+        const Abstract::Point& coordinates
+    ) const;
 
     int getWidth_impl() const;
 
@@ -213,9 +210,10 @@ protected:
 
     int getInstruction_impl(int team, int bacterium_index) const;
 
-    int getX_impl(int team, int bacterium_index) const;
-
-    int getY_impl(int team, int bacterium_index) const;
+    Abstract::Point getCoordinates_impl(
+        int team,
+        int bacterium_index
+    ) const;
 
     int getDirection_impl(int team, int bacterium_index) const;
 
@@ -229,16 +227,10 @@ protected:
         int new_instruction
     );
 
-    void setX_impl(
+    void setCoordinates_impl(
         int team,
         int bacterium_index,
-        int new_x
-    );
-
-    void setY_impl(
-        int team,
-        int bacterium_index,
-        int new_y
+        const Abstract::Point& coordinates
     );
 
 private:
