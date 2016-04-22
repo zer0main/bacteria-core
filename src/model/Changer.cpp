@@ -71,6 +71,32 @@ void LogicalChanger::eat(int bacterium_index) {
     model_.changeMass(team_, bacterium_index, EAT_MASS);
 }
 
+Abstract::Point LogicalChanger::nextCoordinates(
+    int bacterium_index
+) const {
+    int direction = model_.getDirection(team_, bacterium_index);
+    Abstract::Point coordinates = model_.getCoordinates(
+        team_,
+        bacterium_index
+    );
+    int max_width = model_.getWidth() - 1;
+    int max_height = model_.getHeight() - 1;
+    if ((direction == Abstract::LEFT) &&
+        (coordinates.x > 0)) {
+        coordinates.x--;
+    } else if ((direction == Abstract::RIGHT) &&
+               (coordinates.x < max_width)) {
+        coordinates.x++;
+    } else if ((direction == Abstract::BACKWARD) &&
+               (coordinates.y > 0)) {
+        coordinates.y--;
+    } else if ((direction == Abstract::FORWARD) &&
+               (coordinates.y < max_height)) {
+        coordinates.y++;
+    }
+    return coordinates;
+}
+
 RepeaterParams::RepeaterParams(
     int bacterium_index,
     int commands,

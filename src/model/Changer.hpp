@@ -79,6 +79,8 @@ private:
     Abstract::Model& model_;
     int team_;
     int move_number_;
+
+    Abstract::Point nextCoordinates(int bacterium_index) const;
 };
 
 typedef void (LogicalChanger::*LogicalMethod) (int bacterium_index);
