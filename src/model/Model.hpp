@@ -241,7 +241,7 @@ private:
     void checkParams(
         int team_index,
         int bacterium_index,
-        const std::string& method_name
+        const char* method_name
     ) const;
 
     Units board_;
