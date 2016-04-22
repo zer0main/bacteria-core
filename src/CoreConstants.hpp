@@ -11,6 +11,9 @@
 /** Mass increase per one 'eat' command */
 const int EAT_MASS = 1;
 
+/** Mass increase per one 'go' command */
+const int GO_MASS = -1;
+
 const int MAX_COMMANDS_PER_INSTRUCTION = 100;
 
 const int MIN_COMMANDS_PER_INSTRUCTION = 1;
