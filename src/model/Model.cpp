@@ -176,22 +176,9 @@ int Model::getInstruction_impl(
     int team,
     int bacterium_index
 ) const {
-    if (!checkIndex(team, teams_.size())) {
-        throw Exception("Model: team argument of getInstruction() "
-                        "method is out of allowable range.");
-    }
-    if (!checkIndex(bacterium_index, teams_[team].size())) {
-        throw Exception("Model: bacterium_index argument of "
-                        "getInstruction() method is out of "
-                        "allowable range.");
-    }
+    checkParams(team, bacterium_index, "getInstruction()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
-    if (!unit_ptr.isNull()) {
-        return unit_ptr->instruction;
-    } else {
-        throw Exception("Model: Attempt to get instruction "
-                        "of NULL ptr.");
-    }
+    return unit_ptr->instruction;
 }
 
 void Model::changeMass_impl(
