@@ -97,12 +97,16 @@ static int getIndex(int x, int y, int width, int height) {
 }
 
 Unit::Unit(
+    int x,
+    int y,
     int mass,
     int direction,
     int team,
     int instruction
 )
-    : mass(mass)
+    : x(x)
+    , y(y)
+    , mass(mass)
     , direction(direction)
     , team(team)
     , instruction(instruction) {
@@ -237,7 +241,14 @@ void Model::tryToPlace(int team) {
         y = random(height_);
     }
     int direction = random(4);
-    UnitPtr unit_ptr(new Unit(DEFAULT_MASS, direction, team, 0));
+    UnitPtr unit_ptr(new Unit(
+        x,
+        y,
+        DEFAULT_MASS,
+        direction,
+        team,
+        0
+    ));
     teams_[team].push_back(unit_ptr);
     int index = getIndex(x, y, width_, height_);
     board_[index] = unit_ptr;

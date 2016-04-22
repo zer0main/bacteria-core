@@ -132,8 +132,16 @@ protected:
 namespace Implementation {
 
 struct Unit {
-    Unit(int mass, int direction, int team, int instruction);
+    Unit(
+        int x,
+        int y,
+        int mass,
+        int direction,
+        int team,
+        int instruction
+    );
 
+    int x, y;
     int mass;
     int direction;
     int team;
