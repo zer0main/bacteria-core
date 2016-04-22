@@ -219,22 +219,9 @@ void Model::setInstruction_impl(
     int bacterium_index,
     int new_instruction
 ) {
-    if (!checkIndex(team, teams_.size())) {
-        throw Exception("Model: team argument of setInstruction() "
-                        "method is out of allowable range.");
-    }
-    if (!checkIndex(bacterium_index, teams_[team].size())) {
-        throw Exception("Model: bacterium_index argument of "
-                        "setInstruction() method is out of "
-                        "allowable range.");
-    }
+    checkParams(team, bacterium_index, "setInstruction()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
-    if (!unit_ptr.isNull()) {
-        unit_ptr->instruction = new_instruction;
-    } else {
-        throw Exception("Model: Attempt to set instruction "
-                        "for NULL ptr.");
-    }
+    unit_ptr->instruction = new_instruction;
 }
 
 void Model::initializeBoard(int bacteria, int teams) {
