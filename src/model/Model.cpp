@@ -74,6 +74,14 @@ void Model::setInstruction(
     );
 }
 
+void Model::setX(
+    int team,
+    int bacterium_index,
+    int new_x
+) {
+    return setX_impl(team, bacterium_index, new_x);
+}
+
 }
 
 namespace Implementation {
@@ -223,6 +231,16 @@ void Model::setInstruction_impl(
     checkParams(team, bacterium_index, "setInstruction()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     unit_ptr->instruction = new_instruction;
+}
+
+void Model::setX_impl(
+    int team,
+    int bacterium_index,
+    int new_x
+) {
+    checkParams(team, bacterium_index, "setX()");
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    unit_ptr->x = new_x;
 }
 
 void Model::initializeBoard(int bacteria, int teams) {
