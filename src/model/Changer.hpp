@@ -37,6 +37,8 @@ public:
 
     void eat(const Params* params, int bacterium_index);
 
+    void go(const Params* params, int bacterium_index);
+
 protected:
     Changer(
         Model& model,
@@ -56,6 +58,11 @@ protected:
     virtual int getInstruction_impl(int bacterium_index) const = 0;
 
     virtual void eat_impl(
+        const Params* params,
+        int bacterium_index
+    ) = 0;
+
+    virtual void go_impl(
         const Params* params,
         int bacterium_index
     ) = 0;
@@ -122,6 +129,11 @@ protected:
     int getInstruction_impl(int bacterium_index) const;
 
     void eat_impl(
+        const Abstract::Params* params,
+        int bacterium_index
+    );
+
+    void go_impl(
         const Abstract::Params* params,
         int bacterium_index
     );

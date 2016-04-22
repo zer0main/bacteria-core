@@ -44,6 +44,10 @@ void Changer::eat(const Params* params, int bacterium_index) {
     return eat_impl(params, bacterium_index);
 }
 
+void Changer::go(const Params* params, int bacterium_index) {
+    return go_impl(params, bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -182,6 +186,25 @@ void Changer::eat_impl(
         n,
         remaining_actions_,
         &LogicalChanger::eat
+    );
+    repeater(&rp);
+}
+
+void Changer::go_impl(
+    const Abstract::Params* params,
+    int bacterium_index
+) {
+    int n = 1;
+    if (params->spec) {
+        n = random(RANDOM_MAX_ACTIONS);
+    } else if (params->p1 != -1) {
+        n = checkCommandsNumber(params->p1);
+    }
+    RepeaterParams rp(
+        bacterium_index,
+        n,
+        remaining_actions_,
+        &LogicalChanger::go
     );
     repeater(&rp);
 }
