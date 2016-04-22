@@ -50,6 +50,14 @@ int Model::getInstruction(int team, int bacterium_index) const {
     return getInstruction_impl(team, bacterium_index);
 }
 
+int Model::getX(int team, int bacterium_index) const {
+    return getX_impl(team, bacterium_index);
+}
+
+int Model::getY(int team, int bacterium_index) const {
+    return getY_impl(team, bacterium_index);
+}
+
 int Model::getDirection(int team, int bacterium_index) const {
     return getDirection_impl(team, bacterium_index);
 }
@@ -207,6 +215,18 @@ int Model::getInstruction_impl(
     checkParams(team, bacterium_index, "getInstruction()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     return unit_ptr->instruction;
+}
+
+int Model::getX_impl(int team, int bacterium_index) const {
+    checkParams(team, bacterium_index, "getX()");
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    return unit_ptr->x;
+}
+
+int Model::getY_impl(int team, int bacterium_index) const {
+    checkParams(team, bacterium_index, "getY()");
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    return unit_ptr->y;
 }
 
 int Model::getDirection_impl(int team, int bacterium_index) const {

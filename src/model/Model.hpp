@@ -61,6 +61,10 @@ public:
 
     int getInstruction(int team, int bacterium_index) const;
 
+    int getX(int team, int bacterium_index) const;
+
+    int getY(int team, int bacterium_index) const;
+
     int getDirection(int team, int bacterium_index) const;
 
     int getMass(int team, int bacterium_index) const;
@@ -112,6 +116,16 @@ protected:
     virtual int getBacteriaNumber_impl(int team) const = 0;
 
     virtual int getInstruction_impl(
+        int team,
+        int bacterium_index
+    ) const = 0;
+
+    virtual int getX_impl(
+        int team,
+        int bacterium_index
+    ) const = 0;
+
+    virtual int getY_impl(
         int team,
         int bacterium_index
     ) const = 0;
@@ -192,6 +206,10 @@ protected:
     int getBacteriaNumber_impl(int team) const;
 
     int getInstruction_impl(int team, int bacterium_index) const;
+
+    int getX_impl(int team, int bacterium_index) const;
+
+    int getY_impl(int team, int bacterium_index) const;
 
     int getDirection_impl(int team, int bacterium_index) const;
 
