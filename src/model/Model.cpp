@@ -111,6 +111,13 @@ void Model::setCoordinates(
     );
 }
 
+void Model::changeMassByCoordinates(
+    const Point& coordinates,
+    int change
+) {
+    return changeMassByCoordinates_impl(coordinates, change);
+}
+
 }
 
 namespace Implementation {
@@ -303,6 +310,19 @@ void Model::setCoordinates_impl(
     checkParams(team, bacterium_index, "setCoordinates()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     unit_ptr->coordinates = coordinates;
+}
+
+void Model::changeMassByCoordinates_impl(
+    const Abstract::Point& coordinates,
+    int change
+) {
+    int index = getIndex(coordinates, width_, height_);
+    UnitPtr unit_ptr = board_[index];
+    if (!unit_ptr.isNull()) {
+        unit_ptr->mass += change;
+    } else {
+        throw Exception("Error: Attempt to change mass of empty cell.");
+    }
 }
 
 void Model::initializeBoard(int bacteria, int teams) {

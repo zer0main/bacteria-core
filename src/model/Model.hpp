@@ -94,6 +94,11 @@ public:
         const Point& coordinates
     );
 
+    void changeMassByCoordinates(
+        const Point& coordinates,
+        int change
+    );
+
 protected:
     Model(int width, int height, int bacteria, int teams);
 
@@ -160,6 +165,11 @@ protected:
         int team,
         int bacterium_index,
         const Point& coordinates
+    ) = 0;
+
+    virtual void changeMassByCoordinates_impl(
+        const Point& coordinates,
+        int change
     ) = 0;
 };
 
@@ -235,6 +245,11 @@ protected:
         int team,
         int bacterium_index,
         const Abstract::Point& coordinates
+    );
+
+    void changeMassByCoordinates_impl(
+        const Abstract::Point& coordinates,
+        int change
     );
 
 private:
