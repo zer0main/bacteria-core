@@ -50,6 +50,10 @@ int Model::getInstruction(int team, int bacterium_index) const {
     return getInstruction_impl(team, bacterium_index);
 }
 
+int Model::getMass(int team, int bacterium_index) const {
+    return getMass_impl(team, bacterium_index);
+}
+
 void Model::changeMass(int team, int bacterium_index, int change) {
     return changeMass_impl(team, bacterium_index, change);
 }
@@ -179,6 +183,12 @@ int Model::getInstruction_impl(
     checkParams(team, bacterium_index, "getInstruction()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     return unit_ptr->instruction;
+}
+
+int Model::getMass_impl(int team, int bacterium_index) const {
+    checkParams(team, bacterium_index, "getMass()");
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    return unit_ptr->mass;
 }
 
 void Model::changeMass_impl(

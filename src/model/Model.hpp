@@ -61,6 +61,8 @@ public:
 
     int getInstruction(int team, int bacterium_index) const;
 
+    int getMass(int team, int bacterium_index) const;
+
     void changeMass(int team, int bacterium_index, int change);
 
     void setInstruction(
@@ -96,6 +98,11 @@ protected:
     virtual int getBacteriaNumber_impl(int team) const = 0;
 
     virtual int getInstruction_impl(
+        int team,
+        int bacterium_index
+    ) const = 0;
+
+    virtual int getMass_impl(
         int team,
         int bacterium_index
     ) const = 0;
@@ -146,6 +153,8 @@ protected:
     int getBacteriaNumber_impl(int team) const;
 
     int getInstruction_impl(int team, int bacterium_index) const;
+
+    int getMass_impl(int team, int bacterium_index) const;
 
     void changeMass_impl(int team, int bacterium_index, int change);
 
