@@ -196,22 +196,9 @@ void Model::changeMass_impl(
     int bacterium_index,
     int change
 ) {
-    if (!checkIndex(team, teams_.size())) {
-        throw Exception("Model: team argument of changeMass() "
-                        "method is out of allowable range.");
-    }
-    if (!checkIndex(bacterium_index, teams_[team].size())) {
-        throw Exception("Model: bacterium_index argument of "
-                        "changeMass() method is out of "
-                        "allowable range.");
-    }
+    checkParams(team, bacterium_index, "changeMass()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
-    if (!unit_ptr.isNull()) {
-        unit_ptr->mass += change;
-    } else {
-        throw Exception("Model: Attempt to change mass "
-                        "of NULL ptr.");
-    }
+    unit_ptr->mass += change;
 }
 
 void Model::setInstruction_impl(
