@@ -75,6 +75,8 @@ public:
 
     void eat(int bacterium_index);
 
+    void go(int bacterium_index);
+
 private:
     Abstract::Model& model_;
     int team_;

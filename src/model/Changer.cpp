@@ -71,6 +71,20 @@ void LogicalChanger::eat(int bacterium_index) {
     model_.changeMass(team_, bacterium_index, EAT_MASS);
 }
 
+void LogicalChanger::go(int bacterium_index) {
+    model_.changeMass(team_, bacterium_index, GO_MASS);
+    int mass = model_.getMass(team_, bacterium_index);
+    if (mass <= 0) {
+        model_.kill(team_, bacterium_index);
+    } else {
+        Abstract::Point coordinates = nextCoordinates(bacterium_index);
+        Abstract::CellState state = model_.cellState(coordinates);
+        if (state == Abstract::EMPTY) {
+            model_.setCoordinates(team_, bacterium_index, coordinates);
+        }
+    }
+}
+
 Abstract::Point LogicalChanger::nextCoordinates(
     int bacterium_index
 ) const {
