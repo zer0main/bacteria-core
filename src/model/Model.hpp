@@ -79,6 +79,12 @@ public:
         int new_x
     );
 
+    void setY(
+        int team,
+        int bacterium_index,
+        int new_y
+    );
+
 protected:
     Model(int width, int height, int bacteria, int teams);
 
@@ -136,6 +142,12 @@ protected:
         int team,
         int bacterium_index,
         int new_x
+    ) = 0;
+
+    virtual void setY_impl(
+        int team,
+        int bacterium_index,
+        int new_y
     ) = 0;
 };
 
@@ -197,6 +209,12 @@ protected:
         int team,
         int bacterium_index,
         int new_x
+    );
+
+    void setY_impl(
+        int team,
+        int bacterium_index,
+        int new_y
     );
 
 private:
