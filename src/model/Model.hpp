@@ -160,6 +160,12 @@ private:
 
     void tryToPlace(int team);
 
+    void checkParams(
+        int team_index,
+        int bacterium_index,
+        const std::string& method_name
+    ) const;
+
     Units board_;
     Teams teams_;
 

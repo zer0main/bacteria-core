@@ -262,4 +262,25 @@ void Model::tryToPlace(int team) {
     board_[index] = unit_ptr;
 }
 
+void Model::checkParams(
+    int team,
+    int bacterium_index,
+    const std::string& method_name
+) const {
+    if (!checkIndex(team, teams_.size())) {
+        throw Exception("Model: team argument of " + method_name +
+                        " is out of allowable range.");
+    }
+    if (!checkIndex(bacterium_index, teams_[team].size())) {
+        throw Exception("Model: bacterium_index argument"
+                        " of " + method_name + " is out of"
+                        " allowable range");
+    }
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    if (unit_ptr.isNull()) {
+        throw Exception("Model: Attempt to call " + method_name +
+                        " for NULL ptr.");
+    }
+}
+
 }
