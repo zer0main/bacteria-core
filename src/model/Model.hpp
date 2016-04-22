@@ -78,6 +78,8 @@ public:
 
     int getMass(int team, int bacterium_index) const;
 
+    void kill(int team, int bacterium_index);
+
     void changeMass(int team, int bacterium_index, int change);
 
     void setInstruction(
@@ -218,6 +220,8 @@ protected:
     int getDirection_impl(int team, int bacterium_index) const;
 
     int getMass_impl(int team, int bacterium_index) const;
+
+    void kill_impl(int team, int bacterium_index);
 
     void changeMass_impl(int team, int bacterium_index, int change);
 

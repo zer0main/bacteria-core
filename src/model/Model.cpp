@@ -79,6 +79,10 @@ int Model::getMass(int team, int bacterium_index) const {
     return getMass_impl(team, bacterium_index);
 }
 
+void Model::kill(int team, int bacterium_index) {
+    return kill_impl(team, bacterium_index);
+}
+
 void Model::changeMass(int team, int bacterium_index, int change) {
     return changeMass_impl(team, bacterium_index, change);
 }
@@ -257,6 +261,18 @@ int Model::getMass_impl(int team, int bacterium_index) const {
     checkParams(team, bacterium_index, "getMass()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     return unit_ptr->mass;
+}
+
+void Model::kill_impl(
+    int team,
+    int bacterium_index
+) {
+    checkParams(team, bacterium_index, "kill()");
+    Abstract::Point coordinates
+        = teams_[team][bacterium_index]->coordinates;
+    teams_[team].erase(teams_[team].begin() + bacterium_index);
+    int index = getIndex(coordinates, width_, height_);
+    board_[index] = UnitPtr(0);
 }
 
 void Model::changeMass_impl(
