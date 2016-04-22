@@ -14,6 +14,9 @@ const int EAT_MASS = 1;
 /** Mass increase per one 'go' command */
 const int GO_MASS = -1;
 
+/** Mass increase per one 'clon' command */
+const int CLON_MASS = -10;
+
 const int MAX_COMMANDS_PER_INSTRUCTION = 100;
 
 const int MIN_COMMANDS_PER_INSTRUCTION = 1;
@@ -27,8 +30,11 @@ const int MAX_ACTIONS = 1;
 /** Maximum number of pseudo actions per move */
 const int MAX_PSEUDO_ACTIONS = 30;
 
-/** Default mass of bacteria */
+/** Default mass of new bacteria */
 const int DEFAULT_MASS = 5;
+
+/** Default mass of cloned bacteria */
+const int DEFAULT_CLON_MASS = 2;
 
 /** Minimum width of board */
 const int MIN_WIDTH = 5;
