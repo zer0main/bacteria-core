@@ -41,6 +41,8 @@ public:
 
     void clon(const Params* params, int bacterium_index);
 
+    void str(const Params* params, int bacterium_index);
+
 protected:
     Changer(
         Model& model,
@@ -70,6 +72,11 @@ protected:
     ) = 0;
 
     virtual void clon_impl(
+        const Params* params,
+        int bacterium_index
+    ) = 0;
+
+    virtual void str_impl(
         const Params* params,
         int bacterium_index
     ) = 0;
@@ -154,6 +161,11 @@ protected:
     );
 
     void clon_impl(
+        const Abstract::Params* params,
+        int bacterium_index
+    );
+
+    void str_impl(
         const Abstract::Params* params,
         int bacterium_index
     );

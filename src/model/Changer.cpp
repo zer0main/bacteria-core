@@ -52,6 +52,10 @@ void Changer::clon(const Params* params, int bacterium_index) {
     return clon_impl(params, bacterium_index);
 }
 
+void Changer::str(const Params* params, int bacterium_index) {
+    return str_impl(params, bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -271,6 +275,23 @@ void Changer::clon_impl(
         n,
         remaining_actions_,
         &LogicalChanger::clon
+    );
+    repeater(&rp);
+}
+
+void Changer::str_impl(
+    const Abstract::Params* params,
+    int bacterium_index
+) {
+    int n = 1;
+    if (params->p1 != -1) {
+        n = checkCommandsNumber(params->p1);
+    }
+    RepeaterParams rp(
+        bacterium_index,
+        n,
+        remaining_actions_,
+        &LogicalChanger::str
     );
     repeater(&rp);
 }
