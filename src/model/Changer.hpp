@@ -101,6 +101,8 @@ private:
     Abstract::Point nextCoordinates(int bacterium_index) const;
 
     void clonLogic(int bacterium_index);
+
+    void strLogic(int bacterium_index);
 };
 
 typedef void (LogicalChanger::*LogicalMethod) (int bacterium_index);

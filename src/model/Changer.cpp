@@ -122,6 +122,12 @@ void LogicalChanger::clonLogic(int bacterium_index) {
     }
 }
 
+void LogicalChanger::strLogic(int bacterium_index) {
+    int mass = model_.getMass(team_, bacterium_index);
+    int damage = random(MAX_STR_DAMAGE) + mass / 2;
+    Abstract::Point next = nextCoordinates(bacterium_index);
+}
+
 Abstract::Point LogicalChanger::nextCoordinates(
     int bacterium_index
 ) const {
