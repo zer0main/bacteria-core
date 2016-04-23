@@ -17,6 +17,9 @@ const int GO_MASS = -1;
 /** Mass increase per one 'clon' command */
 const int CLON_MASS = -10;
 
+/** Mass increase per one 'str' command */
+const int STR_MASS = -1;
+
 const int MAX_COMMANDS_PER_INSTRUCTION = 100;
 
 const int MIN_COMMANDS_PER_INSTRUCTION = 1;
