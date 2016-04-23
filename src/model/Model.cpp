@@ -371,7 +371,7 @@ void Model::initializeBoard(int bacteria, int teams) {
 void Model::tryToPlace(int team) {
     int x = random(width_);
     int y = random(height_);
-    while (cellState(Abstract::Point(x, y)) == Abstract::BACTERIUM) {
+    while (cellState(Abstract::Point(x, y)) != Abstract::EMPTY) {
         x = random(width_);
         y = random(height_);
     }
@@ -384,11 +384,7 @@ void Model::tryToPlace(int team) {
         0
     ));
     teams_[team].push_back(unit_ptr);
-    int index = getIndex(
-        Abstract::Point(x, y),
-        width_,
-        height_
-    );
+    int index = getIndex(Abstract::Point(x, y), width_, height_);
     board_[index] = unit_ptr;
 }
 
