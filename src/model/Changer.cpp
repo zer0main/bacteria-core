@@ -106,6 +106,19 @@ void LogicalChanger::clon(int bacterium_index) {
     }
 }
 
+void LogicalChanger::str(int bacterium_index) {
+    model_.changeMass(team_, bacterium_index, STR_MASS);
+    int mass = model_.getMass(team_, bacterium_index);
+    if (mass < 0) {
+        model_.kill(team_, bacterium_index);
+    } else if (mass == 0) {
+        model_.kill(team_, bacterium_index);
+        strLogic(bacterium_index);
+    } else {
+        strLogic(bacterium_index);
+    }
+}
+
 void LogicalChanger::clonLogic(int bacterium_index) {
     Abstract::Point coordinates = nextCoordinates(bacterium_index);
     Abstract::CellState state = model_.cellState(coordinates);

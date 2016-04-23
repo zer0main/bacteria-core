@@ -93,6 +93,8 @@ public:
 
     void clon(int bacterium_index);
 
+    void str(int bacterium_index);
+
 private:
     Abstract::Model& model_;
     int team_;
