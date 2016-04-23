@@ -99,6 +99,14 @@ public:
         int change
     );
 
+    void createNewByCoordinates(
+        const Point& coordinates,
+        int mass,
+        int direction,
+        int team,
+        int instruction
+    );
+
 protected:
     Model(int width, int height, int bacteria, int teams);
 
@@ -170,6 +178,14 @@ protected:
     virtual void changeMassByCoordinates_impl(
         const Point& coordinates,
         int change
+    ) = 0;
+
+    virtual void createNewByCoordinates_impl(
+        const Point& coordinates,
+        int mass,
+        int direction,
+        int team,
+        int instruction
     ) = 0;
 };
 
@@ -250,6 +266,14 @@ protected:
     void changeMassByCoordinates_impl(
         const Abstract::Point& coordinates,
         int change
+    );
+
+    void createNewByCoordinates_impl(
+        const Abstract::Point& coordinates,
+        int mass,
+        int direction,
+        int team,
+        int instruction
     );
 
 private:
