@@ -111,6 +111,8 @@ public:
 
     void left(int bacterium_index);
 
+    void right(int bacterium_index);
+
 private:
     Abstract::Model& model_;
     int team_;
