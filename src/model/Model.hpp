@@ -82,6 +82,12 @@ public:
 
     void changeMass(int team, int bacterium_index, int change);
 
+    void setDirection(
+        int team,
+        int bacterium_index,
+        int new_direction
+    );
+
     void setInstruction(
         int team,
         int bacterium_index,
@@ -161,6 +167,12 @@ protected:
         int team,
         int bacterium_index,
         int change
+    ) = 0;
+
+    virtual void setDirection_impl(
+        int team,
+        int bacterium_index,
+        int new_direction
     ) = 0;
 
     virtual void setInstruction_impl(
@@ -250,6 +262,12 @@ protected:
     void kill_impl(int team, int bacterium_index);
 
     void changeMass_impl(int team, int bacterium_index, int change);
+
+    void setDirection_impl(
+        int team,
+        int bacterium_index,
+        int new_direction
+    );
 
     void setInstruction_impl(
         int team,

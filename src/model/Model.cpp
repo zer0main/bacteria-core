@@ -87,6 +87,18 @@ void Model::changeMass(int team, int bacterium_index, int change) {
     return changeMass_impl(team, bacterium_index, change);
 }
 
+void Model::setDirection(
+    int team,
+    int bacterium_index,
+    int new_direction
+) {
+    return setDirection_impl(
+        team,
+        bacterium_index,
+        new_direction
+    );
+}
+
 void Model::setInstruction(
     int team,
     int bacterium_index,
@@ -306,6 +318,16 @@ void Model::changeMass_impl(
     checkParams(team, bacterium_index, "changeMass()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     unit_ptr->mass += change;
+}
+
+void Model::setDirection_impl(
+    int team,
+    int bacterium_index,
+    int new_direction
+) {
+    checkParams(team, bacterium_index, "setDirection()");
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    unit_ptr->direction = new_direction;
 }
 
 void Model::setInstruction_impl(
