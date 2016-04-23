@@ -89,6 +89,22 @@ void LogicalChanger::go(int bacterium_index) {
     }
 }
 
+void LogicalChanger::clonLogic(int bacterium_index) {
+    Abstract::Point coordinates = nextCoordinates(bacterium_index);
+    Abstract::CellState state = model_.cellState(coordinates);
+    if (state == Abstract::EMPTY) {
+        model_.createNewByCoordinates(
+            coordinates,
+            DEFAULT_CLON_MASS,
+            random(4),
+            team_,
+            0
+        );
+    } else {
+        model_.changeMassByCoordinates(coordinates, DEFAULT_CLON_MASS);
+    }
+}
+
 Abstract::Point LogicalChanger::nextCoordinates(
     int bacterium_index
 ) const {
