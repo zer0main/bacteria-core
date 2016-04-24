@@ -57,6 +57,8 @@ public:
 
     void j(const Params* params, int bacterium_index);
 
+    void je(const Params* params, int bacterium_index);
+
 protected:
     Changer(
         Model& model,
@@ -126,6 +128,11 @@ protected:
     ) = 0;
 
     virtual void j_impl(
+        const Abstract::Params* params,
+        int bacterium_index
+    ) = 0;
+
+    virtual void je_impl(
         const Abstract::Params* params,
         int bacterium_index
     ) = 0;
@@ -258,6 +265,11 @@ protected:
     );
 
     void j_impl(
+        const Abstract::Params* params,
+        int bacterium_index
+    );
+
+    void je_impl(
         const Abstract::Params* params,
         int bacterium_index
     );

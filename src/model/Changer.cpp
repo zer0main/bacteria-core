@@ -84,6 +84,10 @@ void Changer::j(const Params* params, int bacterium_index) {
     return j_impl(params, bacterium_index);
 }
 
+void Changer::je(const Params* params, int bacterium_index) {
+    return je_impl(params, bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -449,6 +453,12 @@ void Changer::j_impl(
     } else {
         throw Exception("Invalid instruction in j command,");
     }
+}
+
+void Changer::je_impl(
+    const Abstract::Params* params,
+    int bacterium_index
+) {
 }
 
 bool Changer::remainingActionsDecrement(
