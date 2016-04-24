@@ -153,6 +153,11 @@ void LogicalChanger::back(int bacterium_index) {
     model_.setDirection(team_, bacterium_index, direction);
 }
 
+void LogicalChanger::turn(int bacterium_index) {
+    int direction = random(4);
+    model_.setDirection(team_, bacterium_index, direction);
+}
+
 void LogicalChanger::clonLogic(int bacterium_index) {
     Abstract::Point coordinates = nextCoordinates(bacterium_index);
     Abstract::CellState state = model_.cellState(coordinates);
