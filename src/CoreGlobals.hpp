@@ -13,6 +13,7 @@
 
 namespace Abstract {
 
+class Interpreter;
 class Model;
 
 }
@@ -30,6 +31,7 @@ struct Unit;
 
 typedef QSharedPointer<const Abstract::Model> ConstModelPtr;
 typedef QSharedPointer<Abstract::Model> ModelPtr;
+typedef QSharedPointer<Abstract::Interpreter> InterpreterPtr;
 
 typedef QSharedPointer<Implementation::Bytecode> BytecodePtr;
 typedef std::vector<BytecodePtr> BytecodePtrs;
