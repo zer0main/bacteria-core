@@ -47,6 +47,8 @@ public:
 
     void right(const Params* params, int bacterium_index);
 
+    void back(const Params* params, int bacterium_index);
+
 protected:
     Changer(
         Model& model,
@@ -91,6 +93,11 @@ protected:
     ) = 0;
 
     virtual void right_impl(
+        const Params* params,
+        int bacterium_index
+    ) = 0;
+
+    virtual void back_impl(
         const Params* params,
         int bacterium_index
     ) = 0;
@@ -196,6 +203,11 @@ protected:
     );
 
     void right_impl(
+        const Abstract::Params* params,
+        int bacterium_index
+    );
+
+    void back_impl(
         const Abstract::Params* params,
         int bacterium_index
     );
