@@ -68,6 +68,10 @@ void Changer::back(const Params* params, int bacterium_index) {
     return back_impl(params, bacterium_index);
 }
 
+void Changer::turn(const Params* params, int bacterium_index) {
+    return turn_impl(params, bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -375,6 +379,20 @@ void Changer::back_impl(
         n,
         remaining_pseudo_actions_,
         &LogicalChanger::back
+    );
+    repeater(&rp);
+}
+
+void Changer::turn_impl(
+    const Abstract::Params* params,
+    int bacterium_index
+) {
+    int n = 1;
+    RepeaterParams rp(
+        bacterium_index,
+        n,
+        remaining_pseudo_actions_,
+        &LogicalChanger::turn
     );
     repeater(&rp);
 }
