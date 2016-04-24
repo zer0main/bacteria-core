@@ -76,6 +76,10 @@ void Changer::jg(const Params* params, int bacterium_index) {
     return jg_impl(params, bacterium_index);
 }
 
+void Changer::jl(const Params* params, int bacterium_index) {
+    return jl_impl(params, bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -412,6 +416,21 @@ void Changer::jg_impl(
             model_.setInstruction(team_, bacterium_index, instruction);
         } else {
             throw Exception("Invalid instruction in jg command,");
+        }
+    }
+}
+
+void Changer::jl_impl(
+    const Abstract::Params* params,
+    int bacterium_index
+) {
+    int mass = model_.getMass(team_, bacterium_index);
+    if (mass < params->p1) {
+        int instruction = params->p2;
+        if ((instruction >= 0) && instruction < instructions_) {
+            model_.setInstruction(team_, bacterium_index, instruction);
+        } else {
+            throw Exception("Invalid instruction in jl command,");
         }
     }
 }

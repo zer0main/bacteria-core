@@ -53,6 +53,8 @@ public:
 
     void jg(const Params* params, int bacterium_index);
 
+    void jl(const Params* params, int bacterium_index);
+
 protected:
     Changer(
         Model& model,
@@ -112,6 +114,11 @@ protected:
     ) = 0;
 
     virtual void jg_impl(
+        const Params* params,
+        int bacterium_index
+    ) = 0;
+
+    virtual void jl_impl(
         const Params* params,
         int bacterium_index
     ) = 0;
@@ -234,6 +241,11 @@ protected:
     );
 
     void jg_impl(
+        const Abstract::Params* params,
+        int bacterium_index
+    );
+
+    void jl_impl(
         const Abstract::Params* params,
         int bacterium_index
     );
