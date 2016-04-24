@@ -80,6 +80,10 @@ void Changer::jl(const Params* params, int bacterium_index) {
     return jl_impl(params, bacterium_index);
 }
 
+void Changer::j(const Params* params, int bacterium_index) {
+    return j_impl(params, bacterium_index);
+}
+
 Changer::Changer(
     Model& /*model*/,
     int /*team*/,
@@ -432,6 +436,18 @@ void Changer::jl_impl(
         } else {
             throw Exception("Invalid instruction in jl command,");
         }
+    }
+}
+
+void Changer::j_impl(
+    const Abstract::Params* params,
+    int bacterium_index
+) {
+    int instruction = params->p1;
+    if ((instruction >= 0) && (instruction < instructions_)) {
+        model_.setInstruction(team_, bacterium_index, instruction);
+    } else {
+        throw Exception("Invalid instruction in j command,");
     }
 }
 
