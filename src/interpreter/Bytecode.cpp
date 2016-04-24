@@ -18,7 +18,8 @@ static const char* const specifications_registry[] = {
 
 static const char* const functions_registry[] = {
     "eat", "go", "clon", "str", "left", "right", "back", "turn",
-    "jg", "jl", "j", "je", "jfe", "jw", "jfw", "jb", "jfb"
+    "jg", "jl", "j", "je", /*"jfe", "jw", "jfw",
+    "jb", "jfb"*/
 };
 
 // These four static arrays contain IDs of functions from
