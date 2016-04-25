@@ -44,7 +44,7 @@ static const int non_argument_functions[] = {
 static void split(
     const std::string& str,
     char delimiter,
-    Strings items
+    Strings& items
 ) {
     std::stringstream s_stream(str);
     std::string item;
