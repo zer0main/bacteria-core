@@ -89,7 +89,7 @@ void Changer::je(const Params* params, int bacterium_index) {
 }
 
 Changer::Changer(
-    Model& /*model*/,
+    ModelPtr /*model*/,
     int /*team*/,
     int /*move_number*/,
     int /*instructions*/
@@ -101,7 +101,7 @@ Changer::Changer(
 namespace Implementation {
 
 LogicalChanger::LogicalChanger(
-    Abstract::Model& model,
+    ModelPtr model,
     int team,
     int move_number
 )
@@ -112,30 +112,30 @@ LogicalChanger::LogicalChanger(
 }
 
 void LogicalChanger::eat(int bacterium_index) {
-    model_.changeMass(team_, bacterium_index, EAT_MASS);
+    model_->changeMass(team_, bacterium_index, EAT_MASS);
 }
 
 void LogicalChanger::go(int bacterium_index) {
-    model_.changeMass(team_, bacterium_index, GO_MASS);
-    int mass = model_.getMass(team_, bacterium_index);
+    model_->changeMass(team_, bacterium_index, GO_MASS);
+    int mass = model_->getMass(team_, bacterium_index);
     if (mass <= 0) {
-        model_.kill(team_, bacterium_index);
+        model_->kill(team_, bacterium_index);
     } else {
         Abstract::Point coordinates = nextCoordinates(bacterium_index);
-        Abstract::CellState state = model_.cellState(coordinates);
+        Abstract::CellState state = model_->cellState(coordinates);
         if (state == Abstract::EMPTY) {
-            model_.setCoordinates(team_, bacterium_index, coordinates);
+            model_->setCoordinates(team_, bacterium_index, coordinates);
         }
     }
 }
 
 void LogicalChanger::clon(int bacterium_index) {
-    model_.changeMass(team_, bacterium_index, CLON_MASS);
-    int mass = model_.getMass(team_, bacterium_index);
+    model_->changeMass(team_, bacterium_index, CLON_MASS);
+    int mass = model_->getMass(team_, bacterium_index);
     if (mass < 0) {
-        model_.kill(team_, bacterium_index);
+        model_->kill(team_, bacterium_index);
     } else if (mass == 0) {
-        model_.kill(team_, bacterium_index);
+        model_->kill(team_, bacterium_index);
         clonLogic(bacterium_index);
     } else {
         clonLogic(bacterium_index);
@@ -143,12 +143,12 @@ void LogicalChanger::clon(int bacterium_index) {
 }
 
 void LogicalChanger::str(int bacterium_index) {
-    model_.changeMass(team_, bacterium_index, STR_MASS);
-    int mass = model_.getMass(team_, bacterium_index);
+    model_->changeMass(team_, bacterium_index, STR_MASS);
+    int mass = model_->getMass(team_, bacterium_index);
     if (mass < 0) {
-        model_.kill(team_, bacterium_index);
+        model_->kill(team_, bacterium_index);
     } else if (mass == 0) {
-        model_.kill(team_, bacterium_index);
+        model_->kill(team_, bacterium_index);
         strLogic(bacterium_index);
     } else {
         strLogic(bacterium_index);
@@ -156,33 +156,33 @@ void LogicalChanger::str(int bacterium_index) {
 }
 
 void LogicalChanger::left(int bacterium_index) {
-    int direction = model_.getDirection(team_, bacterium_index);
+    int direction = model_->getDirection(team_, bacterium_index);
     direction = ((direction == 0) ? 3 : (direction - 1));
-    model_.setDirection(team_, bacterium_index, direction);
+    model_->setDirection(team_, bacterium_index, direction);
 }
 
 void LogicalChanger::right(int bacterium_index) {
-    int direction = model_.getDirection(team_, bacterium_index);
+    int direction = model_->getDirection(team_, bacterium_index);
     direction = ((direction == 3) ? 0 : (direction + 1));
-    model_.setDirection(team_, bacterium_index, direction);
+    model_->setDirection(team_, bacterium_index, direction);
 }
 
 void LogicalChanger::back(int bacterium_index) {
-    int direction = model_.getDirection(team_, bacterium_index);
+    int direction = model_->getDirection(team_, bacterium_index);
     direction = (direction + 2) % 4;
-    model_.setDirection(team_, bacterium_index, direction);
+    model_->setDirection(team_, bacterium_index, direction);
 }
 
 void LogicalChanger::turn(int bacterium_index) {
     int direction = random(4);
-    model_.setDirection(team_, bacterium_index, direction);
+    model_->setDirection(team_, bacterium_index, direction);
 }
 
 void LogicalChanger::clonLogic(int bacterium_index) {
     Abstract::Point coordinates = nextCoordinates(bacterium_index);
-    Abstract::CellState state = model_.cellState(coordinates);
+    Abstract::CellState state = model_->cellState(coordinates);
     if (state == Abstract::EMPTY) {
-        model_.createNewByCoordinates(
+        model_->createNewByCoordinates(
             coordinates,
             DEFAULT_CLON_MASS,
             random(4),
@@ -190,12 +190,12 @@ void LogicalChanger::clonLogic(int bacterium_index) {
             0
         );
     } else {
-        model_.changeMassByCoordinates(coordinates, DEFAULT_CLON_MASS);
+        model_->changeMassByCoordinates(coordinates, DEFAULT_CLON_MASS);
     }
 }
 
 void LogicalChanger::strLogic(int bacterium_index) {
-    int mass = model_.getMass(team_, bacterium_index);
+    int mass = model_->getMass(team_, bacterium_index);
     int damage = random(MAX_STR_DAMAGE) + mass / 2;
     Abstract::Point next = nextCoordinates(bacterium_index);
 }
@@ -203,13 +203,13 @@ void LogicalChanger::strLogic(int bacterium_index) {
 Abstract::Point LogicalChanger::nextCoordinates(
     int bacterium_index
 ) const {
-    int direction = model_.getDirection(team_, bacterium_index);
-    Abstract::Point coordinates = model_.getCoordinates(
+    int direction = model_->getDirection(team_, bacterium_index);
+    Abstract::Point coordinates = model_->getCoordinates(
         team_,
         bacterium_index
     );
-    int max_width = model_.getWidth() - 1;
-    int max_height = model_.getHeight() - 1;
+    int max_width = model_->getWidth() - 1;
+    int max_height = model_->getHeight() - 1;
     if ((direction == Abstract::LEFT) &&
         (coordinates.x > 0)) {
         coordinates.x--;
@@ -240,7 +240,7 @@ RepeaterParams::RepeaterParams(
 }
 
 Changer::Changer(
-    Abstract::Model& model,
+    ModelPtr model,
     int team,
     int move_number,
     int instructions
@@ -251,7 +251,7 @@ Changer::Changer(
     , move_number_(move_number)
     , instructions_(instructions)
     , logical_changer_(model_, team_, move_number_) {
-    int bacteria = model_.getBacteriaNumber(team_);
+    int bacteria = model_->getBacteriaNumber(team_);
     remaining_actions_.resize(bacteria, MAX_ACTIONS);
     remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);
     completed_commands_.resize(bacteria, 0);
@@ -271,7 +271,7 @@ bool Changer::endOfMove_impl(int bacterium_index) const {
 }
 
 int Changer::getBacteriaNumber_impl() const {
-    return model_.getBacteriaNumber(team_);
+    return model_->getBacteriaNumber(team_);
 }
 
 int Changer::getTeam_impl() const {
@@ -279,7 +279,7 @@ int Changer::getTeam_impl() const {
 }
 
 int Changer::getInstruction_impl(int bacterium_index) const {
-    return model_.getInstruction(team_, bacterium_index);
+    return model_->getInstruction(team_, bacterium_index);
 }
 
 void Changer::eat_impl(
@@ -417,11 +417,11 @@ void Changer::jg_impl(
     const Abstract::Params* params,
     int bacterium_index
 ) {
-    int mass = model_.getMass(team_, bacterium_index);
+    int mass = model_->getMass(team_, bacterium_index);
     if (mass > params->p1) {
         int instruction = params->p2;
         if ((instruction >= 0) && instruction < instructions_) {
-            model_.setInstruction(team_, bacterium_index, instruction);
+            model_->setInstruction(team_, bacterium_index, instruction);
         } else {
             throw Exception("Invalid instruction in jg command,");
         }
@@ -432,11 +432,11 @@ void Changer::jl_impl(
     const Abstract::Params* params,
     int bacterium_index
 ) {
-    int mass = model_.getMass(team_, bacterium_index);
+    int mass = model_->getMass(team_, bacterium_index);
     if (mass < params->p1) {
         int instruction = params->p2;
         if ((instruction >= 0) && instruction < instructions_) {
-            model_.setInstruction(team_, bacterium_index, instruction);
+            model_->setInstruction(team_, bacterium_index, instruction);
         } else {
             throw Exception("Invalid instruction in jl command,");
         }
@@ -449,7 +449,7 @@ void Changer::j_impl(
 ) {
     int instruction = params->p1;
     if ((instruction >= 0) && (instruction < instructions_)) {
-        model_.setInstruction(team_, bacterium_index, instruction);
+        model_->setInstruction(team_, bacterium_index, instruction);
     } else {
         throw Exception("Invalid instruction in j command,");
     }
@@ -482,11 +482,11 @@ bool Changer::remainingActionsDecrement(
 
 void Changer::updateInstruction(int index) {
     completed_commands_[index] = 0;
-    int instruction = model_.getInstruction(team_, index);
+    int instruction = model_->getInstruction(team_, index);
     if ((instruction + 1) < instructions_) {
-        model_.setInstruction(team_, index, instruction + 1);
+        model_->setInstruction(team_, index, instruction + 1);
     } else {
-        model_.setInstruction(team_, index, 0);
+        model_->setInstruction(team_, index, 0);
     }
 }
 

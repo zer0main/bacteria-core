@@ -61,7 +61,7 @@ public:
 
 protected:
     Changer(
-        Model& model,
+        ModelPtr model,
         int team,
         int move_number,
         int instructions
@@ -145,7 +145,7 @@ namespace Implementation {
 class LogicalChanger {
 public:
     LogicalChanger(
-        Abstract::Model& model,
+        ModelPtr model,
         int team,
         int move_number
     );
@@ -167,7 +167,7 @@ public:
     void turn(int bacterium_index);
 
 private:
-    Abstract::Model& model_;
+    ModelPtr model_;
     int team_;
     int move_number_;
 
@@ -197,7 +197,7 @@ struct RepeaterParams {
 class Changer : public Abstract::Changer {
 public:
     Changer(
-        Abstract::Model& model,
+        ModelPtr model,
         int team,
         int move_number,
         int instructions
@@ -275,7 +275,7 @@ protected:
     );
 
 private:
-    Abstract::Model& model_;
+    ModelPtr model_;
     Ints remaining_actions_;
     Ints remaining_pseudo_actions_;
     // command = action OR pseudo action
