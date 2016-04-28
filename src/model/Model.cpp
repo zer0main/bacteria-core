@@ -303,9 +303,9 @@ void Model::kill_impl(
     int bacterium_index
 ) {
     checkParams(team, bacterium_index, "kill()");
-    Abstract::Point coordinates
-        = teams_[team][bacterium_index]->coordinates;
-    teams_[team].erase(teams_[team].begin() + bacterium_index);
+    Abstract::Point coordinates =
+        teams_[team][bacterium_index]->coordinates;
+    teams_[team][bacterium_index] = UnitPtr(0);
     int index = getIndex(coordinates, width_, height_);
     board_[index] = UnitPtr(0);
 }
