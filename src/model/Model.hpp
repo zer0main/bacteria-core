@@ -51,6 +51,8 @@ struct Point {
 
 class Model {
 public:
+    void clearAfterMove(int team);
+
     CellState cellState(const Point& coordinates) const;
 
     int getDirectionByCoordinates(
@@ -115,6 +117,8 @@ public:
 
 protected:
     Model(int width, int height, int bacteria, int teams);
+
+    virtual void clearAfterMove_impl(int team) = 0;
 
     virtual CellState cellState_impl(
         const Point& coordinates
@@ -226,6 +230,8 @@ public:
     Model(int width, int height, int bacteria, int teams);
 
 protected:
+    void clearAfterMove_impl(int team);
+
     Abstract::CellState cellState_impl(
         const Abstract::Point& coordinates
     ) const;

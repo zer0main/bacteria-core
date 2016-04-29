@@ -26,6 +26,10 @@ Point::Point(
     , y(y) {
 }
 
+void Model::clearAfterMove(int team) {
+    return clearAfterMove_impl(team);
+}
+
 CellState Model::cellState(const Point& coordinates) const {
     return cellState_impl(coordinates);
 }
@@ -199,6 +203,22 @@ Model::Model(
     board_.resize(width * height);
     teams_.resize(teams);
     initializeBoard(bacteria, teams);
+}
+
+void Model::clearAfterMove_impl(int team) {
+    int size = teams_[team].size();
+    int last = size;
+    for (int i = 0; i < last; i++) {
+        UnitPtr unit_ptr = teams_[team][i];
+        if (unit_ptr.isNull()) {
+            std::swap(teams_[team][i], teams_[team][last]);
+            last--;
+            i--;
+        }
+    }
+    for (int i = size - 1; i > last; i--) {
+        teams_[team].pop_back();
+    }
 }
 
 Abstract::CellState Model::cellState_impl(
