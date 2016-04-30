@@ -8,6 +8,7 @@
 #ifndef MODEL_HPP_
 #define MODEL_HPP_
 
+#include <algorithm>
 #include <vector>
 
 #include "CoreGlobals.hpp"

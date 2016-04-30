@@ -154,6 +154,10 @@ void Model::createNewByCoordinates(
 
 namespace Implementation {
 
+static bool isNull(UnitPtr unit_ptr) {
+    return unit_ptr.isNull();
+}
+
 static bool checkIndex(int index, int size) {
     return (index >= 0) && (index < size);
 }
@@ -206,19 +210,9 @@ Model::Model(
 }
 
 void Model::clearAfterMove_impl(int team) {
-    int size = teams_[team].size();
-    int last = size;
-    for (int i = 0; i < last; i++) {
-        UnitPtr unit_ptr = teams_[team][i];
-        if (unit_ptr.isNull()) {
-            std::swap(teams_[team][i], teams_[team][last]);
-            last--;
-            i--;
-        }
-    }
-    for (int i = size - 1; i > last; i--) {
-        teams_[team].pop_back();
-    }
+    Units::iterator begin = teams_[team].begin();
+    Units::iterator end = teams_[team].end();
+    teams_[team].erase(std::remove_if(begin, end, isNull), end);
 }
 
 Abstract::CellState Model::cellState_impl(
