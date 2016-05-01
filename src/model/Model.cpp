@@ -64,6 +64,10 @@ int Model::getBacteriaNumber(int team) const {
     return getBacteriaNumber_impl(team);
 }
 
+bool Model::isAlive(int team, int bacterium_index) const {
+    return isAlive_impl(team, bacterium_index);
+}
+
 int Model::getInstruction(int team, int bacterium_index) const {
     return getInstruction_impl(team, bacterium_index);
 }
@@ -279,6 +283,15 @@ int Model::getBacteriaNumber_impl(int team) const {
                         "allowable range.");
     }
     return teams_[team].size();
+}
+
+bool Model::isAlive_impl(
+    int team,
+    int bacterium_index
+) const {
+    checkParams(team, bacterium_index, "isAlive()");
+    UnitPtr unit_ptr = teams_[team][bacterium_index];
+    return !unit_ptr.isNull();
 }
 
 int Model::getInstruction_impl(

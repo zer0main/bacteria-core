@@ -70,6 +70,8 @@ public:
 
     int getBacteriaNumber(int team) const;
 
+    bool isAlive(int team, int bacterium_index) const;
+
     int getInstruction(int team, int bacterium_index) const;
 
     Point getCoordinates(
@@ -142,6 +144,11 @@ protected:
     virtual int getHeight_impl() const = 0;
 
     virtual int getBacteriaNumber_impl(int team) const = 0;
+
+    virtual bool isAlive_impl(
+        int team,
+        int bacterium_index
+    ) const = 0;
 
     virtual int getInstruction_impl(
         int team,
@@ -254,6 +261,8 @@ protected:
     int getHeight_impl() const;
 
     int getBacteriaNumber_impl(int team) const;
+
+    bool isAlive_impl(int team, int bacterium_index) const;
 
     int getInstruction_impl(int team, int bacterium_index) const;
 
