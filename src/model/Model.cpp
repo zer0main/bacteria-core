@@ -374,6 +374,11 @@ void Model::setCoordinates_impl(
 ) {
     checkParams(team, bacterium_index, "setCoordinates()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
+    Abstract::Point prev_coordinates = unit_ptr->coordinates;
+    int prev_index = getIndex(prev_coordinates, width_, height_);
+    int new_index = getIndex(coordinates, width_, height_);
+    board_[prev_index] = UnitPtr(0);
+    board_[new_index] = unit_ptr;
     unit_ptr->coordinates = coordinates;
 }
 
