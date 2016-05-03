@@ -100,6 +100,12 @@ Changer::Changer(
 
 namespace Implementation {
 
+static void eraseElements(Ints& vect, int val) {
+    Ints::iterator begin = vect.begin();
+    Ints::iterator end = vect.end();
+    vect.erase(std::remove(begin, end, val), end);
+}
+
 LogicalChanger::LogicalChanger(
     ModelPtr model,
     int team,
