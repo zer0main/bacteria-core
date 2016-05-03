@@ -468,7 +468,8 @@ void Changer::je_impl(
 }
 
 void Changer::markDead() {
-    for (int b = 0; b < getBacteriaNumber_impl(); b++) {
+    int bacteria = remaining_actions_.size();
+    for (int b = 0; b < bacteria; b++) {
         if (!model_->isAlive(team_, b)) {
             remaining_actions_[b] = -1;
             remaining_pseudo_actions_[b] = -1;
