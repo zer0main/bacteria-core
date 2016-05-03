@@ -264,9 +264,22 @@ Changer::Changer(
 }
 
 void Changer::clearAfterMove_impl() {
-    for (int i = 0; i < getBacteriaNumber_impl(); i++) {
-        remaining_actions_[i] = MAX_ACTIONS;
-        remaining_pseudo_actions_[i] = MAX_PSEUDO_ACTIONS;
+    markDead();
+    // remove dead
+    eraseElements(remaining_actions_, -1);
+    eraseElements(remaining_pseudo_actions_, -1);
+    eraseElements(completed_commands_, -1);
+    // clear model
+    model_->clearAfterMove(team_);
+    // resize Changer's private vectors
+    int bacteria = getBacteriaNumber_impl();
+    remaining_actions_.resize(bacteria, MAX_ACTIONS);
+    remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);
+    completed_commands_.resize(bacteria, 0);
+    // max remaining actions (because of new move)
+    for (int b = 0; b < bacteria; b++) {
+        remaining_actions_[b] = MAX_ACTIONS;
+        remaining_pseudo_actions_[b] = MAX_PSEUDO_ACTIONS;
     }
 }
 
