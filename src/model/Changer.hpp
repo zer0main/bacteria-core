@@ -8,6 +8,8 @@
 #ifndef CHANGER_HPP_
 #define CHANGER_HPP_
 
+#include <algorithm>
+
 #include "CoreConstants.hpp"
 #include "CoreGlobals.hpp"
 #include "Model.hpp"
@@ -286,6 +288,8 @@ private:
     int instructions_;
 
     LogicalChanger logical_changer_;
+
+    void markDead();
 
     bool remainingActionsDecrement(
         Ints& remaining_commands_vect,

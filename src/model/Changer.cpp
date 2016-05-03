@@ -461,6 +461,16 @@ void Changer::je_impl(
 ) {
 }
 
+void Changer::markDead() {
+    for (int b = 0; b < getBacteriaNumber_impl(); b++) {
+        if (!model_->isAlive(team_, b)) {
+            remaining_actions_[b] = -1;
+            remaining_pseudo_actions_[b] = -1;
+            completed_commands_[b] = -1;
+        }
+    }
+}
+
 bool Changer::remainingActionsDecrement(
     Ints& actions_vect,
     int bacterium_index
