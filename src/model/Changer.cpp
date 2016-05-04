@@ -186,7 +186,13 @@ void LogicalChanger::turn(int bacterium_index) {
 
 void LogicalChanger::clonLogic(int bacterium_index) {
     Abstract::Point coordinates = nextCoordinates(bacterium_index);
+    Abstract::Point prev_coordinates = model_->getCoordinates(
+        team_,
+        bacterium_index
+    );
     Abstract::CellState state = model_->cellState(coordinates);
+    bool equal = ((prev_coordinates.x == coordinates.x) &&
+                  (prev_coordinates.y == coordinates.y));
     if (state == Abstract::EMPTY) {
         model_->createNewByCoordinates(
             coordinates,
@@ -195,7 +201,7 @@ void LogicalChanger::clonLogic(int bacterium_index) {
             team_,
             0
         );
-    } else {
+    } else if (!equal) {
         model_->changeMassByCoordinates(coordinates, DEFAULT_CLON_MASS);
     }
 }
