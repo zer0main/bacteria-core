@@ -36,6 +36,9 @@ const int MAX_ACTIONS = 1;
 /** Maximum number of pseudo actions per move */
 const int MAX_PSEUDO_ACTIONS = 30;
 
+/** Mass penalty (if pseudo actions >= MAX_PSEUDO_ACTIONS) */
+const int PSEUDO_ACTIONS_EXCESS_PENALTY = -5;
+
 /** Default mass of new bacteria */
 const int DEFAULT_MASS = 5;
 
