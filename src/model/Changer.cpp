@@ -109,13 +109,11 @@ static void eraseElements(Ints& vect, int val) {
 LogicalChanger::LogicalChanger(
     ModelPtr model,
     int team,
-    int move_number,
-    int instructions
+    int move_number
 )
     : model_(model)
     , team_(team)
     , move_number_(move_number)
-    , instructions_(instructions)
 {
 }
 
@@ -258,7 +256,7 @@ Changer::Changer(
     , team_(team)
     , move_number_(move_number)
     , instructions_(instructions)
-    , logical_changer_(model_, team_, move_number_, instructions_) {
+    , logical_changer_(model_, team_, move_number_) {
     int bacteria = model_->getBacteriaNumber(team_);
     remaining_actions_.resize(bacteria, MAX_ACTIONS);
     remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);
@@ -388,6 +386,7 @@ void Changer::left_impl(
         &LogicalChanger::left
     );
     repeater(&rp);
+    penalize(bacterium_index);
 }
 
 void Changer::right_impl(
@@ -405,6 +404,7 @@ void Changer::right_impl(
         &LogicalChanger::right
     );
     repeater(&rp);
+    penalize(bacterium_index);
 }
 
 void Changer::back_impl(
@@ -419,6 +419,7 @@ void Changer::back_impl(
         &LogicalChanger::back
     );
     repeater(&rp);
+    penalize(bacterium_index);
 }
 
 void Changer::turn_impl(
@@ -433,6 +434,7 @@ void Changer::turn_impl(
         &LogicalChanger::turn
     );
     repeater(&rp);
+    penalize(bacterium_index);
 }
 
 void Changer::jg_impl(
@@ -445,9 +447,16 @@ void Changer::jg_impl(
         if ((instruction >= 0) && instruction < instructions_) {
             model_->setInstruction(team_, bacterium_index, instruction);
         } else {
-            throw Exception("Invalid instruction in jg command,");
+            throw Exception("Invalid instruction in jg command.");
         }
+    } else {
+        updateInstruction(bacterium_index);
     }
+    remainingActionsDecrement(
+        remaining_pseudo_actions_,
+        bacterium_index
+    );
+    penalize(bacterium_index);
 }
 
 void Changer::jl_impl(
@@ -460,9 +469,16 @@ void Changer::jl_impl(
         if ((instruction >= 0) && instruction < instructions_) {
             model_->setInstruction(team_, bacterium_index, instruction);
         } else {
-            throw Exception("Invalid instruction in jl command,");
+            throw Exception("Invalid instruction in jl command.");
         }
+    } else {
+        updateInstruction(bacterium_index);
     }
+    remainingActionsDecrement(
+        remaining_pseudo_actions_,
+        bacterium_index
+    );
+    penalize(bacterium_index);
 }
 
 void Changer::j_impl(
@@ -473,8 +489,13 @@ void Changer::j_impl(
     if ((instruction >= 0) && (instruction < instructions_)) {
         model_->setInstruction(team_, bacterium_index, instruction);
     } else {
-        throw Exception("Invalid instruction in j command,");
+        throw Exception("Invalid instruction in j command.");
     }
+    remainingActionsDecrement(
+        remaining_pseudo_actions_,
+        bacterium_index
+    );
+    penalize(bacterium_index);
 }
 
 void Changer::je_impl(
@@ -506,6 +527,22 @@ void Changer::remainingActionsDecrement(
     actions_vect[bacterium_index]--;
     if (actions_vect[bacterium_index] < 0) {
         throw Exception("Changer: too many commands for one move.");
+    }
+}
+
+void Changer::penalize(int bacterium_index) {
+    bool alive = model_->isAlive(team_, bacterium_index);
+    bool end = endOfMove(bacterium_index);
+    if (alive && end) {
+        model_->changeMass(
+            team_,
+            bacterium_index,
+            PSEUDO_ACTIONS_EXCESS_PENALTY
+        );
+        int mass = model_->getMass(team_, bacterium_index);
+        if (mass <= 0) {
+            model_->kill(team_, bacterium_index);
+        }
     }
 }
 
