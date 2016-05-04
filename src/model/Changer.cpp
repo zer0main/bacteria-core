@@ -141,8 +141,8 @@ void LogicalChanger::clon(int bacterium_index) {
     if (mass < 0) {
         model_->kill(team_, bacterium_index);
     } else if (mass == 0) {
-        model_->kill(team_, bacterium_index);
         clonLogic(bacterium_index);
+        model_->kill(team_, bacterium_index);
     } else {
         clonLogic(bacterium_index);
     }
@@ -154,8 +154,8 @@ void LogicalChanger::str(int bacterium_index) {
     if (mass < 0) {
         model_->kill(team_, bacterium_index);
     } else if (mass == 0) {
-        model_->kill(team_, bacterium_index);
         strLogic(bacterium_index);
+        model_->kill(team_, bacterium_index);
     } else {
         strLogic(bacterium_index);
     }
