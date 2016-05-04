@@ -291,7 +291,7 @@ private:
 
     void markDead();
 
-    bool remainingActionsDecrement(
+    void remainingActionsDecrement(
         Ints& remaining_commands_vect,
         int bacterium_index
     );

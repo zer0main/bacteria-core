@@ -492,7 +492,7 @@ void Changer::markDead() {
     }
 }
 
-bool Changer::remainingActionsDecrement(
+void Changer::remainingActionsDecrement(
     Ints& actions_vect,
     int bacterium_index
 ) {
@@ -505,10 +505,6 @@ bool Changer::remainingActionsDecrement(
     if (actions_vect[bacterium_index] < 0) {
         throw Exception("Changer: too many commands for one move.");
     }
-    if (actions_vect[bacterium_index] == 0) {
-        return false;
-    }
-    return true;
 }
 
 void Changer::updateInstruction(int index) {
@@ -534,19 +530,18 @@ int Changer::checkCommandsNumber(int number) const {
 void Changer::repeater(RepeaterParams* params) {
     int index = params->bacterium_index;
     int total_commands = params->commands;
-    bool finished = false;
-    while ((completed_commands_[index] < total_commands) &&
-           !finished) {
-        finished = !remainingActionsDecrement(
+    while (!endOfMove(index)) {
+        remainingActionsDecrement(
             params->remaining_commands_vect,
             index
         );
         completed_commands_[index]++;
         LogicalMethod method = params->logic_function;
         (logical_changer_.*method)(index);
-    }
-    if (completed_commands_[index] == (total_commands)) {
-        updateInstruction(index);
+        if (completed_commands_[index] == (total_commands)) {
+            updateInstruction(index);
+            break;
+        }
     }
 }
 
