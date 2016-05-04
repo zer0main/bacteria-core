@@ -149,7 +149,8 @@ public:
     LogicalChanger(
         ModelPtr model,
         int team,
-        int move_number
+        int move_number,
+        int instructions
     );
 
     void eat(int bacterium_index);
@@ -172,6 +173,7 @@ private:
     ModelPtr model_;
     int team_;
     int move_number_;
+    int instructions_;
 
     Abstract::Point nextCoordinates(int bacterium_index) const;
 

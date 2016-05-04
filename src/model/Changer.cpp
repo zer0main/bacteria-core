@@ -109,11 +109,13 @@ static void eraseElements(Ints& vect, int val) {
 LogicalChanger::LogicalChanger(
     ModelPtr model,
     int team,
-    int move_number
+    int move_number,
+    int instructions
 )
     : model_(model)
     , team_(team)
     , move_number_(move_number)
+    , instructions_(instructions)
 {
 }
 
@@ -256,7 +258,7 @@ Changer::Changer(
     , team_(team)
     , move_number_(move_number)
     , instructions_(instructions)
-    , logical_changer_(model_, team_, move_number_) {
+    , logical_changer_(model_, team_, move_number_, instructions_) {
     int bacteria = model_->getBacteriaNumber(team_);
     remaining_actions_.resize(bacteria, MAX_ACTIONS);
     remaining_pseudo_actions_.resize(bacteria, MAX_PSEUDO_ACTIONS);
