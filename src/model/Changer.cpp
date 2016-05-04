@@ -286,7 +286,8 @@ void Changer::clearAfterMove_impl() {
 bool Changer::endOfMove_impl(int bacterium_index) const {
     bool actions = remaining_actions_[bacterium_index] > 0;
     bool pseudo_actions = remaining_pseudo_actions_[bacterium_index] > 0;
-    return !(actions && pseudo_actions);
+    bool alive = model_->isAlive(team_, bacterium_index);
+    return !(actions && pseudo_actions && alive);
 }
 
 int Changer::getBacteriaNumber_impl() const {
