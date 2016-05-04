@@ -39,6 +39,7 @@ void Interpreter::makeMove_impl(
     Abstract::Changer& changer,
     Abstract::State* st
 ) const {
+    changer.clearBeforeMove();
     int bacteria = changer.getBacteriaNumber();
     int team = changer.getTeam();
     for (int b = 0; b < bacteria; b++) {
@@ -52,7 +53,6 @@ void Interpreter::makeMove_impl(
             (changer.*func)(&params, b);
         }
     }
-    changer.clearAfterMove();
 }
 
 Abstract::State* Interpreter::createState_impl() const {

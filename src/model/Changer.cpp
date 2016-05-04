@@ -20,8 +20,8 @@ Params::Params(
 {
 }
 
-void Changer::clearAfterMove() {
-    return clearAfterMove_impl();
+void Changer::clearBeforeMove() {
+    return clearBeforeMove_impl();
 }
 
 bool Changer::endOfMove(int bacterium_index) const {
@@ -263,14 +263,14 @@ Changer::Changer(
     completed_commands_.resize(bacteria, 0);
 }
 
-void Changer::clearAfterMove_impl() {
+void Changer::clearBeforeMove_impl() {
     markDead();
     // remove dead
     eraseElements(remaining_actions_, -1);
     eraseElements(remaining_pseudo_actions_, -1);
     eraseElements(completed_commands_, -1);
     // clear model
-    model_->clearAfterMove(team_);
+    model_->clearBeforeMove(team_);
     // resize Changer's private vectors
     int bacteria = getBacteriaNumber_impl();
     remaining_actions_.resize(bacteria, MAX_ACTIONS);

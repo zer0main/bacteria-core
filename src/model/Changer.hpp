@@ -27,7 +27,7 @@ struct Params {
 
 class Changer {
 public:
-    void clearAfterMove();
+    void clearBeforeMove();
 
     bool endOfMove(int bacterium_index) const;
 
@@ -69,7 +69,7 @@ protected:
         int instructions
     );
 
-    virtual void clearAfterMove_impl() = 0;
+    virtual void clearBeforeMove_impl() = 0;
 
     virtual bool endOfMove_impl(int bacterium_index) const = 0;
 
@@ -206,7 +206,7 @@ public:
     );
 
 protected:
-    void clearAfterMove_impl();
+    void clearBeforeMove_impl();
 
     bool endOfMove_impl(int bacterium_index) const;
 

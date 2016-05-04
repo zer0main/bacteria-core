@@ -26,8 +26,8 @@ Point::Point(
     , y(y) {
 }
 
-void Model::clearAfterMove(int team) {
-    return clearAfterMove_impl(team);
+void Model::clearBeforeMove(int team) {
+    return clearBeforeMove_impl(team);
 }
 
 CellState Model::cellState(const Point& coordinates) const {
@@ -213,7 +213,7 @@ Model::Model(
     initializeBoard(bacteria, teams);
 }
 
-void Model::clearAfterMove_impl(int team) {
+void Model::clearBeforeMove_impl(int team) {
     Units::iterator begin = teams_[team].begin();
     Units::iterator end = teams_[team].end();
     teams_[team].erase(std::remove_if(begin, end, isNull), end);

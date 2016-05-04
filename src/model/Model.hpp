@@ -52,7 +52,7 @@ struct Point {
 
 class Model {
 public:
-    void clearAfterMove(int team);
+    void clearBeforeMove(int team);
 
     CellState cellState(const Point& coordinates) const;
 
@@ -121,7 +121,7 @@ public:
 protected:
     Model(int width, int height, int bacteria, int teams);
 
-    virtual void clearAfterMove_impl(int team) = 0;
+    virtual void clearBeforeMove_impl(int team) = 0;
 
     virtual CellState cellState_impl(
         const Point& coordinates
@@ -238,7 +238,7 @@ public:
     Model(int width, int height, int bacteria, int teams);
 
 protected:
-    void clearAfterMove_impl(int team);
+    void clearBeforeMove_impl(int team);
 
     Abstract::CellState cellState_impl(
         const Abstract::Point& coordinates
