@@ -530,7 +530,8 @@ int Changer::checkCommandsNumber(int number) const {
 void Changer::repeater(RepeaterParams* params) {
     int index = params->bacterium_index;
     int total_commands = params->commands;
-    while (!endOfMove(index)) {
+    while (!endOfMove(index) &&
+           (completed_commands_[index] < total_commands)) {
         remainingActionsDecrement(
             params->remaining_commands_vect,
             index
@@ -538,9 +539,10 @@ void Changer::repeater(RepeaterParams* params) {
         completed_commands_[index]++;
         LogicalMethod method = params->logic_function;
         (logical_changer_.*method)(index);
+    }
+    if (model_->isAlive(team_, index)) {
         if (completed_commands_[index] == (total_commands)) {
             updateInstruction(index);
-            break;
         }
     }
 }
