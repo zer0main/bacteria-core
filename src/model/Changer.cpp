@@ -100,6 +100,10 @@ Changer::Changer(
 
 namespace Implementation {
 
+static int toRight(int direction) {
+    return ((direction == 3) ? 0 : (direction + 1));
+}
+
 static void eraseElements(Ints& vect, int val) {
     Ints::iterator begin = vect.begin();
     Ints::iterator end = vect.end();
@@ -174,7 +178,7 @@ void LogicalChanger::left(int bacterium_index) {
 
 void LogicalChanger::right(int bacterium_index) {
     int direction = model_->getDirection(team_, bacterium_index);
-    direction = ((direction == 3) ? 0 : (direction + 1));
+    direction = toRight(direction);
     model_->setDirection(team_, bacterium_index, direction);
 }
 
