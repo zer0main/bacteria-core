@@ -34,6 +34,12 @@ CellState Model::cellState(const Point& coordinates) const {
     return cellState_impl(coordinates);
 }
 
+bool Model::isAliveByCoordinates(
+    const Point& coordinates
+) const {
+    return isAliveByCoordinates_impl(coordinates);
+}
+
 int Model::getDirectionByCoordinates(
     const Point& coordinates
 ) const {
@@ -129,6 +135,12 @@ void Model::setCoordinates(
         bacterium_index,
         coordinates
     );
+}
+
+void Model::killByCoordinates(
+    const Point& coordinates
+) {
+    return killByCoordinates_impl(coordinates);
 }
 
 void Model::changeMassByCoordinates(
@@ -229,6 +241,14 @@ Abstract::CellState Model::cellState_impl(
     } else {
         return Abstract::EMPTY;
     }
+}
+
+bool Model::isAliveByCoordinates_impl(
+    const Abstract::Point& coordinates
+) const {
+    int index = getIndex(coordinates, width_, height_);
+    UnitPtr unit_ptr = board_[index];
+    return !unit_ptr.isNull();
 }
 
 int Model::getDirectionByCoordinates_impl(
@@ -380,6 +400,13 @@ void Model::setCoordinates_impl(
     board_[prev_index] = UnitPtr(0);
     board_[new_index] = unit_ptr;
     unit_ptr->coordinates = coordinates;
+}
+
+void Model::killByCoordinates_impl(
+    const Abstract::Point& coordinates
+) {
+    int index = getIndex(coordinates, width_, height_);
+    board_[index] = UnitPtr(0);
 }
 
 void Model::changeMassByCoordinates_impl(

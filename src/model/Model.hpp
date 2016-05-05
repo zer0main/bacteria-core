@@ -56,6 +56,10 @@ public:
 
     CellState cellState(const Point& coordinates) const;
 
+    bool isAliveByCoordinates(
+        const Point& coordinates
+    ) const;
+
     int getDirectionByCoordinates(
         const Point& coordinates
     ) const;
@@ -105,6 +109,10 @@ public:
         const Point& coordinates
     );
 
+    void killByCoordinates(
+        const Point& coordinates
+    );
+
     void changeMassByCoordinates(
         const Point& coordinates,
         int change
@@ -124,6 +132,10 @@ protected:
     virtual void clearBeforeMove_impl(int team) = 0;
 
     virtual CellState cellState_impl(
+        const Point& coordinates
+    ) const = 0;
+
+    virtual bool isAliveByCoordinates_impl(
         const Point& coordinates
     ) const = 0;
 
@@ -199,6 +211,10 @@ protected:
         const Point& coordinates
     ) = 0;
 
+    virtual void killByCoordinates_impl(
+        const Point& coordinates
+    ) = 0;
+
     virtual void changeMassByCoordinates_impl(
         const Point& coordinates,
         int change
@@ -241,6 +257,10 @@ protected:
     void clearBeforeMove_impl(int team);
 
     Abstract::CellState cellState_impl(
+        const Abstract::Point& coordinates
+    ) const;
+
+    bool isAliveByCoordinates_impl(
         const Abstract::Point& coordinates
     ) const;
 
@@ -294,6 +314,10 @@ protected:
     void setCoordinates_impl(
         int team,
         int bacterium_index,
+        const Abstract::Point& coordinates
+    );
+
+    void killByCoordinates_impl(
         const Abstract::Point& coordinates
     );
 
