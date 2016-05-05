@@ -254,6 +254,15 @@ void LogicalChanger::clonLogic(int bacterium_index) {
 void LogicalChanger::strLogic(int bacterium_index) {
     int mass = model_->getMass(team_, bacterium_index);
     int damage = random(-MAX_STR_DAMAGE) + mass / 2;
+    Abstract::Point enemy(-1, -1);
+    bool has_enemy = roundEnemySearch(bacterium_index, &enemy);
+    if (has_enemy) {
+        model_->changeMassByCoordinates(enemy, -damage);
+        int enemy_mass = model_->getMassByCoordinates(enemy);
+        if (enemy_mass <= 0) {
+            model_->killByCoordinates(enemy);
+        }
+    }
 }
 
 void LogicalChanger::nextCoordinates(
