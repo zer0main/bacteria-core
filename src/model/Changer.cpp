@@ -559,6 +559,22 @@ void Changer::je_impl(
     const Abstract::Params* params,
     int bacterium_index
 ) {
+    bool enemy = logical_changer_.roundEnemySearch(bacterium_index);
+    if (enemy) {
+        int instruction = params->p1;
+        if ((instruction >= 0) && instruction < instructions_) {
+            model_->setInstruction(team_, bacterium_index, instruction);
+        } else {
+            throw Exception("Invalid instruction in je command.");
+        }
+    } else {
+        updateInstruction(bacterium_index);
+    }
+    remainingActionsDecrement(
+        remaining_pseudo_actions_,
+        bacterium_index
+    );
+    penalize(bacterium_index);
 }
 
 void Changer::markDead() {

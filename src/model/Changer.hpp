@@ -155,7 +155,7 @@ public:
 
     bool roundEnemySearch(
         int bacterium_index,
-        Abstract::Point* enemy
+        Abstract::Point* enemy = NULL
     ) const;
 
     void eat(int bacterium_index);
