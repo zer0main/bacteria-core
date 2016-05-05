@@ -175,7 +175,6 @@ private:
 
     void nextCoordinates(
         int direction,
-        int team,
         int steps,
         Abstract::Point& start,
         Abstract::Point* enemy = NULL

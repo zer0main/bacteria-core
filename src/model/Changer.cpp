@@ -132,7 +132,7 @@ void LogicalChanger::go(int bacterium_index) {
             bacterium_index
         );
         int direction = model_->getDirection(team_, bacterium_index);
-        nextCoordinates(direction, team_, 1, coordinates);
+        nextCoordinates(direction, 1, coordinates);
         Abstract::CellState state = model_->cellState(coordinates);
         if (state == Abstract::EMPTY) {
             model_->setCoordinates(team_, bacterium_index, coordinates);
@@ -196,7 +196,7 @@ void LogicalChanger::clonLogic(int bacterium_index) {
         bacterium_index
     );
     Abstract::Point temp = coordinates;
-    nextCoordinates(direction, team_, 1, coordinates);
+    nextCoordinates(direction, 1, coordinates);
     Abstract::CellState state = model_->cellState(coordinates);
     bool equal = ((temp.x == coordinates.x) &&
                   (temp.y == coordinates.y));
@@ -220,7 +220,6 @@ void LogicalChanger::strLogic(int bacterium_index) {
 
 void LogicalChanger::nextCoordinates(
     int direction,
-    int team,
     int steps,
     Abstract::Point& start,
     Abstract::Point* enemy
@@ -244,8 +243,8 @@ void LogicalChanger::nextCoordinates(
         }
         Abstract::CellState state = model_->cellState(start);
         if ((enemy == NULL) && (state == Abstract::BACTERIUM)) {
-            int team2 = model_->getTeamByCoordinates(start);
-            if (team != team2) {
+            int team = model_->getTeamByCoordinates(start);
+            if (team != team_) {
                 *enemy = start;
             }
         }
