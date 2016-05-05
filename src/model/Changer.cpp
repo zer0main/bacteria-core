@@ -121,6 +121,40 @@ LogicalChanger::LogicalChanger(
 {
 }
 
+bool LogicalChanger::roundEnemySearch(
+    int bacterium_index,
+    Abstract::Point* enemy
+) const {
+    int direction = model_->getDirection(team_, bacterium_index);
+    Abstract::Point start = model_->getCoordinates(
+        team_,
+        bacterium_index
+    );
+    enemy = NULL;
+    // clockwise round magic
+    int delta = 0;
+    Abstract::Point temp = start;
+    for (int i = 0; i < 6; i++) {
+        int steps;
+        if ((i < 2) || (i == 5)) {
+            steps = 1;
+        } else {
+            steps = 2;
+        }
+        nextCoordinates(direction, steps - delta, start, enemy);
+        direction = toRight(direction);
+        bool error = (std::abs((start.x - temp.x)) > 1) ||
+                     (std::abs((start.y - temp.y)) > 1);
+        delta = ((error) ? 1 : 0);
+        if (error) {
+            i--;
+        } else if (enemy != NULL) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void LogicalChanger::eat(int bacterium_index) {
     model_->changeMass(team_, bacterium_index, EAT_MASS);
 }

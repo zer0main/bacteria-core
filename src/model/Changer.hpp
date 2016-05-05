@@ -8,6 +8,7 @@
 #ifndef CHANGER_HPP_
 #define CHANGER_HPP_
 
+#include <cmath>
 #include <algorithm>
 
 #include "CoreConstants.hpp"
@@ -151,6 +152,11 @@ public:
         int team,
         int move_number
     );
+
+    bool roundEnemySearch(
+        int bacterium_index,
+        Abstract::Point* enemy
+    ) const;
 
     void eat(int bacterium_index);
 
