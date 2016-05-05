@@ -318,7 +318,8 @@ private:
     void checkParams(
         int team_index,
         int bacterium_index,
-        const char* method_name
+        const char* method_name,
+        bool check_alive
     ) const;
 
     Units board_;
