@@ -127,7 +127,12 @@ void LogicalChanger::go(int bacterium_index) {
     if (mass <= 0) {
         model_->kill(team_, bacterium_index);
     } else {
-        Abstract::Point coordinates = nextCoordinates(bacterium_index);
+        Abstract::Point coordinates = model_->getCoordinates(
+            team_,
+            bacterium_index
+        );
+        int direction = model_->getDirection(team_, bacterium_index);
+        nextCoordinates(direction, team_, 1, coordinates);
         Abstract::CellState state = model_->cellState(coordinates);
         if (state == Abstract::EMPTY) {
             model_->setCoordinates(team_, bacterium_index, coordinates);
@@ -185,14 +190,16 @@ void LogicalChanger::turn(int bacterium_index) {
 }
 
 void LogicalChanger::clonLogic(int bacterium_index) {
-    Abstract::Point coordinates = nextCoordinates(bacterium_index);
-    Abstract::Point prev_coordinates = model_->getCoordinates(
+    int direction = model_->getDirection(team_, bacterium_index);
+    Abstract::Point coordinates = model_->getCoordinates(
         team_,
         bacterium_index
     );
+    Abstract::Point temp = coordinates;
+    nextCoordinates(direction, team_, 1, coordinates);
     Abstract::CellState state = model_->cellState(coordinates);
-    bool equal = ((prev_coordinates.x == coordinates.x) &&
-                  (prev_coordinates.y == coordinates.y));
+    bool equal = ((temp.x == coordinates.x) &&
+                  (temp.y == coordinates.y));
     if (state == Abstract::EMPTY) {
         model_->createNewByCoordinates(
             coordinates,
@@ -208,34 +215,41 @@ void LogicalChanger::clonLogic(int bacterium_index) {
 
 void LogicalChanger::strLogic(int bacterium_index) {
     int mass = model_->getMass(team_, bacterium_index);
-    int damage = random(MAX_STR_DAMAGE) - mass / 2;
-    Abstract::Point next = nextCoordinates(bacterium_index);
+    int damage = random(-MAX_STR_DAMAGE) + mass / 2;
 }
 
-Abstract::Point LogicalChanger::nextCoordinates(
-    int bacterium_index
+void LogicalChanger::nextCoordinates(
+    int direction,
+    int team,
+    int steps,
+    Abstract::Point& start,
+    Abstract::Point* enemy
 ) const {
-    int direction = model_->getDirection(team_, bacterium_index);
-    Abstract::Point coordinates = model_->getCoordinates(
-        team_,
-        bacterium_index
-    );
     int max_width = model_->getWidth() - 1;
     int max_height = model_->getHeight() - 1;
-    if ((direction == Abstract::LEFT) &&
-        (coordinates.x > 0)) {
-        coordinates.x--;
-    } else if ((direction == Abstract::RIGHT) &&
-               (coordinates.x < max_width)) {
-        coordinates.x++;
-    } else if ((direction == Abstract::BACKWARD) &&
-               (coordinates.y > 0)) {
-        coordinates.y--;
-    } else if ((direction == Abstract::FORWARD) &&
-               (coordinates.y < max_height)) {
-        coordinates.y++;
+    enemy = NULL;
+    for (int i = 0; i < steps; i++) {
+        if ((direction == Abstract::LEFT) &&
+            (start.x > 0)) {
+            start.x--;
+        } else if ((direction == Abstract::RIGHT) &&
+                   (start.x < max_width)) {
+            start.x++;
+        } else if ((direction == Abstract::BACKWARD) &&
+                   (start.y > 0)) {
+            start.y--;
+        } else if ((direction == Abstract::FORWARD) &&
+                   (start.y < max_height)) {
+            start.y++;
+        }
+        Abstract::CellState state = model_->cellState(start);
+        if ((enemy == NULL) && (state == Abstract::BACTERIUM)) {
+            int team2 = model_->getTeamByCoordinates(start);
+            if (team != team2) {
+                *enemy = start;
+            }
+        }
     }
-    return coordinates;
 }
 
 RepeaterParams::RepeaterParams(

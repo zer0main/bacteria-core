@@ -173,7 +173,13 @@ private:
     int team_;
     int move_number_;
 
-    Abstract::Point nextCoordinates(int bacterium_index) const;
+    void nextCoordinates(
+        int direction,
+        int team,
+        int steps,
+        Abstract::Point& start,
+        Abstract::Point* enemy = NULL
+    ) const;
 
     void clonLogic(int bacterium_index);
 
