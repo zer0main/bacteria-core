@@ -601,12 +601,17 @@ void Changer::markDead() {
 void Changer::killDead() {
     int bacteria = model_->getBacteriaNumber(team_);
     for (int b = 0; b < bacteria; b++) {
-        Abstract::Point coordinates = model_->getCoordinates(team_, b);
         bool alive = model_->isAlive(team_, b);
-        bool alive_by_coordinates =
-            model_->isAliveByCoordinates(coordinates);
-        if (alive && !alive_by_coordinates) {
-            model_->kill(team_, b);
+        if (alive) {
+            Abstract::Point coordinates = model_->getCoordinates(
+                team_,
+                b
+            );
+            bool alive_by_coordinates =
+                model_->isAliveByCoordinates(coordinates);
+            if (!alive_by_coordinates) {
+                model_->kill(team_, b);
+            }
         }
     }
 }
