@@ -295,7 +295,8 @@ bool LogicalChanger::nextCoordinates(
             start.y++;
         }
         Abstract::CellState state = model_->cellState(start);
-        if ((enemy == NULL) && (state == Abstract::BACTERIUM)) {
+        bool needed = (enemy != NULL) && !found;
+        if (needed && (state == Abstract::BACTERIUM)) {
             int team = model_->getTeamByCoordinates(start);
             if (team != team_) {
                 *enemy = start;
