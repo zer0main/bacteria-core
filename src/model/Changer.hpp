@@ -179,7 +179,7 @@ private:
     int team_;
     int move_number_;
 
-    void nextCoordinates(
+    bool nextCoordinates(
         int direction,
         int steps,
         Abstract::Point& start,

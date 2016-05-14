@@ -130,7 +130,6 @@ bool LogicalChanger::roundEnemySearch(
         team_,
         bacterium_index
     );
-    enemy = NULL;
     // clockwise round magic
     int delta = 0;
     Abstract::Point temp = start;
@@ -265,7 +264,7 @@ void LogicalChanger::strLogic(int bacterium_index) {
     }
 }
 
-void LogicalChanger::nextCoordinates(
+bool LogicalChanger::nextCoordinates(
     int direction,
     int steps,
     Abstract::Point& start,
@@ -273,7 +272,7 @@ void LogicalChanger::nextCoordinates(
 ) const {
     int max_width = model_->getWidth() - 1;
     int max_height = model_->getHeight() - 1;
-    enemy = NULL;
+    bool found = false;
     for (int i = 0; i < steps; i++) {
         if ((direction == Abstract::LEFT) &&
             (start.x > 0)) {
@@ -293,9 +292,11 @@ void LogicalChanger::nextCoordinates(
             int team = model_->getTeamByCoordinates(start);
             if (team != team_) {
                 *enemy = start;
+                found = true;
             }
         }
     }
+    return found;
 }
 
 RepeaterParams::RepeaterParams(
@@ -569,7 +570,8 @@ void Changer::je_impl(
     const Abstract::Params* params,
     int bacterium_index
 ) {
-    bool enemy = logical_changer_.roundEnemySearch(bacterium_index);
+    Abstract::Point en;
+    bool enemy = logical_changer_.roundEnemySearch(bacterium_index, &en);
     if (enemy) {
         int instruction = params->p1;
         if ((instruction >= 0) && instruction < instructions_) {
