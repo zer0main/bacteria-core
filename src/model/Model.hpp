@@ -45,6 +45,8 @@ enum Direction {
 };
 
 struct Point {
+    Point();
+
     Point(int x, int y);
 
     int x, y;

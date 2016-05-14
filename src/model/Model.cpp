@@ -18,6 +18,9 @@ Model::Model(
 ) {
 }
 
+Point::Point() {
+}
+
 Point::Point(
     int x,
     int y
