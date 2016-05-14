@@ -132,7 +132,7 @@ bool LogicalChanger::roundEnemySearch(
     );
     // clockwise round magic
     int delta = 0;
-    Abstract::Point temp = start;
+    Abstract::Point center = start;
     for (int i = 0; i < 6; i++) {
         int steps;
         if ((i < 2) || (i == 5)) {
@@ -140,14 +140,21 @@ bool LogicalChanger::roundEnemySearch(
         } else {
             steps = 2;
         }
-        nextCoordinates(direction, steps - delta, start, enemy);
-        direction = toRight(direction);
-        bool error = (std::abs((start.x - temp.x)) > 1) ||
-                     (std::abs((start.y - temp.y)) > 1);
+        Abstract::Point temp = start;
+        bool found = nextCoordinates(
+            direction,
+            steps - delta,
+            start,
+            enemy
+        );
+        bool error = (std::abs((start.x - center.x)) > 1) ||
+                     (std::abs((start.y - center.y)) > 1);
         delta = ((error) ? 1 : 0);
+        direction = ((error) ? direction : toRight(direction));
         if (error) {
             i--;
-        } else if (enemy != NULL) {
+            start = temp;
+        } else if (found) {
             return true;
         }
     }
