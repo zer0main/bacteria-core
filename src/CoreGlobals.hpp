@@ -48,6 +48,7 @@ typedef std::vector<UnitPtr> Units;
 typedef std::vector<Units> Teams;
 
 typedef std::vector<int> Ints;
+typedef std::vector<bool> Bools;
 typedef std::vector<std::string> Strings;
 
 #endif
