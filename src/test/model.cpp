@@ -21,13 +21,7 @@ static Implementation::Model* createBaseModel() {
 }
 
 BOOST_AUTO_TEST_CASE (kill_test) {
-    Implementation::Model* model =
-        Abstract::makeModel<Implementation::Model>(
-            MIN_WIDTH,
-            MIN_HEIGHT,
-            0,
-            1
-        );
+    Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates(0, 0);
     model->createNewByCoordinates(
         coordinates,
