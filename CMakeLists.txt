@@ -19,3 +19,4 @@ file(GLOB sources
 )
 
 add_library(bacteria-core SHARED ${sources})
+TARGET_LINK_LIBRARIES(bacteria-core ${QT_LIBRARIES})
