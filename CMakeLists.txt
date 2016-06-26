@@ -12,7 +12,10 @@ include_directories(src/model)
 include_directories(src/interpreter)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-file(GLOB sources "src/*/*.cpp" "src/*.cpp")
+file(GLOB sources
+    "src/model/*.cpp"
+    "src/util/*.cpp"
+    "src/interpreter/*.cpp"
+)
 
-add_executable(bacteria-core ${sources})
-TARGET_LINK_LIBRARIES(bacteria-core ${QT_LIBRARIES})
+add_library(bacteria-core SHARED ${sources})

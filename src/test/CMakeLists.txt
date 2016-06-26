@@ -1,8 +1,8 @@
 enable_testing()
 
-include_directories(../util/ ../model/ ../interpreter/ ..)
+include_directories(../util/ ../model/ ../interpreter/ .. .)
 
-file(GLOB sources "../*.cpp" "../*/*.cpp")
+file(GLOB sources "../*/*.cpp")
 
 add_executable(bacteria_test ${sources})
 
