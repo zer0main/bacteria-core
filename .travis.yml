@@ -1,0 +1,14 @@
+language: c
+
+install:
+  - sudo apt-get update
+  - sudo apt-get install g++ cmake make libqt4-dev libboost-test-dev
+
+before_script:
+  - mkdir build-dir
+  - cd build-dir
+  - cmake ..
+  - make
+
+script:
+  - ./src/test/bacteria_test
