@@ -26,6 +26,12 @@ BOOST_AUTO_TEST_CASE (height_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (width_test) {
+    Implementation::Model* model = createBaseModel();
+    BOOST_REQUIRE(model->getWidth() == MIN_WIDTH);
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (kill_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates(0, 0);
