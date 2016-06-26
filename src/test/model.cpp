@@ -9,6 +9,17 @@
 
 #include "Model.hpp"
 
+static Implementation::Model* createBaseModel() {
+    Implementation::Model* model =
+        Abstract::makeModel<Implementation::Model>(
+            MIN_WIDTH,
+            MIN_HEIGHT,
+            0,
+            1
+        );
+    return model;
+}
+
 BOOST_AUTO_TEST_CASE (kill_test) {
     Implementation::Model* model =
         Abstract::makeModel<Implementation::Model>(
