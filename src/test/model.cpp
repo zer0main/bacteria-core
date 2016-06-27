@@ -56,6 +56,15 @@ BOOST_AUTO_TEST_CASE (width_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (kill_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    model->kill(0, 0);
+    Abstract::CellState state = model->cellState(coordinates);
+    BOOST_REQUIRE(state == Abstract::EMPTY);
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (create_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
