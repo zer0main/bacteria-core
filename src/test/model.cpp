@@ -9,13 +9,16 @@
 
 #include "Model.hpp"
 
-static Implementation::Model* createBaseModel() {
+static Implementation::Model* createBaseModel(
+    int bacteria = 0,
+    int teams = 1
+) {
     Implementation::Model* model =
         Abstract::makeModel<Implementation::Model>(
             MIN_WIDTH,
             MIN_HEIGHT,
-            0,
-            1
+            bacteria,
+            teams
         );
     return model;
 }
