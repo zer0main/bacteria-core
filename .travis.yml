@@ -1,14 +1,17 @@
 language: c
 
-install:
+before_install:
   - sudo apt-get update
   - sudo apt-get install g++ cmake make libqt4-dev libboost-test-dev
 
-before_script:
+install:
   - mkdir build-dir
   - cd build-dir
   - cmake ..
   - make
+
+before_script:
+  - sudo apt-get install --yes valgrind
 
 script:
   - valgrind ./src/test/bacteria_test
