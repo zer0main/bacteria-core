@@ -23,6 +23,13 @@ static Implementation::Model* createBaseModel(
     return model;
 }
 
+BOOST_AUTO_TEST_CASE (get_mass_test) {
+    Implementation::Model* model = createBaseModel(1, 1);
+    int mass = model->getMass(0, 0);
+    BOOST_REQUIRE(mass == DEFAULT_MASS);
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (height_test) {
     Implementation::Model* model = createBaseModel();
     BOOST_REQUIRE(model->getHeight() == MIN_HEIGHT);
