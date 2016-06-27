@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE (create_coordinates_test) {
     delete model;
 }
 
-BOOST_AUTO_TEST_CASE (kill_test) {
+BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates(0, 0);
     model->createNewByCoordinates(
