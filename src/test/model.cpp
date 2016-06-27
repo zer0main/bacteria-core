@@ -58,14 +58,7 @@ BOOST_AUTO_TEST_CASE (width_test) {
 
 BOOST_AUTO_TEST_CASE (create_coordinates_test) {
     Implementation::Model* model = createBaseModel();
-    Abstract::Point coordinates(0, 0);
-    model->createNewByCoordinates(
-        coordinates,
-        DEFAULT_MASS,
-        0,
-        0,
-        0
-    );
+    Abstract::Point coordinates = createInBaseCoordinates(model);
     Abstract::CellState state = model->cellState(coordinates);
     BOOST_REQUIRE(state == Abstract::BACTERIUM);
     delete model;
@@ -73,14 +66,7 @@ BOOST_AUTO_TEST_CASE (create_coordinates_test) {
 
 BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     Implementation::Model* model = createBaseModel();
-    Abstract::Point coordinates(0, 0);
-    model->createNewByCoordinates(
-        coordinates,
-        DEFAULT_MASS,
-        0,
-        0,
-        0
-    );
+    Abstract::Point coordinates = createInBaseCoordinates(model);
     model->killByCoordinates(coordinates);
     Abstract::CellState state = model->cellState(coordinates);
     BOOST_REQUIRE(state == Abstract::EMPTY);
