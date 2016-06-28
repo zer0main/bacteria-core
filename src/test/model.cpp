@@ -44,6 +44,9 @@ BOOST_AUTO_TEST_CASE (bacteria_number_test) {
     createInBaseCoordinates(model);
     bacteria_number = model->getBacteriaNumber(0);
     BOOST_REQUIRE(bacteria_number == 1);
+    // range errors
+    BOOST_REQUIRE_THROW(model->getBacteriaNumber(-1), Exception);
+    BOOST_REQUIRE_THROW(model->getBacteriaNumber(2), Exception);
     delete model;
 }
 
