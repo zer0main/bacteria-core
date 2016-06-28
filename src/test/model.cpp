@@ -9,6 +9,32 @@
 
 #include "Model.hpp"
 
+template<typename Func>
+static void checkErrorHandling(
+    Implementation::Model* model,
+    Func model_method
+) {
+    // range errors: test all combinations of
+    // "wrong" (outside of correct range) arguments
+    // Max_index: 0; min_index: 0
+    for (int arg1 = -1; arg1 <= 1; arg1++) {
+        for (int arg2 = -1; arg2 <= 1; arg2++) {
+            if ((arg1 != 0) || (arg2 != 0)) {
+                // (0, 0) is correct
+                BOOST_REQUIRE_THROW(
+                    ((*model).*model_method)(arg1, arg2), Exception
+                );
+            }
+        }
+    }
+    // "dead" error
+    // (attempt to do something with dead bacterium)
+    model->kill(0, 0);
+    BOOST_REQUIRE_THROW(
+        ((*model).*model_method)(0, 0), Exception
+    );
+}
+
 static Abstract::Point createInBaseCoordinates(
     Implementation::Model* model
 ) {
