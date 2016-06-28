@@ -37,6 +37,16 @@ static Implementation::Model* createBaseModel(
     return model;
 }
 
+BOOST_AUTO_TEST_CASE (bacteria_number_test) {
+    Implementation::Model* model = createBaseModel();
+    int bacteria_number = model->getBacteriaNumber(0);
+    BOOST_REQUIRE(bacteria_number == 0);
+    createInBaseCoordinates(model);
+    bacteria_number = model->getBacteriaNumber(0);
+    BOOST_REQUIRE(bacteria_number == 1);
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_mass_test) {
     Implementation::Model* model = createBaseModel(1, 1);
     int mass = model->getMass(0, 0);
