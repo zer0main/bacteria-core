@@ -54,6 +54,12 @@ BOOST_AUTO_TEST_CASE (get_mass_test) {
     Implementation::Model* model = createBaseModel(1, 1);
     int mass = model->getMass(0, 0);
     BOOST_REQUIRE(mass == DEFAULT_MASS);
+    // range errors
+    BOOST_REQUIRE_THROW(model->getMass(-1, 0), Exception);
+    BOOST_REQUIRE_THROW(model->getMass(0, -1), Exception);
+    // "dead" error
+    model->kill(0, 0);
+    BOOST_REQUIRE_THROW(model->getMass(0, 0), Exception);
     delete model;
 }
 
