@@ -48,13 +48,7 @@ static Abstract::Point createInBaseCoordinates(
     Implementation::Model* model
 ) {
     Abstract::Point coordinates(0, 0);
-    model->createNewByCoordinates(
-        coordinates,
-        DEFAULT_MASS,
-        0,
-        0,
-        0
-    );
+    CREATE_NEW
     return coordinates;
 }
 
