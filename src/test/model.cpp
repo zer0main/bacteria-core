@@ -35,6 +35,15 @@ static void checkErrorHandling(
     );
 }
 
+#define CREATE_NEW \
+    model->createNewByCoordinates( \
+        coordinates, \
+        DEFAULT_MASS, \
+        0, \
+        0, \
+        0 \
+    );
+
 static Abstract::Point createInBaseCoordinates(
     Implementation::Model* model
 ) {
