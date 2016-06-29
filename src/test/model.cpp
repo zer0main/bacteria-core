@@ -52,6 +52,13 @@ static Abstract::Point createInBaseCoordinates(
     return coordinates;
 }
 
+static void createByCoordinates(
+    Implementation::Model* model,
+    Abstract::Point coordinates
+) {
+    CREATE_NEW
+}
+
 static Implementation::Model* createBaseModel(
     int bacteria = 0,
     int teams = 1
