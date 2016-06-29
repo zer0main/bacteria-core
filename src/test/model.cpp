@@ -102,6 +102,9 @@ BOOST_AUTO_TEST_CASE (kill_test) {
     model->kill(0, 0);
     Abstract::CellState state = model->cellState(coordinates);
     BOOST_REQUIRE(state == Abstract::EMPTY);
+    // error handling checks
+    createInBaseCoordinates(model);
+    checkErrorHandling(model, &Implementation::Model::kill);
     delete model;
 }
 
