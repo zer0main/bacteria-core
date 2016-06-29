@@ -59,6 +59,8 @@ static void createByCoordinates(
     CREATE_NEW
 }
 
+#undef CREATE_NEW
+
 static Implementation::Model* createBaseModel(
     int bacteria = 0,
     int teams = 1
