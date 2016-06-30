@@ -9,6 +9,10 @@
 
 #include "Model.hpp"
 
+typedef void (Implementation::Model::*OneArgMethod) (
+    const Abstract::Point& coordinates
+);
+
 template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
