@@ -13,6 +13,11 @@ typedef void (Implementation::Model::*OneArgMethod) (
     const Abstract::Point& coordinates
 );
 
+typedef void (Implementation::Model::*TwoArgsMethod) (
+    const Abstract::Point& coordinates,
+    int change
+);
+
 template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
