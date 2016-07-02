@@ -27,6 +27,18 @@ typedef void (Implementation::Model::*MultiArgsMethod) (
 );
 
 template<typename Func>
+void checkModelMethodForThrow(
+    Implementation::Model* model,
+    Func model_method,
+    int arg1,
+    int arg2
+) {
+    BOOST_REQUIRE_THROW(
+        ((*model).*model_method)(arg1, arg2), Exception
+    );
+}
+
+template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
     Func model_method
