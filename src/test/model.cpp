@@ -229,6 +229,12 @@ BOOST_AUTO_TEST_CASE (create_coordinates_test) {
     Abstract::Point coordinates = createInBaseCoordinates(model);
     Abstract::CellState state = model->cellState(coordinates);
     BOOST_REQUIRE(state == Abstract::BACTERIUM);
+    checkErrorHandling<MultiArgsMethod>(
+        model,
+        &Implementation::Model::createNewByCoordinates,
+        true,
+        false
+    );
     delete model;
 }
 
