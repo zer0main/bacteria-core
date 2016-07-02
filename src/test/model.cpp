@@ -64,6 +64,26 @@ void checkModelMethodForThrow<TwoArgsMethod>(
     );
 }
 
+template<>
+void checkModelMethodForThrow<MultiArgsMethod>(
+    Implementation::Model* model,
+    MultiArgsMethod model_method,
+    int arg1,
+    int arg2
+) {
+    Abstract::Point coordinates(arg1, arg2);
+    BOOST_REQUIRE_THROW(
+        ((*model).*model_method)(
+            coordinates,
+            DEFAULT_MASS,
+            0,
+            0,
+            0
+        ),
+        Exception
+    );
+}
+
 template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
