@@ -215,7 +215,12 @@ BOOST_AUTO_TEST_CASE (kill_test) {
     // FIXME test doesn't work correctly without this function call.
     // The solution is to use set instead of vector in model.
     model->clearBeforeMove(0);
-    checkErrorHandling(model, &Implementation::Model::kill);
+    checkErrorHandling(
+        model,
+        &Implementation::Model::kill,
+        false,
+        true
+    );
     delete model;
 }
 
