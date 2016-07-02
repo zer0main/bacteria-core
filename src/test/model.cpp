@@ -183,7 +183,12 @@ BOOST_AUTO_TEST_CASE (get_mass_test) {
     Implementation::Model* model = createBaseModel(1, 1);
     int mass = model->getMass(0, 0);
     BOOST_REQUIRE(mass == DEFAULT_MASS);
-    checkErrorHandling(model, &Implementation::Model::getMass);
+    checkErrorHandling(
+        model,
+        &Implementation::Model::getMass,
+        false,
+        true
+    );
     delete model;
 }
 
