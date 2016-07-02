@@ -138,24 +138,19 @@ static void checkErrorHandling(
     }
 }
 
-#define CREATE_NEW \
-    model->createNewByCoordinates( \
-        coordinates, \
-        DEFAULT_MASS, \
-        0, \
-        0, \
-        0 \
-    );
-
 static Abstract::Point createInBaseCoordinates(
     Implementation::Model* model
 ) {
     Abstract::Point coordinates(0, 0);
-    CREATE_NEW
+    model->createNewByCoordinates(
+        coordinates,
+        DEFAULT_MASS,
+        0,
+        0,
+        0
+    );
     return coordinates;
 }
-
-#undef CREATE_NEW
 
 static Implementation::Model* createBaseModel(
     int bacteria = 0,
