@@ -84,6 +84,27 @@ void checkModelMethodForThrow<MultiArgsMethod>(
     );
 }
 
+// "dead" test: attempt to do something with dead bacterium
+template<typename Func>
+static void deadTest(
+    Implementation::Model* model,
+    Func model_method,
+    bool by_coordinates
+) {
+    if (by_coordinates) {
+        Abstract::Point coordinates(0, 0);
+        model->killByCoordinates(coordinates);
+    } else {
+        model->kill(0, 0);
+    }
+    checkModelMethodForThrow(
+        model,
+        model_method,
+        0,
+        0
+    );
+}
+
 template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
