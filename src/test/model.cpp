@@ -18,6 +18,14 @@ typedef void (Implementation::Model::*TwoArgsMethod) (
     int change
 );
 
+typedef void (Implementation::Model::*MultiArgsMethod) (
+    const Abstract::Point& coordinates,
+    int mass,
+    int direction,
+    int team,
+    int instruction
+);
+
 template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
