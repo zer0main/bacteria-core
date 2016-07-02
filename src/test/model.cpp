@@ -5,6 +5,7 @@
  * See the LICENSE file for terms of use.
  */
 
+#include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include "Model.hpp"
@@ -108,27 +109,33 @@ static void deadTest(
 template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
-    Func model_method
+    Func model_method,
+    bool by_coordinates,
+    bool dead_test
 ) {
-    // range errors: test all combinations of
-    // "wrong" (outside of correct range) arguments
-    // Max_index: 0; min_index: 0
-    for (int arg1 = -1; arg1 <= 1; arg1++) {
-        for (int arg2 = -1; arg2 <= 1; arg2++) {
+    // Range errors: test all combinations of
+    // "wrong" (outside of correct range) arguments.
+    // This solution works for coordinates and non-coordinates
+    // methods of Model. (< 0, = 0, > MAX)
+    int wrong_args[] = {-1, 0, MIN_WIDTH};
+    BOOST_FOREACH (int arg1, wrong_args) {
+        BOOST_FOREACH (int arg2, wrong_args) {
             if ((arg1 != 0) || (arg2 != 0)) {
                 // (0, 0) is correct
-                BOOST_REQUIRE_THROW(
-                    ((*model).*model_method)(arg1, arg2), Exception
+                checkModelMethodForThrow(
+                    model,
+                    model_method,
+                    arg1,
+                    arg2
                 );
             }
         }
     }
-    // "dead" error
-    // (attempt to do something with dead bacterium)
-    model->kill(0, 0);
-    BOOST_REQUIRE_THROW(
-        ((*model).*model_method)(0, 0), Exception
-    );
+    if (dead_test) {
+        // "dead" error
+        // (attempt to do something with dead bacterium)
+        deadTest(model, model_method, by_coordinates);
+    }
 }
 
 #define CREATE_NEW \
