@@ -32,6 +32,19 @@ typedef void (Implementation::Model::*MultiArgsMethod) (
 );
 
 template<typename Func>
+static void checkOneArgMethod(
+    Implementation::Model* model,
+    Func model_method,
+    int arg1,
+    int arg2
+) {
+    Abstract::Point coordinates(arg1, arg2);
+    BOOST_REQUIRE_THROW(
+        ((*model).*model_method)(coordinates), Exception
+    );
+}
+
+template<typename Func>
 void checkModelMethodForThrow(
     Implementation::Model* model,
     Func model_method,
