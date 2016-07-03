@@ -172,6 +172,19 @@ BOOST_AUTO_TEST_CASE (bacteria_number_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (is_alive_test) {
+    Implementation::Model* model = createBaseModel(1, 1);
+    checkErrorHandling(
+        model,
+        &Implementation::Model::isAlive,
+        false
+    );
+    BOOST_REQUIRE(model->isAlive(0, 0) == true);
+    model->kill(0, 0);
+    BOOST_REQUIRE(model->isAlive(0, 0) == false);
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_instruction_test) {
     Implementation::Model* model = createBaseModel(1, 1);
     int instruction = model->getInstruction(0, 0);
