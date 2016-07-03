@@ -183,6 +183,19 @@ static Implementation::Model* createBaseModel(
     return model;
 }
 
+BOOST_AUTO_TEST_CASE (get_team_coordinates_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    int team = model->getTeamByCoordinates(coordinates);
+    BOOST_REQUIRE(team == 0);
+    checkErrorHandling<IntOneArgMethod>(
+        model,
+        &Implementation::Model::getTeamByCoordinates,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (width_test) {
     Implementation::Model* model = createBaseModel();
     BOOST_REQUIRE(model->getWidth() == MIN_WIDTH);
