@@ -159,6 +159,18 @@ static Implementation::Model* createBaseModel(
     return model;
 }
 
+BOOST_AUTO_TEST_CASE (width_test) {
+    Implementation::Model* model = createBaseModel();
+    BOOST_REQUIRE(model->getWidth() == MIN_WIDTH);
+    delete model;
+}
+
+BOOST_AUTO_TEST_CASE (height_test) {
+    Implementation::Model* model = createBaseModel();
+    BOOST_REQUIRE(model->getHeight() == MIN_HEIGHT);
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (bacteria_number_test) {
     Implementation::Model* model = createBaseModel();
     int bacteria_number = model->getBacteriaNumber(0);
@@ -235,18 +247,6 @@ BOOST_AUTO_TEST_CASE (get_mass_test) {
     delete model;
 }
 
-BOOST_AUTO_TEST_CASE (height_test) {
-    Implementation::Model* model = createBaseModel();
-    BOOST_REQUIRE(model->getHeight() == MIN_HEIGHT);
-    delete model;
-}
-
-BOOST_AUTO_TEST_CASE (width_test) {
-    Implementation::Model* model = createBaseModel();
-    BOOST_REQUIRE(model->getWidth() == MIN_WIDTH);
-    delete model;
-}
-
 BOOST_AUTO_TEST_CASE (kill_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
@@ -267,14 +267,15 @@ BOOST_AUTO_TEST_CASE (kill_test) {
     delete model;
 }
 
-BOOST_AUTO_TEST_CASE (create_coordinates_test) {
+BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
+    model->killByCoordinates(coordinates);
     Abstract::CellState state = model->cellState(coordinates);
-    BOOST_REQUIRE(state == Abstract::BACTERIUM);
-    checkErrorHandling<MultiArgsMethod>(
+    BOOST_REQUIRE(state == Abstract::EMPTY);
+    checkErrorHandling<OneArgMethod>(
         model,
-        &Implementation::Model::createNewByCoordinates,
+        &Implementation::Model::killByCoordinates,
         false
     );
     delete model;
@@ -298,15 +299,14 @@ BOOST_AUTO_TEST_CASE (change_mass_coordinates_test) {
     delete model;
 }
 
-BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
+BOOST_AUTO_TEST_CASE (create_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
-    model->killByCoordinates(coordinates);
     Abstract::CellState state = model->cellState(coordinates);
-    BOOST_REQUIRE(state == Abstract::EMPTY);
-    checkErrorHandling<OneArgMethod>(
+    BOOST_REQUIRE(state == Abstract::BACTERIUM);
+    checkErrorHandling<MultiArgsMethod>(
         model,
-        &Implementation::Model::killByCoordinates,
+        &Implementation::Model::createNewByCoordinates,
         false
     );
     delete model;
