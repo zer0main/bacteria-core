@@ -240,6 +240,7 @@ BOOST_AUTO_TEST_CASE (kill_test) {
     model->kill(0, 0);
     Abstract::CellState state = model->cellState(coordinates);
     BOOST_REQUIRE(state == Abstract::EMPTY);
+    BOOST_REQUIRE(model->isAlive(0, 0) == false);
     // error handling checks
     createInBaseCoordinates(model);
     // FIXME test doesn't work correctly without this function call.
