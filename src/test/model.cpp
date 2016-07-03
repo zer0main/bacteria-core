@@ -172,6 +172,19 @@ BOOST_AUTO_TEST_CASE (bacteria_number_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (get_direction_test) {
+    Implementation::Model* model = createBaseModel();
+    createInBaseCoordinates(model);
+    int direction = model->getDirection(0, 0);
+    BOOST_REQUIRE(direction == Abstract::LEFT);
+    checkErrorHandling(
+        model,
+        &Implementation::Model::getDirection,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_mass_test) {
     Implementation::Model* model = createBaseModel(1, 1);
     int mass = model->getMass(0, 0);
