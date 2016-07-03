@@ -172,6 +172,19 @@ BOOST_AUTO_TEST_CASE (bacteria_number_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (get_coordinates_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    Abstract::Point derived_coordinates = model->getCoordinates(0, 0);
+    BOOST_REQUIRE(derived_coordinates == coordinates);
+    checkErrorHandling(
+        model,
+        &Implementation::Model::getCoordinates,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_direction_test) {
     Implementation::Model* model = createBaseModel();
     createInBaseCoordinates(model);
