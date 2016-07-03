@@ -73,10 +73,7 @@ void checkModelMethodForThrow<OneArgMethod>(
     int arg1,
     int arg2
 ) {
-    Abstract::Point coordinates(arg1, arg2);
-    BOOST_REQUIRE_THROW(
-        ((*model).*model_method)(coordinates), Exception
-    );
+    checkOneArgMethod(model, model_method, arg1, arg2);
 }
 
 template<>
