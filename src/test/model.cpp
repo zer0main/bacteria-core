@@ -10,6 +10,10 @@
 
 #include "Model.hpp"
 
+typedef int (Implementation::Model::*IntOneArgMethod) (
+    const Abstract::Point& coordinates
+) const;
+
 typedef void (Implementation::Model::*OneArgMethod) (
     const Abstract::Point& coordinates
 );
