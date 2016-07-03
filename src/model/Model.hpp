@@ -49,6 +49,8 @@ struct Point {
 
     Point(int x, int y);
 
+    bool operator==(const Point& p) const;
+
     int x, y;
 };
 

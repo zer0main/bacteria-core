@@ -29,6 +29,10 @@ Point::Point(
     , y(y) {
 }
 
+bool Point::operator==(const Point& p) const {
+    return (p.x == x) && (p.y == y);
+}
+
 void Model::clearBeforeMove(int team) {
     return clearBeforeMove_impl(team);
 }
