@@ -238,6 +238,25 @@ BOOST_AUTO_TEST_CASE (create_coordinates_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (change_mass_coordinates_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    int test_val = 1;
+    model->changeMassByCoordinates(coordinates, test_val);
+    int new_mass = model->getMassByCoordinates(coordinates);
+    BOOST_REQUIRE(new_mass == (DEFAULT_MASS + test_val));
+    model->changeMassByCoordinates(coordinates, -test_val);
+    new_mass = model->getMassByCoordinates(coordinates);
+    BOOST_REQUIRE(new_mass == DEFAULT_MASS);
+    checkErrorHandling<TwoArgsMethod>(
+        model,
+        &Implementation::Model::changeMassByCoordinates,
+        true,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
