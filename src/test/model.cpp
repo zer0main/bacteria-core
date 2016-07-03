@@ -89,15 +89,9 @@ void checkModelMethodForThrow<MultiArgsMethod>(
 template<typename Func>
 static void deadTest(
     Implementation::Model* model,
-    Func model_method,
-    bool by_coordinates
+    Func model_method
 ) {
-    if (by_coordinates) {
-        Abstract::Point coordinates(0, 0);
-        model->killByCoordinates(coordinates);
-    } else {
-        model->kill(0, 0);
-    }
+    model->kill(0, 0);
     checkModelMethodForThrow(
         model,
         model_method,
@@ -110,7 +104,6 @@ template<typename Func>
 static void checkErrorHandling(
     Implementation::Model* model,
     Func model_method,
-    bool by_coordinates,
     bool dead_test
 ) {
     // Range errors: test all combinations of
@@ -134,7 +127,7 @@ static void checkErrorHandling(
     if (dead_test) {
         // "dead" error
         // (attempt to do something with dead bacterium)
-        deadTest(model, model_method, by_coordinates);
+        deadTest(model, model_method);
     }
 }
 
@@ -186,7 +179,6 @@ BOOST_AUTO_TEST_CASE (get_mass_test) {
     checkErrorHandling(
         model,
         &Implementation::Model::getMass,
-        false,
         true
     );
     delete model;
@@ -218,7 +210,6 @@ BOOST_AUTO_TEST_CASE (kill_test) {
     checkErrorHandling(
         model,
         &Implementation::Model::kill,
-        false,
         true
     );
     delete model;
@@ -232,7 +223,6 @@ BOOST_AUTO_TEST_CASE (create_coordinates_test) {
     checkErrorHandling<MultiArgsMethod>(
         model,
         &Implementation::Model::createNewByCoordinates,
-        true,
         false
     );
     delete model;
@@ -251,7 +241,6 @@ BOOST_AUTO_TEST_CASE (change_mass_coordinates_test) {
     checkErrorHandling<TwoArgsMethod>(
         model,
         &Implementation::Model::changeMassByCoordinates,
-        true,
         true
     );
     delete model;
@@ -266,7 +255,6 @@ BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     checkErrorHandling<OneArgMethod>(
         model,
         &Implementation::Model::killByCoordinates,
-        true,
         false
     );
     delete model;
