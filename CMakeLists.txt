@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
 project(bacteria-core)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage") # enabling coverage
+
 FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 
