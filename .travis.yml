@@ -3,6 +3,7 @@ language: c
 before_install:
   - sudo apt-get update
   - sudo apt-get install g++ cmake make libqt4-dev libboost-test-dev
+  - sudo pip install cpp-coveralls
 
 install:
   - mkdir build-dir
@@ -15,3 +16,6 @@ before_script:
 
 script:
   - valgrind ./src/test/bacteria_test
+
+after_success:
+  - coveralls --include src
