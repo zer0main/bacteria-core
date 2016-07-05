@@ -20,4 +20,4 @@ script:
   - valgrind ./src/test/bacteria_test
 
 after_success:
-  - coveralls --include src/model src/util src/interpreter
+  - coveralls --include src --exclude src/test
