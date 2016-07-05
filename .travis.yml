@@ -8,7 +8,7 @@ before_install:
   - sudo pip install cpp-coveralls
 
 install:
-  - cmake
+  - cmake .
   - make
 
 before_script:
