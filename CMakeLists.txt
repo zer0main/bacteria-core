@@ -6,7 +6,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -fPIC -ftest-coverage -fprofile-a
 FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 
-subdirs(src/test)
+subdirs(test)
 
 include_directories(src)
 include_directories(src/util)

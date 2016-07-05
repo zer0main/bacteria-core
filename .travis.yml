@@ -15,7 +15,7 @@ before_script:
   - sudo apt-get install --yes valgrind
 
 script:
-  - valgrind ./src/test/bacteria_test
+  - valgrind ./test/bacteria_test
 
 after_success:
-  - coveralls -r ./src/test
+  - coveralls -r ./src
