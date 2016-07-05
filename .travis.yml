@@ -18,4 +18,4 @@ script:
   - valgrind ./src/test/bacteria_test
 
 after_success:
-  - coveralls -r ./src/test --include __
+  - coveralls -r ./src/test
