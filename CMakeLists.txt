@@ -13,8 +13,14 @@ include_directories(src/model)
 include_directories(src/interpreter)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-file(GLOB sources
+file(GLOB test_sources
     "test/*.cpp"
+    "src/model/*.cpp"
+    "src/util/*.cpp"
+    "src/interpreter/*.cpp"
+)
+
+file(GLOB lib_sources
     "src/model/*.cpp"
     "src/util/*.cpp"
     "src/interpreter/*.cpp"
@@ -22,8 +28,8 @@ file(GLOB sources
 
 enable_testing()
 
-add_executable(bacteria_test ${sources})
+add_executable(bacteria_test ${test_sources})
 add_test(bacteria_test bacteria_test --log_level=warning)
 
-add_library(bacteria-core SHARED ${sources})
+add_library(bacteria-core SHARED ${lib_sources})
 TARGET_LINK_LIBRARIES(bacteria-core ${QT_LIBRARIES})
