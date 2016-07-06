@@ -6,8 +6,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -fPIC -ftest-coverage -fprofile-a
 FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 
-subdirs(test)
-
+include_directories(test)
 include_directories(src)
 include_directories(src/util)
 include_directories(src/model)
@@ -15,10 +14,16 @@ include_directories(src/interpreter)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 file(GLOB sources
+    "test/*.cpp"
     "src/model/*.cpp"
     "src/util/*.cpp"
     "src/interpreter/*.cpp"
 )
+
+enable_testing()
+
+add_executable(bacteria_test ${sources})
+add_test(bacteria_test bacteria_test --log_level=warning)
 
 add_library(bacteria-core SHARED ${sources})
 TARGET_LINK_LIBRARIES(bacteria-core ${QT_LIBRARIES})
