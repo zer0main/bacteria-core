@@ -413,7 +413,15 @@ void Model::killByCoordinates_impl(
     const Abstract::Point& coordinates
 ) {
     int index = getIndex(coordinates, width_, height_);
+    UnitPtr murdered = board_[index];
+    int team = murdered->team;
     board_[index] = UnitPtr(0);
+    Units::iterator for_kill = std::find(
+        teams_[team].begin(),
+        teams_[team].end(),
+        murdered
+    );
+    *for_kill = UnitPtr(0);
 }
 
 void Model::changeMassByCoordinates_impl(
