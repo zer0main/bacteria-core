@@ -484,13 +484,13 @@ void Model::tryToPlace(int team) {
     board_[index] = unit_ptr;
 }
 
+#define TO_S std::string
 void Model::checkParams(
     int team,
     int bacterium_index,
     const char* method_name,
     bool check_alive
 ) const {
-#define TO_S std::string
     if (!checkIndex(team, teams_.size())) {
         throw Exception(
             "Model: team argument of " + TO_S(method_name) +
@@ -512,7 +512,19 @@ void Model::checkParams(
             );
         }
     }
-#undef TO_S
 }
+
+void Model::checkDead(
+    int team,
+    const char* method_name
+) const {
+    if (dead_bacteria_[team] > 0) {
+        throw Exception(
+            "Model: there are some dead bacteria; you "
+            "must call clearBeforeMove() before " + TO_S(method_name)
+        );
+    }
+}
+#undef TO_S
 
 }

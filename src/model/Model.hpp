@@ -338,6 +338,11 @@ private:
         bool check_alive
     ) const;
 
+    void checkDead(
+        int team,
+        const char* method_name
+    ) const;
+
     Units board_;
     Teams teams_;
 
