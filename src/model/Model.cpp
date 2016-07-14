@@ -301,6 +301,7 @@ int Model::getBacteriaNumber_impl(int team) const {
             "allowable range."
         );
     }
+    checkDead(team, "getBacteriaNumber()");
     return teams_[team].size();
 }
 
@@ -318,6 +319,7 @@ int Model::getInstruction_impl(
     int bacterium_index
 ) const {
     checkParams(team, bacterium_index, "getInstruction()", true);
+    checkDead(team, "getInstruction()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     return unit_ptr->instruction;
 }
@@ -327,6 +329,7 @@ Abstract::Point Model::getCoordinates_impl(
     int bacterium_index
 ) const {
     checkParams(team, bacterium_index, "getCoordinates()", true);
+    checkDead(team, "getCoordinates()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     Abstract::Point coordinates = unit_ptr->coordinates;
     return coordinates;
@@ -334,12 +337,14 @@ Abstract::Point Model::getCoordinates_impl(
 
 int Model::getDirection_impl(int team, int bacterium_index) const {
     checkParams(team, bacterium_index, "getDirection()", true);
+    checkDead(team, "getDirection()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     return unit_ptr->direction;
 }
 
 int Model::getMass_impl(int team, int bacterium_index) const {
     checkParams(team, bacterium_index, "getMass()", true);
+    checkDead(team, "getMass()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     return unit_ptr->mass;
 }
@@ -349,6 +354,7 @@ void Model::kill_impl(
     int bacterium_index
 ) {
     checkParams(team, bacterium_index, "kill()", true);
+    checkDead(team, "kill()");
     Abstract::Point coordinates =
         teams_[team][bacterium_index]->coordinates;
     teams_[team][bacterium_index] = UnitPtr(0);
@@ -363,6 +369,7 @@ void Model::changeMass_impl(
     int change
 ) {
     checkParams(team, bacterium_index, "changeMass()", true);
+    checkDead(team, "changeMass()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     unit_ptr->mass += change;
 }
@@ -373,6 +380,7 @@ void Model::setDirection_impl(
     int new_direction
 ) {
     checkParams(team, bacterium_index, "setDirection()", true);
+    checkDead(team, "setDirection()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     unit_ptr->direction = new_direction;
 }
@@ -383,6 +391,7 @@ void Model::setInstruction_impl(
     int new_instruction
 ) {
     checkParams(team, bacterium_index, "setInstruction()", true);
+    checkDead(team, "setInstruction()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     unit_ptr->instruction = new_instruction;
 }
@@ -393,6 +402,7 @@ void Model::setCoordinates_impl(
     const Abstract::Point& coordinates
 ) {
     checkParams(team, bacterium_index, "setCoordinates()", true);
+    checkDead(team, "setCoordinates()");
     UnitPtr unit_ptr = teams_[team][bacterium_index];
     Abstract::Point prev_coordinates = unit_ptr->coordinates;
     int prev_index = getIndex(prev_coordinates, width_, height_);
