@@ -407,6 +407,12 @@ void Model::killByCoordinates_impl(
 ) {
     int index = getIndex(coordinates, width_, height_);
     UnitPtr murdered = board_[index];
+    if (murdered.isNull()) {
+        throw Exception(
+            "Model: Attempt to call killByCoordinates() "
+            "with coordinates of empty cell."
+        );
+    }
     int team = murdered->team;
     board_[index] = UnitPtr(0);
     Units::iterator for_kill = std::find(
