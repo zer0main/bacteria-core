@@ -341,6 +341,10 @@ private:
     Units board_;
     Teams teams_;
 
+    // dead_bacteria_[team] is a number of dead bacteria for this team.
+    // dead_bacteria_[team] is 0 after calling clearBeforeMove(team).
+    Ints dead_bacteria_;
+
     int width_;
     int height_;
 };
