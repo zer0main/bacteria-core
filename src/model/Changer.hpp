@@ -302,8 +302,6 @@ private:
 
     void markDead();
 
-    void killDead();
-
     void remainingActionsDecrement(
         Ints& remaining_commands_vect,
         int bacterium_index

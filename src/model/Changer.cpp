@@ -339,7 +339,6 @@ Changer::Changer(
 }
 
 void Changer::clearBeforeMove_impl() {
-    killDead();
     markDead();
     // remove dead
     eraseElements(remaining_actions_, -1);
@@ -604,24 +603,6 @@ void Changer::markDead() {
             remaining_actions_[b] = -1;
             remaining_pseudo_actions_[b] = -1;
             completed_commands_[b] = -1;
-        }
-    }
-}
-
-void Changer::killDead() {
-    int bacteria = model_->getBacteriaNumber(team_);
-    for (int b = 0; b < bacteria; b++) {
-        bool alive = model_->isAlive(team_, b);
-        if (alive) {
-            Abstract::Point coordinates = model_->getCoordinates(
-                team_,
-                b
-            );
-            bool alive_by_coordinates =
-                model_->isAliveByCoordinates(coordinates);
-            if (!alive_by_coordinates) {
-                model_->kill(team_, b);
-            }
         }
     }
 }
