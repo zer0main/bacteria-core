@@ -41,12 +41,6 @@ CellState Model::cellState(const Point& coordinates) const {
     return cellState_impl(coordinates);
 }
 
-bool Model::isAliveByCoordinates(
-    const Point& coordinates
-) const {
-    return isAliveByCoordinates_impl(coordinates);
-}
-
 int Model::getDirectionByCoordinates(
     const Point& coordinates
 ) const {
@@ -248,14 +242,6 @@ Abstract::CellState Model::cellState_impl(
     } else {
         return Abstract::EMPTY;
     }
-}
-
-bool Model::isAliveByCoordinates_impl(
-    const Abstract::Point& coordinates
-) const {
-    int index = getIndex(coordinates, width_, height_);
-    UnitPtr unit_ptr = board_[index];
-    return !unit_ptr.isNull();
 }
 
 int Model::getDirectionByCoordinates_impl(
