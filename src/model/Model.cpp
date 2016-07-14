@@ -223,6 +223,7 @@ Model::Model(
     , height_(height) {
     board_.resize(width * height);
     teams_.resize(teams);
+    dead_bacteria_.resize(teams, 0);
     initializeBoard(bacteria, teams);
 }
 
@@ -230,6 +231,7 @@ void Model::clearBeforeMove_impl(int team) {
     Units::iterator begin = teams_[team].begin();
     Units::iterator end = teams_[team].end();
     teams_[team].erase(std::remove_if(begin, end, isNull), end);
+    dead_bacteria_[team] = 0;
 }
 
 Abstract::CellState Model::cellState_impl(
@@ -346,6 +348,7 @@ void Model::kill_impl(
     Abstract::Point coordinates =
         teams_[team][bacterium_index]->coordinates;
     teams_[team][bacterium_index] = UnitPtr(0);
+    dead_bacteria_[team]++;
     int index = getIndex(coordinates, width_, height_);
     board_[index] = UnitPtr(0);
 }
@@ -408,6 +411,7 @@ void Model::killByCoordinates_impl(
         murdered
     );
     *for_kill = UnitPtr(0);
+    dead_bacteria_[team]++;
 }
 
 void Model::changeMassByCoordinates_impl(
