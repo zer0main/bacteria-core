@@ -310,10 +310,14 @@ BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     model->killByCoordinates(coordinates);
     Abstract::CellState state = model->cellState(coordinates);
     BOOST_REQUIRE(state == Abstract::EMPTY);
+    BOOST_REQUIRE(model->isAlive(0, 0) == false);
+    // error handling checks
+    createInBaseCoordinates(model);
+    model->clearBeforeMove(0);
     checkErrorHandling<OneArgMethod>(
         model,
         &Implementation::Model::killByCoordinates,
-        false
+        true
     );
     delete model;
 }
