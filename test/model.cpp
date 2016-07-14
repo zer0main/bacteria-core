@@ -293,8 +293,6 @@ BOOST_AUTO_TEST_CASE (kill_test) {
     BOOST_REQUIRE(model->isAlive(0, 0) == false);
     // error handling checks
     createInBaseCoordinates(model);
-    // FIXME test doesn't work correctly without this function call.
-    // The solution is to use set instead of vector in model.
     model->clearBeforeMove(0);
     checkErrorHandling(
         model,
