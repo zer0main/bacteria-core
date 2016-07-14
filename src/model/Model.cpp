@@ -191,8 +191,10 @@ static int getIndex(
     bool greater = ((coordinates.x >= width) ||
                     (coordinates.y >= height));
     if (less || greater) {
-        throw Exception("Model: index of cell in arguments "
-                        "of some methods is out of range.");
+        throw Exception(
+            "Model: index of cell in arguments "
+            "of some methods is out of range."
+        );
     }
     int index = coordinates.y * width + coordinates.x;
     return index;
@@ -293,9 +295,11 @@ int Model::getHeight_impl() const {
 
 int Model::getBacteriaNumber_impl(int team) const {
     if (!checkIndex(team, teams_.size())) {
-        throw Exception("Model: team argument of "
-                        "getBacteriaNumber() method is out of "
-                        "allowable range.");
+        throw Exception(
+            "Model: team argument of "
+            "getBacteriaNumber() method is out of "
+            "allowable range."
+        );
     }
     return teams_[team].size();
 }
