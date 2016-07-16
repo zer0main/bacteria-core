@@ -61,6 +61,9 @@ static const ChangerMethod changer_functions[] = {
     &Abstract::Changer::je
 };
 
+const size_t FUNCTION_COUNT =
+    sizeof(changer_functions) / sizeof(ChangerMethod);
+
 class Interpreter : public Abstract::Interpreter {
 protected:
     void makeBytecode_impl(const Strings& scripts);
