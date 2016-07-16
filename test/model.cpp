@@ -256,6 +256,14 @@ BOOST_AUTO_TEST_CASE (make_model_test) {
     BOOST_REQUIRE(model->getWidth() == MIN_WIDTH);
     BOOST_REQUIRE(model->getHeight() == MIN_HEIGHT);
     BOOST_REQUIRE(model->getBacteriaNumber(0) == 1);
+    // tryToPlace() checks
+    Implementation::Model* model2 =
+        Abstract::makeModel<Implementation::Model>(
+            MAX_WIDTH,
+            MAX_HEIGHT,
+            (MAX_WIDTH * MAX_HEIGHT) / 2,
+            1
+        );
     // check error handling
     BOOST_REQUIRE_THROW(
         Abstract::makeModel<Implementation::Model>(
@@ -276,6 +284,7 @@ BOOST_AUTO_TEST_CASE (make_model_test) {
         Exception
     );
     delete model;
+    delete model2;
 }
 
 BOOST_AUTO_TEST_CASE (clear_before_move_test) {
