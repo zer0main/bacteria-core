@@ -268,6 +268,18 @@ BOOST_AUTO_TEST_CASE (make_model_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (clear_before_move_test) {
+    Implementation::Model* model = createBaseModel(1, 1);
+    model->kill(0, 0);
+    BOOST_REQUIRE_THROW(model->getBacteriaNumber(0), Exception);
+    model->clearBeforeMove(0);
+    BOOST_REQUIRE(model->getBacteriaNumber(0) == 0);
+    //check error handling
+    BOOST_REQUIRE_THROW(model->clearBeforeMove(-1), Exception);
+    BOOST_REQUIRE_THROW(model->clearBeforeMove(1), Exception);
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_team_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
