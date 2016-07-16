@@ -129,6 +129,19 @@ void checkModelMethodForThrow<IntThreeArgsMethod>(
 }
 
 template<>
+void checkModelMethodForThrow<ThreeArgsMethod>(
+    Implementation::Model* model,
+    ThreeArgsMethod model_method,
+    int arg1,
+    int arg2
+) {
+    Abstract::Point coordinates(0, 0);
+    BOOST_REQUIRE_THROW(
+        ((*model).*model_method)(arg1, arg2, coordinates), Exception
+    );
+}
+
+template<>
 void checkModelMethodForThrow<MultiArgsMethod>(
     Implementation::Model* model,
     MultiArgsMethod model_method,
