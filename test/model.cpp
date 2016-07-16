@@ -358,6 +358,9 @@ BOOST_AUTO_TEST_CASE (bacteria_number_test) {
     // range errors
     BOOST_REQUIRE_THROW(model->getBacteriaNumber(-1), Exception);
     BOOST_REQUIRE_THROW(model->getBacteriaNumber(1), Exception);
+    // error handling checks (checkDead)
+    model->kill(0, 0);
+    BOOST_REQUIRE_THROW(model->getBacteriaNumber(0), Exception);
     delete model;
 }
 
