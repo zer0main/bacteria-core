@@ -471,6 +471,18 @@ BOOST_AUTO_TEST_CASE (set_direction_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (set_instruction_test) {
+    Implementation::Model* model = createBaseModel(1, 1);
+    model->setInstruction(0, 0, 1);
+    BOOST_REQUIRE(model->getInstruction(0, 0) == 1);
+    checkErrorHandling<IntThreeArgsMethod>(
+        model,
+        &Implementation::Model::setInstruction,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
