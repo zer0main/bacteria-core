@@ -33,6 +33,12 @@ typedef void (Implementation::Model::*IntThreeArgsMethod) (
     int spec
 );
 
+typedef void (Implementation::Model::*ThreeArgsMethod) (
+    int team,
+    int bacterium_index,
+    const Abstract::Point& coordinates
+);
+
 typedef void (Implementation::Model::*MultiArgsMethod) (
     const Abstract::Point& coordinates,
     int mass,
