@@ -230,6 +230,13 @@ Model::Model(
 }
 
 void Model::clearBeforeMove_impl(int team) {
+    if (!checkIndex(team, teams_.size())) {
+        throw Exception(
+            "Model: team argument of "
+            "clearBeforeMove() method is out of "
+            "allowable range."
+        );
+    }
     Units::iterator begin = teams_[team].begin();
     Units::iterator end = teams_[team].end();
     teams_[team].erase(std::remove_if(begin, end, isNull), end);
