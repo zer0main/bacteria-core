@@ -297,6 +297,19 @@ BOOST_AUTO_TEST_CASE (cell_state_coordinates_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (get_direction_coordinates_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    int direction = model->getDirectionByCoordinates(coordinates);
+    BOOST_REQUIRE(direction == Abstract::LEFT);
+    checkErrorHandling<IntOneArgMethod>(
+        model,
+        &Implementation::Model::getDirectionByCoordinates,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_team_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
