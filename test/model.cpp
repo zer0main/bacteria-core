@@ -27,6 +27,12 @@ typedef void (Implementation::Model::*TwoArgsMethod) (
     int change
 );
 
+typedef void (Implementation::Model::*IntThreeArgsMethod) (
+    int team,
+    int bacterium_index,
+    int spec
+);
+
 typedef void (Implementation::Model::*MultiArgsMethod) (
     const Abstract::Point& coordinates,
     int mass,
