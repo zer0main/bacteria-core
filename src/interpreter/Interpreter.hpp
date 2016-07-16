@@ -41,26 +41,6 @@ protected:
 
 namespace Implementation {
 
-typedef void (Abstract::Changer::*ChangerMethod) (
-    const Abstract::Params* params,
-    int b_index
-);
-
-static const ChangerMethod changer_functions[] = {
-    &Abstract::Changer::eat,
-    &Abstract::Changer::go,
-    &Abstract::Changer::clon,
-    &Abstract::Changer::str,
-    &Abstract::Changer::left,
-    &Abstract::Changer::right,
-    &Abstract::Changer::back,
-    &Abstract::Changer::turn,
-    &Abstract::Changer::jg,
-    &Abstract::Changer::jl,
-    &Abstract::Changer::j,
-    &Abstract::Changer::je
-};
-
 class Interpreter : public Abstract::Interpreter {
 protected:
     void makeBytecode_impl(const Strings& scripts);
