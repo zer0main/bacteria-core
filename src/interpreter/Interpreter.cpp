@@ -47,7 +47,7 @@ static const ChangerMethod CHANGER_FUNCTIONS[] = {
     &Abstract::Changer::jg,
     &Abstract::Changer::jl,
     &Abstract::Changer::j,
-    &Abstract::Changer::je
+    &Abstract::Changer::je,
 };
 
 const size_t FUNCTION_COUNT =
