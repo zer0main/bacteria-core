@@ -445,6 +445,20 @@ BOOST_AUTO_TEST_CASE (kill_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (change_mass_test) {
+    Implementation::Model* model = createBaseModel(1, 1);
+    model->changeMass(0, 0, 1);
+    BOOST_REQUIRE(model->getMass(0, 0) == DEFAULT_MASS + 1);
+    model->changeMass(0, 0, -1);
+    BOOST_REQUIRE(model->getMass(0, 0) == DEFAULT_MASS);
+    checkErrorHandling<IntThreeArgsMethod>(
+        model,
+        &Implementation::Model::changeMass,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
