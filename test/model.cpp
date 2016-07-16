@@ -310,6 +310,19 @@ BOOST_AUTO_TEST_CASE (get_direction_coordinates_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (get_mass_coordinates_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    int mass = model->getMassByCoordinates(coordinates);
+    BOOST_REQUIRE(mass == DEFAULT_MASS);
+    checkErrorHandling<IntOneArgMethod>(
+        model,
+        &Implementation::Model::getMassByCoordinates,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_team_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
