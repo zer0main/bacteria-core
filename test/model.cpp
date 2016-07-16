@@ -235,6 +235,16 @@ static Implementation::Model* createBaseModel(
     return model;
 }
 
+BOOST_AUTO_TEST_CASE (point_test) {
+    Abstract::Point p0;
+    Abstract::Point p1(1, 1);
+    BOOST_REQUIRE(p1.x == 1);
+    BOOST_REQUIRE(p1.y == 1);
+    p0.x = 1;
+    p0.y = 1;
+    BOOST_REQUIRE(p0 == p1);
+}
+
 BOOST_AUTO_TEST_CASE (make_model_test) {
     Implementation::Model* model =
         Abstract::makeModel<Implementation::Model>(
