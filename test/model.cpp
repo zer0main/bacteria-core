@@ -116,6 +116,19 @@ void checkModelMethodForThrow<TwoArgsMethod>(
 }
 
 template<>
+void checkModelMethodForThrow<IntThreeArgsMethod>(
+    Implementation::Model* model,
+    IntThreeArgsMethod model_method,
+    int arg1,
+    int arg2
+) {
+    int spec = 0;
+    BOOST_REQUIRE_THROW(
+        ((*model).*model_method)(arg1, arg2, spec), Exception
+    );
+}
+
+template<>
 void checkModelMethodForThrow<MultiArgsMethod>(
     Implementation::Model* model,
     MultiArgsMethod model_method,
