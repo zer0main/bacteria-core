@@ -83,6 +83,16 @@ void checkModelMethodForThrow<IntOneArgMethod>(
 }
 
 template<>
+void checkModelMethodForThrow<OneArgMethod2>(
+    Implementation::Model* model,
+    OneArgMethod2 model_method,
+    int arg1,
+    int arg2
+) {
+    checkOneArgMethod(model, model_method, arg1, arg2);
+}
+
+template<>
 void checkModelMethodForThrow<OneArgMethod>(
     Implementation::Model* model,
     OneArgMethod model_method,
