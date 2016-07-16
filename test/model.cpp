@@ -280,6 +280,23 @@ BOOST_AUTO_TEST_CASE (clear_before_move_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (cell_state_coordinates_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    Abstract::CellState state0 = model->cellState(coordinates);
+    Abstract::CellState state1 = model->cellState(
+        Abstract::Point(1, 1)
+    );
+    BOOST_REQUIRE(state0 == Abstract::BACTERIUM);
+    BOOST_REQUIRE(state1 == Abstract::EMPTY);
+    checkErrorHandling<OneArgMethod2>(
+        model,
+        &Implementation::Model::cellState,
+        false
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_team_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
