@@ -235,6 +235,39 @@ static Implementation::Model* createBaseModel(
     return model;
 }
 
+BOOST_AUTO_TEST_CASE (make_model_test) {
+    Implementation::Model* model =
+        Abstract::makeModel<Implementation::Model>(
+            MIN_WIDTH,
+            MIN_HEIGHT,
+            1,
+            1
+        );
+    BOOST_REQUIRE(model->getWidth() == MIN_WIDTH);
+    BOOST_REQUIRE(model->getHeight() == MIN_HEIGHT);
+    BOOST_REQUIRE(model->getBacteriaNumber(0) == 1);
+    // check error handling
+    BOOST_REQUIRE_THROW(
+        Abstract::makeModel<Implementation::Model>(
+            MIN_WIDTH - 1,
+            MIN_HEIGHT - 1,
+            1,
+            1
+        ),
+        Exception
+    );
+    BOOST_REQUIRE_THROW(
+        Abstract::makeModel<Implementation::Model>(
+            MIN_WIDTH,
+            MIN_HEIGHT,
+            1,
+            15
+        ),
+        Exception
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (get_team_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
