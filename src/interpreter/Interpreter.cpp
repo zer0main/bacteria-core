@@ -30,6 +30,29 @@ State* Interpreter::createState() const {
 
 namespace Implementation {
 
+typedef void (Abstract::Changer::*ChangerMethod) (
+    const Abstract::Params* params,
+    int b_index
+);
+
+static const ChangerMethod CHANGER_FUNCTIONS[] = {
+    &Abstract::Changer::eat,
+    &Abstract::Changer::go,
+    &Abstract::Changer::clon,
+    &Abstract::Changer::str,
+    &Abstract::Changer::left,
+    &Abstract::Changer::right,
+    &Abstract::Changer::back,
+    &Abstract::Changer::turn,
+    &Abstract::Changer::jg,
+    &Abstract::Changer::jl,
+    &Abstract::Changer::j,
+    &Abstract::Changer::je
+};
+
+const size_t FUNCTION_COUNT =
+    sizeof(CHANGER_FUNCTIONS) / sizeof(ChangerMethod);
+
 void Interpreter::makeBytecode_impl(const Strings& scripts) {
     for (int i = 0; i < scripts.size(); i++) {
         BytecodePtr bytecode_ptr = Bytecode::make(scripts[i]);
@@ -54,7 +77,7 @@ void Interpreter::makeMove_impl(
             if (func_id < 0 || func_id >= FUNCTION_COUNT) {
                 throw std::range_error("Bad opcode");
             }
-            ChangerMethod func = changer_functions[func_id];
+            ChangerMethod func = CHANGER_FUNCTIONS[func_id];
             (changer.*func)(&params, b);
         }
     }
