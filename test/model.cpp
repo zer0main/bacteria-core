@@ -483,6 +483,24 @@ BOOST_AUTO_TEST_CASE (set_instruction_test) {
     delete model;
 }
 
+BOOST_AUTO_TEST_CASE (set_coordinates_test) {
+    Implementation::Model* model = createBaseModel();
+    Abstract::Point coordinates = createInBaseCoordinates(model);
+    Abstract::Point new_coordinates(1, 1);
+    model->setCoordinates(0, 0, new_coordinates);
+    Abstract::CellState prev_state = model->cellState(coordinates);
+    Abstract::CellState new_state = model->cellState(new_coordinates);
+    BOOST_REQUIRE(prev_state == Abstract::EMPTY);
+    BOOST_REQUIRE(new_state == Abstract::BACTERIUM);
+    BOOST_REQUIRE(model->getCoordinates(0, 0) == new_coordinates);
+    checkErrorHandling<ThreeArgsMethod>(
+        model,
+        &Implementation::Model::setCoordinates,
+        true
+    );
+    delete model;
+}
+
 BOOST_AUTO_TEST_CASE (kill_coordinates_test) {
     Implementation::Model* model = createBaseModel();
     Abstract::Point coordinates = createInBaseCoordinates(model);
