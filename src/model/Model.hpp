@@ -343,7 +343,7 @@ private:
         const char* method_name
     ) const;
 
-    Units board_;
+    UnitPtrs board_;
     Teams teams_;
 
     // dead_bacteria_[team] is a number of dead bacteria for this team.

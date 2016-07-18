@@ -237,8 +237,8 @@ void Model::clearBeforeMove_impl(int team) {
             "allowable range."
         );
     }
-    Units::iterator begin = teams_[team].begin();
-    Units::iterator end = teams_[team].end();
+    UnitPtrs::iterator begin = teams_[team].begin();
+    UnitPtrs::iterator end = teams_[team].end();
     teams_[team].erase(std::remove_if(begin, end, isNull), end);
     dead_bacteria_[team] = 0;
 }
@@ -423,7 +423,7 @@ void Model::killByCoordinates_impl(
     }
     int team = murdered->team;
     board_[index] = UnitPtr(0);
-    Units::iterator for_kill = std::find(
+    UnitPtrs::iterator for_kill = std::find(
         teams_[team].begin(),
         teams_[team].end(),
         murdered

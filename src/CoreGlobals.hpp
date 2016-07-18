@@ -43,9 +43,10 @@ typedef std::vector<Implementation::Token> Tokens;
 typedef std::vector<Implementation::Instruction> Instructions;
 typedef std::vector<Implementation::PackedInstruction> PackedInstructions;
 
+typedef std::vector<Implementation::Unit> Units;
 typedef QSharedPointer<Implementation::Unit> UnitPtr;
-typedef std::vector<UnitPtr> Units;
-typedef std::vector<Units> Teams;
+typedef std::vector<UnitPtr> UnitPtrs;
+typedef std::vector<UnitPtrs> Teams;
 
 typedef std::vector<int> Ints;
 typedef std::vector<bool> Bools;
