@@ -14,6 +14,9 @@ namespace Abstract {
 Interpreter::Interpreter() {
 }
 
+Interpreter::~Interpreter() {
+}
+
 void Interpreter::makeBytecode(const Strings& scripts) {
     return makeBytecode_impl(scripts);
 }

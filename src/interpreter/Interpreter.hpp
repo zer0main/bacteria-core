@@ -23,6 +23,8 @@ class Interpreter {
 public:
     Interpreter();
 
+    virtual ~Interpreter();
+
     void makeBytecode(const Strings& scripts);
 
     void makeMove(Changer& changer, State* st) const;
