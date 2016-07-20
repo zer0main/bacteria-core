@@ -62,6 +62,8 @@ public:
 
     void je(const Params* params, int bacterium_index);
 
+    virtual ~Changer();
+
 protected:
     Changer(
         ModelPtr model,

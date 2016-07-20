@@ -88,6 +88,9 @@ void Changer::je(const Params* params, int bacterium_index) {
     return je_impl(params, bacterium_index);
 }
 
+Changer::~Changer() {
+}
+
 Changer::Changer(
     ModelPtr /*model*/,
     int /*team*/,
