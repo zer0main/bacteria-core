@@ -126,6 +126,8 @@ public:
         int instruction
     );
 
+    virtual ~Model();
+
 protected:
     Model(int width, int height, int bacteria, int teams);
 

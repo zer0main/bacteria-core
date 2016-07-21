@@ -167,6 +167,9 @@ void Model::createNewByCoordinates(
     );
 }
 
+Model::~Model() {
+}
+
 }
 
 namespace Implementation {
