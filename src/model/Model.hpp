@@ -232,6 +232,8 @@ protected:
 namespace Implementation {
 
 struct Unit {
+    Unit();
+
     Unit(
         const Abstract::Point& coordinates,
         int mass,

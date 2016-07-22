@@ -203,6 +203,9 @@ static int getIndex(
     return index;
 }
 
+Unit::Unit() {
+}
+
 Unit::Unit(
     const Abstract::Point& coordinates,
     int mass,
