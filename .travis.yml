@@ -4,12 +4,10 @@ dist: trusty # modern Python
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get autoremove --yes python-yaml
   - >
     sudo apt-get install --yes
-    g++ cmake make libqt4-dev libboost-dev libyaml-cpp-dev
+    g++ cmake make libqt4-dev libboost-dev libyaml-cpp-dev python3-yaml
   - sudo pip install cpp-coveralls
-  - sudo pip install pyyaml
 
 install:
   - cmake .
