@@ -220,6 +220,15 @@ Unit::Unit(
     , instruction(instruction) {
 }
 
+Unit& Unit::operator=(const Unit& unit) {
+    coordinates = unit.coordinates;
+    mass = unit.mass;
+    direction = unit.direction;
+    team = unit.team;
+    instruction = unit.instruction;
+    return *this;
+}
+
 Model::Model(
     int width,
     int height,

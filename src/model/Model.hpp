@@ -242,6 +242,8 @@ struct Unit {
         int instruction
     );
 
+    Unit& operator=(const Unit& unit);
+
     Abstract::Point coordinates;
     int mass;
     int direction;
