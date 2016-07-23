@@ -7,29 +7,45 @@ FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 
 include_directories(test)
+include_directories(integration_tests)
 include_directories(src)
 include_directories(src/util)
 include_directories(src/model)
 include_directories(src/interpreter)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
+file (GLOB integration_tests_sources
+    "integration_tests/*.cpp"
+)
+
 file(GLOB test_sources
     "test/*.cpp"
+)
+
+file(GLOB lib_sources
+    "src/*.cpp"
     "src/model/*.cpp"
     "src/util/*.cpp"
     "src/interpreter/*.cpp"
 )
 
-file(GLOB lib_sources
-    "src/model/*.cpp"
-    "src/util/*.cpp"
-    "src/interpreter/*.cpp"
-)
+add_library(bacteria-core STATIC ${lib_sources})
+TARGET_LINK_LIBRARIES(bacteria-core ${QT_LIBRARIES})
 
 enable_testing()
 
 add_executable(bacteria_test ${test_sources})
 add_test(bacteria_test bacteria_test --log_level=warning)
+TARGET_LINK_LIBRARIES(
+    bacteria_test
+    ${QT_LIBRARIES}
+    bacteria-core
+)
 
-add_library(bacteria-core SHARED ${lib_sources})
-TARGET_LINK_LIBRARIES(bacteria-core ${QT_LIBRARIES})
+add_executable(integration_test ${integration_tests_sources})
+TARGET_LINK_LIBRARIES(
+    integration_test
+    ${QT_LIBRARIES}
+    yaml-cpp
+    bacteria-core
+)
