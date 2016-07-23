@@ -18,7 +18,8 @@ before_script:
 
 script:
   - valgrind ./bacteria_test
-  - ./integration_tests/run_tests.sh ./integration_test
+  - cd ./integration_tests
+  - ./run_tests.sh ../integration_test
 
 after_success:
   - coveralls --include src
