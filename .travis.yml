@@ -4,8 +4,10 @@ dist: trusty # modern Python
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install --yes g++ cmake make libqt4-dev libboost-dev
-  - sudo pip install cpp-coveralls
+  - >
+    sudo apt-get install --yes
+    g++ cmake make libqt4-dev libboost-dev libyaml-cpp-dev
+  - sudo pip install cpp-coveralls pyyaml
 
 install:
   - cmake .
@@ -16,6 +18,7 @@ before_script:
 
 script:
   - valgrind ./bacteria_test
+  - ./integration_tests/run_tests.sh ./integration_test
 
 after_success:
   - coveralls --include src
