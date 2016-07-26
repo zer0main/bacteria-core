@@ -101,7 +101,7 @@ static void argParse(
 ) {
     // input yaml, script and output yaml
     int min_args_number = 4;
-    if (argc < 4) {
+    if (argc < min_args_number) {
         throw Exception(
             "Integration tests: you must specify input yaml, "
             "script(s) and output yaml in args."
