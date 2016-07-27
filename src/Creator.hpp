@@ -38,7 +38,7 @@ public:
 
     InterpreterPtr createCoreObjects(
         ModelPtr model,
-        const Strings& script_names,
+        const QStringList& script_names,
         ChangerPtrs& changers
     ) const;
 };

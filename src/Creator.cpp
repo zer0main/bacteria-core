@@ -44,12 +44,12 @@ ModelPtr Creator::createModel(
 
 InterpreterPtr Creator::createCoreObjects(
     ModelPtr model,
-    const Strings& script_names,
+    const QStringList& script_names,
     ChangerPtrs& changers
 ) const {
     Strings script_strs;
     for (int i = 0; i < script_names.size(); i++) {
-        std::ifstream script(script_names[i].c_str());
+        std::ifstream script(script_names[i].toStdString().c_str());
         std::string script_str;
         int instructions = 0;
         for (std::string buffer; getline(script, buffer); ) {

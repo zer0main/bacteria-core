@@ -5,6 +5,8 @@
  * See the LICENSE file for terms of use.
  */
 
+#include <QStringList>
+
 #include <boost/foreach.hpp>
 
 #include <iostream>
@@ -67,7 +69,7 @@ static void runTest(
 // Return number of moves
 static int createEverything(
     const std::string& input_yaml,
-    const Strings& scripts,
+    const QStringList& scripts,
     ModelPtr& model,
     ChangerPtrs& changers,
     InterpreterPtr& interpreter
@@ -97,7 +99,7 @@ static void argParse(
     char* argv[],
     std::string& input_yaml,
     std::string& output_yaml,
-    Strings& scripts
+    QStringList& scripts
 ) {
     // input yaml, script and output yaml
     int min_args_number = 4;
@@ -109,14 +111,14 @@ static void argParse(
     }
     input_yaml = argv[1];
     for (int i = 2; i < argc - 1; i++) {
-        scripts.push_back(argv[i]);
+        scripts.append(argv[i]);
     }
     output_yaml = argv[argc - 1];
 }
 
 int main(int argc, char* argv[]) {
     std::string input_yaml, output_yaml;
-    Strings scripts;
+    QStringList scripts;
     argParse(
         argc,
         argv,
