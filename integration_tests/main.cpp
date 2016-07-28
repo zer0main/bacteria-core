@@ -79,14 +79,13 @@ static int createEverything(
     int height = reader.getHeight();
     int moves_number = reader.getMovesNumber();
     Units units = reader.getUnits();
-    Creator creator;
-    model = creator.createSpecialModel(
+    model = Creator::createSpecialModel(
         width,
         height,
         scripts.size(),
         units
     );
-    interpreter = creator.createCoreObjects(
+    interpreter = Creator::createCoreObjects(
         model,
         scripts,
         changers

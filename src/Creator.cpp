@@ -12,7 +12,7 @@ ModelPtr Creator::createSpecialModel(
     int height,
     int teams,
     const Units& units
-) const {
+) {
     ModelPtr model = createModel(width, height, 0, teams);
     foreach (Implementation::Unit unit, units) {
         model->createNewByCoordinates(
@@ -31,7 +31,7 @@ ModelPtr Creator::createModel(
     int height,
     int bacteria,
     int teams
-) const {
+) {
     ModelPtr model =
         ModelPtr(Abstract::makeModel<Implementation::Model>(
             width,
@@ -46,7 +46,7 @@ InterpreterPtr Creator::createCoreObjects(
     ModelPtr model,
     const QStringList& script_names,
     ChangerPtrs& changers
-) const {
+) {
     Strings script_strs;
     for (int i = 0; i < script_names.size(); i++) {
         std::ifstream script(script_names[i].toStdString().c_str());

@@ -22,25 +22,25 @@
 
 class Creator {
 public:
-    ModelPtr createSpecialModel(
+    static ModelPtr createSpecialModel(
         int width,
         int height,
         int teams,
         const Units& units
-    ) const;
+    );
 
-    ModelPtr createModel(
+    static ModelPtr createModel(
         int width,
         int height,
         int bacteria,
         int teams
-    ) const;
+    );
 
-    InterpreterPtr createCoreObjects(
+    static InterpreterPtr createCoreObjects(
         ModelPtr model,
         const QStringList& script_names,
         ChangerPtrs& changers
-    ) const;
+    );
 };
 
 #endif
