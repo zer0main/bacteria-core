@@ -64,6 +64,9 @@ static void runTest(
             interpreter->makeMove(*(changer.data()), 0);
         }
     }
+    BOOST_FOREACH (ChangerPtr changer, changers) {
+        changer->clearBeforeMove();
+    }
 }
 
 // Return number of moves
