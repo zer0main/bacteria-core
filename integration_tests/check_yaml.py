@@ -10,6 +10,42 @@ Compare .yaml files:
 import argparse
 import yaml
 
+"""
+Compare yaml objects:
+add possibility of specifying the correct value ranges in
+expected object.
+
+EXAMPLES:
+// expected_file
+some_key: [0, 3]  ===> OK
+// observed_file
+some_key: 2
+
+// expected_file
+some_key: [0, 3]  ===> :( assertion failed
+// observed_file
+some_key: 4
+"""
+def compareYaml(expected, observed):
+    ex_type = type(expected)
+    obs_type = type(observed)
+    if ex_type == obs_type:
+        if ex_type == list:
+            assert len(expected) == len(observed)
+            for (ex, ob) in zip(expected, observed):
+                compareYaml(ex, ob)
+        elif ex_type == dict:
+            assert len(expected) == len(observed)
+            for (key, value) in expected.items():
+                assert key in observed
+                compareYaml(value, observed[key])
+        else:
+            assert expected == observed
+    else:
+        assert ex_type == list and obs_type == int
+        assert len(expected) == 2
+        assert observed >= expected[0] and observed <= expected[1]
+
 def compare(expected_filename, observed_filename):
     with open(expected_filename) as expected_file:
         expected = yaml.load(expected_file)
