@@ -51,7 +51,7 @@ def compare(expected_filename, observed_filename):
         expected = yaml.load(expected_file)
     with open(observed_filename) as observed_file:
         observed = yaml.load(observed_file)
-    assert expected == observed
+    compareYaml(expected, observed)
 
 def main():
     parser = argparse.ArgumentParser(
