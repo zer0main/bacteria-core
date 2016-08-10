@@ -1,0 +1,8 @@
+board_width: 15
+board_height: 15
+units:
+    - coordinates: [10, 10]
+      mass: 1
+      direction: 2
+      team: 0
+      instruction: 0
