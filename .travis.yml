@@ -17,7 +17,7 @@ before_script:
   - sudo apt-get install --yes valgrind
 
 script:
-  - valgrind ./bacteria_test
+  - valgrind ./unit_test
   - cd ./integration_tests
   - ./run_tests.sh ../integration_test
 

@@ -34,10 +34,10 @@ TARGET_LINK_LIBRARIES(bacteria-core ${QT_LIBRARIES})
 
 enable_testing()
 
-add_executable(unit_tests ${unit_tests_sources})
-add_test(unit_tests unit_tests --log_level=warning)
+add_executable(unit_test ${unit_tests_sources})
+add_test(unit_test unit_test --log_level=warning)
 TARGET_LINK_LIBRARIES(
-    unit_tests
+    unit_test
     ${QT_LIBRARIES}
     bacteria-core
 )
