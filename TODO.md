@@ -1,9 +1,10 @@
 TODO
 ====
 
- - Add integration tests.
-    Input: YAML file with map (include bacteria parameters); script.
-    Output: YAML file with result (map).
+ - See FIXME in src/util/random.cpp
+ - Implement 1000000 move's rule.
+    Victory in the case of biomass dominance to 1000000-th move.
+ - Write detailed README and description of bact language
  - Increase test coverage to 100%.
  - Develop build and deploy system.
     Setup Travis to build Mac.
