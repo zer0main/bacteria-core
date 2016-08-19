@@ -22,3 +22,20 @@ static void checkPackedInstruction(
     BOOST_REQUIRE(pi.p2 == p2);
     BOOST_REQUIRE(pi.spec == spec);
 }
+
+BOOST_AUTO_TEST_CASE (Bytecode_test) {
+    std::string code("clon\ngo r\nstr 5\njl 5 10\n");
+    BytecodePtr bytecode = Implementation::Bytecode::make(code);
+    PackedInstructions packed_inst;
+    // Non-argument functions, functions with one argument,
+    // functions with two arguments and functions
+    // with spec argument
+    int function_types = 4;
+    for (int i = 0; i < function_types; i++) {
+        packed_inst.push_back(bytecode->getInstruction(i));
+    }
+    checkPackedInstruction(bytecode->getInstruction(0), 2, -1, -1, false);
+    checkPackedInstruction(bytecode->getInstruction(1), 1, -1, -1, true);
+    checkPackedInstruction(bytecode->getInstruction(2), 3, 5, -1, false);
+    checkPackedInstruction(bytecode->getInstruction(3), 9, 5, 10, false);
+}
