@@ -7,6 +7,7 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include "CoreConstants.hpp"
 #include "CoreGlobals.hpp"
 #include "Model.hpp"
 #include "Changer.hpp"
