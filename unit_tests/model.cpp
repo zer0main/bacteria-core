@@ -245,6 +245,23 @@ BOOST_AUTO_TEST_CASE (point_test) {
     BOOST_REQUIRE(p0 == p1);
 }
 
+BOOST_AUTO_TEST_CASE (Unit_test) {
+    Implementation::Unit unit0(
+        Abstract::Point(0, 0),
+        0,
+        0,
+        0,
+        0
+    );
+    Implementation::Unit unit1;
+    unit1 = unit0;
+    BOOST_REQUIRE(unit0.coordinates == unit1.coordinates);
+    BOOST_REQUIRE(unit0.mass == unit1.mass);
+    BOOST_REQUIRE(unit0.direction == unit1.direction);
+    BOOST_REQUIRE(unit0.team == unit1.team);
+    BOOST_REQUIRE(unit0.instruction == unit1.instruction);
+}
+
 BOOST_AUTO_TEST_CASE (make_model_test) {
     Implementation::Model* model =
         Abstract::makeModel<Implementation::Model>(
