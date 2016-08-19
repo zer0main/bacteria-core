@@ -23,6 +23,30 @@ static void checkPackedInstruction(
     BOOST_REQUIRE(pi.spec == spec);
 }
 
+BOOST_AUTO_TEST_CASE (Bytecode_exceptions_test) {
+    std::string invalid_spec("eat grgr\n");
+    BOOST_REQUIRE_THROW(
+        Implementation::Bytecode::make(invalid_spec),
+        Exception
+    );
+    std::string too_many_funcs("eat go\n");
+    BOOST_REQUIRE_THROW(
+        Implementation::Bytecode::make(too_many_funcs),
+        Exception
+    );
+    std::string invalid_args("eat 10 10\n");
+    BOOST_REQUIRE_THROW(
+        Implementation::Bytecode::make(invalid_args),
+        Exception
+    );
+    std::string correct_code("eat\n");
+    BytecodePtr bytecode = Implementation::Bytecode::make(
+        correct_code
+    );
+    BOOST_REQUIRE_THROW(bytecode->getInstruction(-1), Exception);
+    BOOST_REQUIRE_THROW(bytecode->getInstruction(1), Exception);
+}
+
 BOOST_AUTO_TEST_CASE (Bytecode_test) {
     std::string code("clon\ngo r\nstr 5\njl 5 10\n");
     BytecodePtr bytecode = Implementation::Bytecode::make(code);
