@@ -14,6 +14,11 @@
 #include "Interpreter.hpp"
 #include "State.hpp"
 
+BOOST_AUTO_TEST_CASE (create_state_test) {
+    Implementation::Interpreter interpreter;
+    interpreter.createState();
+}
+
 BOOST_AUTO_TEST_CASE (make_move_test) {
     Implementation::Interpreter interpreter;
     ModelPtr model =
