@@ -5,8 +5,6 @@
  * See the LICENSE file for terms of use.
  */
 
-#include <stdexcept>
-
 #include "Interpreter.hpp"
 
 namespace Abstract {
@@ -77,9 +75,8 @@ void Interpreter::makeMove_impl(
                 bytecode_[team]->getInstruction(instruction_number);
             int func_id = pi.function_id;
             Abstract::Params params(pi.p1, pi.p2, pi.spec);
-            if (func_id < 0 || func_id >= FUNCTION_COUNT) {
-                throw std::range_error("Bad opcode");
-            }
+            assert(func_id >= 0);
+            assert(func_id < FUNCTION_COUNT);
             ChangerMethod func = CHANGER_FUNCTIONS[func_id];
             (changer.*func)(&params, b);
         }

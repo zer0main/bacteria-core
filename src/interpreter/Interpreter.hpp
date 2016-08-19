@@ -8,9 +8,11 @@
 #ifndef INTERPRETER_HPP_
 #define INTERPRETER_HPP_
 
-#include <vector>
+#include <cassert>
 #include <sstream>
+#include <stdexcept>
 #include <string>
+#include <vector>
 
 #include "CoreGlobals.hpp"
 #include "Bytecode.hpp"
