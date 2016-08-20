@@ -213,9 +213,6 @@ BytecodePtr Bytecode::make(const std::string& source) {
     return bytecode;
 }
 
-Bytecode::Bytecode() {
-}
-
 PackedInstruction Bytecode::getInstruction(int index) const {
     bool less = index < 0;
     bool greater = index >= bytecode_.size();

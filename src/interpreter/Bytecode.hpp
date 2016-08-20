@@ -76,8 +76,6 @@ public:
 private:
     PackedInstructions bytecode_;
 
-    Bytecode();
-
     void generateBytecode(const std::string& source);
 
     Tokens lexer(const std::string& source) const;
