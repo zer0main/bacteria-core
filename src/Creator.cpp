@@ -63,9 +63,7 @@ InterpreterPtr Creator::createCoreObjects(
         script_strs.push_back(script_str);
         script.close();
     }
-    InterpreterPtr interpreter = InterpreterPtr(
-        new Implementation::Interpreter()
-    );
+    InterpreterPtr interpreter(new Implementation::Interpreter());
     interpreter->makeBytecode(script_strs);
     return interpreter;
 }
