@@ -5,6 +5,10 @@
  * See the LICENSE file for terms of use.
  */
 
+#include <fstream>
+
+#include <QStringList>
+
 #include <boost/test/unit_test.hpp>
 
 #include "CoreConstants.hpp"
@@ -52,4 +56,30 @@ BOOST_AUTO_TEST_CASE (create_model_test) {
         1
     );
     baseModelChecks(model, MIN_WIDTH, MIN_HEIGHT, 1);
+}
+
+BOOST_AUTO_TEST_CASE (create_core_objects_test) {
+    ModelPtr model = Creator::createModel(
+        MIN_WIDTH,
+        MIN_HEIGHT,
+        1,
+        1
+    );
+    ChangerPtrs changers;
+    std::ofstream bact_file("eat.bact");
+    if (bact_file.is_open()) {
+        bact_file << "eat\n";
+        bact_file.close();
+    } else {
+        std::cerr << "Error: Unable to open script file." << std::endl;
+    }
+    QStringList scripts(QString("eat.bact"));
+    InterpreterPtr interpreter = Creator::createCoreObjects(
+        model,
+        scripts,
+        changers
+    );
+    BOOST_REQUIRE(changers[0]->getBacteriaNumber() == 1);
+    interpreter->makeMove(*(changers[0].data()), 0);
+    BOOST_REQUIRE(model->getMass(0, 0) == DEFAULT_MASS + EAT_MASS);
 }
