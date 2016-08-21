@@ -19,3 +19,9 @@ BOOST_AUTO_TEST_CASE (get_bacteria_number_test) {
     Implementation::Changer changer(model, 0, 0, 0);
     BOOST_REQUIRE(changer.getBacteriaNumber() == 1);
 }
+
+BOOST_AUTO_TEST_CASE (get_team_test) {
+    ModelPtr model(createBaseModel(1, 1));
+    Implementation::Changer changer(model, 0, 0, 0);
+    BOOST_REQUIRE(changer.getTeam() == 0);
+}
