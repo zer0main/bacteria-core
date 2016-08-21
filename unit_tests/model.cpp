@@ -8,6 +8,8 @@
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include "TestFunctions.hpp"
+
 #include "Model.hpp"
 
 typedef int (Implementation::Model::*IntOneArgMethod) (
@@ -219,20 +221,6 @@ static Abstract::Point createInBaseCoordinates(
         0
     );
     return coordinates;
-}
-
-static Implementation::Model* createBaseModel(
-    int bacteria = 0,
-    int teams = 1
-) {
-    Implementation::Model* model =
-        Abstract::makeModel<Implementation::Model>(
-            MIN_WIDTH,
-            MIN_HEIGHT,
-            bacteria,
-            teams
-        );
-    return model;
 }
 
 BOOST_AUTO_TEST_CASE (point_test) {
