@@ -31,11 +31,6 @@ State* Interpreter::createState() const {
 
 namespace Implementation {
 
-typedef void (Abstract::Changer::*ChangerMethod) (
-    const Abstract::Params* params,
-    int b_index
-);
-
 static const ChangerMethod CHANGER_FUNCTIONS[] = {
     &Abstract::Changer::eat,
     &Abstract::Changer::go,

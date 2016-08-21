@@ -45,6 +45,11 @@ protected:
 
 namespace Implementation {
 
+typedef void (Abstract::Changer::*ChangerMethod) (
+    const Abstract::Params* params,
+    int b_index
+);
+
 class Interpreter : public Abstract::Interpreter {
 protected:
     void makeBytecode_impl(const Strings& scripts);
