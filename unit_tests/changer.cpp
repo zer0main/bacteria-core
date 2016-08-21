@@ -47,3 +47,30 @@ BOOST_AUTO_TEST_CASE (changer_get_instruction_test) {
     // cycle: after execution of all commands it returns to initial state
     BOOST_REQUIRE(changer.getInstruction(0) == 0);
 }
+
+BOOST_AUTO_TEST_CASE (eat_test) {
+    ModelPtr model(createBaseModel(1, 1));
+    // number of instructions is 3: eat; eat 5; eat r
+    Implementation::Changer changer(model, 0, 0, 3);
+    Abstract::Params params(-1, -1, false);
+    // eat
+    changer.eat(&params, 0);
+    BOOST_REQUIRE(model->getMass(0, 0) == DEFAULT_MASS + EAT_MASS);
+    int commands = 5;
+    params = Abstract::Params(commands, -1, false);
+    for (int i = 0; i < commands; i++) {
+        int expected_mass = EAT_MASS * (i + 1) + DEFAULT_MASS;
+        BOOST_REQUIRE(model->getMass(0, 0) == expected_mass);
+        changer.clearBeforeMove();
+        // eat 5
+        changer.eat(&params, 0);
+    }
+    int prev_mass = model->getMass(0, 0);
+    params = Abstract::Params(-1, -1, true);
+    changer.clearBeforeMove();
+    // eat r
+    changer.eat(&params, 0);
+    int curr_mass = model->getMass(0, 0);
+    int max_mass = prev_mass + RANDOM_MAX_ACTIONS * EAT_MASS;
+    BOOST_REQUIRE(curr_mass >= prev_mass && curr_mass < max_mass);
+}
