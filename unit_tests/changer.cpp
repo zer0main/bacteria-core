@@ -11,6 +11,7 @@
 
 #include "CoreConstants.hpp"
 #include "CoreGlobals.hpp"
+#include "Exception.hpp"
 #include "Model.hpp"
 #include "Changer.hpp"
 
@@ -73,4 +74,7 @@ BOOST_AUTO_TEST_CASE (eat_test) {
     int curr_mass = model->getMass(0, 0);
     int max_mass = prev_mass + RANDOM_MAX_ACTIONS * EAT_MASS;
     BOOST_REQUIRE(curr_mass >= prev_mass && curr_mass < max_mass);
+    // range error
+    params = Abstract::Params(10000, -1, false);
+    BOOST_REQUIRE_THROW(changer.eat(&params, 0), Exception);
 }
