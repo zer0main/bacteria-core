@@ -7,6 +7,16 @@
 
 #include "TestFunctions.hpp"
 
+Implementation::Unit getFirstUnit(ModelPtr model) {
+    return Implementation::Unit(
+        model->getCoordinates(0, 0),
+        model->getMass(0, 0),
+        model->getDirection(0, 0),
+        0,
+        model->getInstruction(0, 0)
+    );
+}
+
 Implementation::Model* createBaseModel(
     int bacteria,
     int teams

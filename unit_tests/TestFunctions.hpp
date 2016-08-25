@@ -9,7 +9,10 @@
 #define TEST_FUNCTIONS_HPP_
 
 #include "CoreConstants.hpp"
+#include "CoreGlobals.hpp"
 #include "Model.hpp"
+
+Implementation::Unit getFirstUnit(ModelPtr model);
 
 Implementation::Model* createBaseModel(
     int bacteria = 0,
