@@ -15,6 +15,12 @@
 #include "Model.hpp"
 #include "Changer.hpp"
 
+typedef void (CheckerFunc) (
+    Implementation::Unit prev,
+    Implementation::Unit curr,
+    bool spec
+);
+
 static Implementation::Changer createChanger(
     ModelPtr model,
     bool spec,
