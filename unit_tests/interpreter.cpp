@@ -7,6 +7,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include "TestFunctions.hpp"
+
 #include "CoreConstants.hpp"
 #include "CoreGlobals.hpp"
 #include "Model.hpp"
@@ -30,13 +32,7 @@ BOOST_AUTO_TEST_CASE (make_move_test) {
                 1
             )
         );
-    Implementation::Unit unit(
-        model->getCoordinates(0, 0),
-        model->getMass(0, 0),
-        model->getDirection(0, 0),
-        0,
-        0
-    );
+    Implementation::Unit unit = getFirstUnit(model);
     Implementation::Changer changer(model, 0, 0, 1);
     Abstract::State state;
     Strings code;
