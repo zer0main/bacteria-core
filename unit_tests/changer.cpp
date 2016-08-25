@@ -79,6 +79,28 @@ static void checkManyCommands(
     BOOST_REQUIRE_THROW((changer.*tested)(&params, 0), Exception);
 }
 
+static void checkLogicalMethod(
+    Implementation::ChangerMethod tested,
+    CheckerFunc checker,
+    bool spec,
+    bool many_commands
+) {
+    ModelPtr model(createBaseModel(1, 1));
+    Implementation::Changer changer =
+        createChanger(model, spec, many_commands);
+    Implementation::Unit prev = getFirstUnit(model);
+    Abstract::Params params(-1, -1, false);
+    (changer.*tested)(&params, 0);
+    Implementation::Unit curr = getFirstUnit(model);
+    checker(prev, curr, false);
+    if (many_commands) {
+        checkManyCommands(model, changer, tested, checker);
+    }
+    if (spec) {
+        checkSpec(model, changer, tested, checker);
+    }
+}
+
 BOOST_AUTO_TEST_CASE (get_bacteria_number_test) {
     ModelPtr model(createBaseModel(1, 1));
     Implementation::Changer changer(model, 0, 0, 0);
