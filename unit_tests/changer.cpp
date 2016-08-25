@@ -58,6 +58,27 @@ static void checkSpec(
     checker(prev, curr, true);
 }
 
+static void checkManyCommands(
+    ModelPtr model,
+    Implementation::Changer& changer,
+    Implementation::ChangerMethod tested,
+    CheckerFunc checker
+) {
+    int commands = 5;
+    Abstract::Params params(commands, -1, false);
+    for (int i = 0; i < commands; i++) {
+        Implementation::Unit prev = getFirstUnit(model);
+        changer.clearBeforeMove();
+        (changer.*tested)(&params, 0);
+        Implementation::Unit curr = getFirstUnit(model);
+        checker(prev, curr, false);
+    }
+    // range error
+    params = Abstract::Params(10000, -1, false);
+    changer.clearBeforeMove();
+    BOOST_REQUIRE_THROW((changer.*tested)(&params, 0), Exception);
+}
+
 BOOST_AUTO_TEST_CASE (get_bacteria_number_test) {
     ModelPtr model(createBaseModel(1, 1));
     Implementation::Changer changer(model, 0, 0, 0);
