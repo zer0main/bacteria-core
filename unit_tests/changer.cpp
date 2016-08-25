@@ -22,6 +22,19 @@ typedef void (CheckerFunc) (
     bool spec
 );
 
+static void eatChecker(
+    Implementation::Unit prev,
+    Implementation::Unit curr,
+    bool spec
+) {
+    if (spec) {
+        int max_mass = prev.mass + RANDOM_MAX_ACTIONS * EAT_MASS;
+        BOOST_REQUIRE(curr.mass >= prev.mass && curr.mass < max_mass);
+    } else {
+        BOOST_REQUIRE(curr.mass == (prev.mass + EAT_MASS));
+    }
+}
+
 static Implementation::Changer createChanger(
     ModelPtr model,
     bool spec,
