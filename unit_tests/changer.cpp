@@ -14,6 +14,7 @@
 #include "Exception.hpp"
 #include "Model.hpp"
 #include "Changer.hpp"
+#include "Interpreter.hpp"
 
 typedef void (CheckerFunc) (
     Implementation::Unit prev,
@@ -41,6 +42,20 @@ static Implementation::Changer createChanger(
         instructions = 1;
     }
     return Implementation::Changer(model, 0, 0, instructions);
+}
+
+static void checkSpec(
+    ModelPtr model,
+    Implementation::Changer& changer,
+    Implementation::ChangerMethod tested,
+    CheckerFunc checker
+) {
+    Implementation::Unit prev = getFirstUnit(model);
+    Abstract::Params params(-1, -1, true);
+    changer.clearBeforeMove();
+    (changer.*tested)(&params, 0);
+    Implementation::Unit curr = getFirstUnit(model);
+    checker(prev, curr, true);
 }
 
 BOOST_AUTO_TEST_CASE (get_bacteria_number_test) {
