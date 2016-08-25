@@ -15,6 +15,28 @@
 #include "Model.hpp"
 #include "Changer.hpp"
 
+static Implementation::Changer createChanger(
+    ModelPtr model,
+    bool spec,
+    bool many_commands
+) {
+    int instructions;
+    if (spec && many_commands) {
+        // func; func r; func n
+        instructions = 3;
+    } else if (spec) {
+        // func; func r
+        instructions = 2;
+    } else if (many_commands) {
+        // func; func n
+        instructions = 2;
+    } else {
+        // func
+        instructions = 1;
+    }
+    return Implementation::Changer(model, 0, 0, instructions);
+}
+
 BOOST_AUTO_TEST_CASE (get_bacteria_number_test) {
     ModelPtr model(createBaseModel(1, 1));
     Implementation::Changer changer(model, 0, 0, 0);
